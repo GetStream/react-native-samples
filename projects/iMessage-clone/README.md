@@ -1,6 +1,6 @@
 # iMessage Clone
 
-![](https://user-images.githubusercontent.com/18744505/116022826-53809780-a621-11eb-97ef-9d13eb8d0e07.jpg)
+![](https://user-images.githubusercontent.com/18744505/116126112-a21f4780-a69c-11eb-8d03-dbfc174d04aa.jpg)
 
 iMessage Clone is a sample app implemented using Stream Chat and React Native. It is a fully fledged messaging app built using core packages.
 
