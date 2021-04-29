@@ -4,6 +4,7 @@ import React, {
   useRef,
   useState,
   useCallback,
+  useMemo,
 } from 'react';
 import {
   Alert,
@@ -288,6 +289,27 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
     [navigation, selectedUsers, setChannelWithId],
   );
 
+  const onSearchPress = useCallback(() => {
+    setFocusOnMessageInput(false);
+    setFocusOnSearchInput(true);
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, []);
+
+  const additionalTextInputProps = useMemo(
+    () => ({
+      onFocus: () => {
+        setFocusOnMessageInput(true);
+        setFocusOnSearchInput(false);
+        if (messageInputRef.current) {
+          messageInputRef.current.focus();
+        }
+      },
+    }),
+    [],
+  );
+
   const renderUserSearch = () => (
     <View
       style={[
@@ -303,13 +325,7 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
       </View>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => {
-          setFocusOnMessageInput(false);
-          setFocusOnSearchInput(true);
-          if (searchInputRef.current) {
-            searchInputRef.current.focus();
-          }
-        }}
+        onPress={onSearchPress}
         style={[
           styles.searchContainer,
           {
@@ -397,15 +413,7 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
         },
       ]}>
       <Channel
-        additionalTextInputProps={{
-          onFocus: () => {
-            setFocusOnMessageInput(true);
-            setFocusOnSearchInput(false);
-            if (messageInputRef.current) {
-              messageInputRef.current.focus();
-            }
-          },
-        }}
+        additionalTextInputProps={additionalTextInputProps}
         channel={currentChannel.current}
         EmptyStateIndicator={EmptyMessagesIndicator}
         enforceUniqueReaction

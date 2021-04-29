@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useCallback} from 'react';
 import {
   StyleSheet,
   View,
@@ -87,14 +87,43 @@ export const ChannelListHeader = () => {
     reset,
   } = useContext(SearchContext);
 
+  const onChangeText = useCallback(
+    text => {
+      setSearchInputText(text);
+      if (!text) {
+        reset();
+        setSearchQuery('');
+      }
+    },
+    [reset, setSearchInputText, setSearchQuery],
+  );
+
+  const onSubmitEditing = useCallback(
+    ({nativeEvent: {text}}) => {
+      setSearchQuery(text);
+    },
+    [setSearchQuery],
+  );
+
+  const onClearInputText = useCallback(() => {
+    setSearchInputText('');
+    setSearchQuery('');
+    searchInputRef.current?.blur();
+    reset();
+  }, [reset, searchInputRef, setSearchInputText, setSearchQuery]);
+
+  const onClickNewMessage = useCallback(
+    () => navigation.navigate('NewMessage'),
+    [navigation],
+  );
+
   return (
     <>
       <View style={[styles.container, {backgroundColor: white_snow}]}>
         <View style={[styles.flex]}>
           <View style={[styles.headerContainer]}>
             <Text style={[styles.titleText]}>Messages</Text>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate('NewMessage')}>
+            <TouchableWithoutFeedback onPress={onClickNewMessage}>
               <Compose height={30} width={30} pathFill={accent_blue} />
             </TouchableWithoutFeedback>
           </View>
@@ -109,16 +138,8 @@ export const ChannelListHeader = () => {
             ]}>
             <Search width={18} pathFill={grey} />
             <TextInput
-              onChangeText={text => {
-                setSearchInputText(text);
-                if (!text) {
-                  reset();
-                  setSearchQuery('');
-                }
-              }}
-              onSubmitEditing={({nativeEvent: {text}}) => {
-                setSearchQuery(text);
-              }}
+              onChangeText={onChangeText}
+              onSubmitEditing={onSubmitEditing}
               placeholder="Search"
               placeholderTextColor={grey}
               ref={searchInputRef}
@@ -127,13 +148,7 @@ export const ChannelListHeader = () => {
               value={searchInputText}
             />
             {!!searchInputText && (
-              <TouchableOpacity
-                onPress={() => {
-                  setSearchInputText('');
-                  setSearchQuery('');
-                  searchInputRef.current?.blur();
-                  reset();
-                }}>
+              <TouchableOpacity onPress={onClearInputText}>
                 <CircleClose pathFill={grey} />
               </TouchableOpacity>
             )}

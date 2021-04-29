@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useCallback} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ChannelSort} from 'stream-chat';
@@ -6,17 +6,26 @@ import {ChannelList, Chat, Search, useTheme} from 'stream-chat-react-native';
 
 import {ChannelPreviewMessenger} from '../../components/ChannelPreview';
 import {MessageSearchList} from '../../components/MessageSearch';
-import {chatClient} from '../../client';
+import {chatClient, currentUser} from '../../client';
 import {AppContext} from '../../contexts/AppContext';
 import {SearchContext} from '../../contexts/SearchContext';
 import {NavigationParamsList} from '../Screens';
 
 const filters = {
-  members: {$in: ['vishal']},
+  members: {$in: [currentUser.id]},
   type: 'messaging',
 };
 
 const sort: ChannelSort = {last_message_at: -1};
+
+const additionalFlatListProps = {
+  keyboardDismissMode: 'on-drag' as const,
+  getItemLayout: (_: any, index: number) => ({
+    index,
+    length: 65,
+    offset: 65 * index,
+  }),
+};
 
 type ChannelListScreenProps = {
   navigation: StackNavigationProp<NavigationParamsList, 'Main'>;
@@ -92,6 +101,14 @@ export const ChannelListScreen: React.FC<ChannelListScreenProps> = ({
     </View>
   );
 
+  const onSelect = useCallback(
+    channel => {
+      setChannel(channel);
+      navigation.navigate('Main', {screen: 'Channel'});
+    },
+    [navigation, setChannel],
+  );
+
   return (
     <Chat client={chatClient}>
       <View style={StyleSheet.absoluteFill}>
@@ -113,21 +130,11 @@ export const ChannelListScreen: React.FC<ChannelListScreenProps> = ({
               {opacity: searchQuery ? 0 : 1},
             ]}>
             <ChannelList
-              additionalFlatListProps={{
-                keyboardDismissMode: 'on-drag',
-                getItemLayout: (_, index) => ({
-                  index,
-                  length: 65,
-                  offset: 65 * index,
-                }),
-              }}
+              additionalFlatListProps={additionalFlatListProps}
               filters={filters}
               HeaderNetworkDownIndicator={() => null}
               maxUnreadCount={99}
-              onSelect={channel => {
-                setChannel(channel);
-                navigation.navigate('Main', {screen: 'Channel'});
-              }}
+              onSelect={onSelect}
               options={options}
               Preview={ChannelPreviewMessenger}
               sort={sort}
