@@ -55,6 +55,7 @@ npx react-native run-ios
 
 - Create a new app in [our dashboard](https://dashboard.getstream.io/dashboard)
 - Create a `.env` file and add the app `key` as `STREAM_API_KEY`
+- Add the `STREAM_USER_ID=vishal` to the `.env`
 - Follow the [setup guide](https://github.com/GetStream/stream-chat-test-data-cli#-setup) of our `test data cli`, but instead of `cp config.js.template dev.config.js`, use `cp react-native.config.js.template dev.config.js`
 - Run `create-channels` in order to generate initial data
 - [Generate a user token](https://getstream.io/chat/docs/react-native/token_generator) and add it to the `.env` as `STREAM_USER_TOKEN`
