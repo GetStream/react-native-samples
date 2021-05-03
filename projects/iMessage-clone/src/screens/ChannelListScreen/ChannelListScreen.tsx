@@ -6,13 +6,13 @@ import {ChannelList, Chat, Search, useTheme} from 'stream-chat-react-native';
 
 import {ChannelPreviewMessenger} from '../../components/ChannelPreview';
 import {MessageSearchList} from '../../components/MessageSearch';
-import {chatClient, currentUser} from '../../client';
+import {chatClient, user} from '../../client';
 import {AppContext} from '../../contexts/AppContext';
 import {SearchContext} from '../../contexts/SearchContext';
 import {NavigationParamsList} from '../Screens';
 
 const filters = {
-  members: {$in: [currentUser.id]},
+  members: {$in: [user.id]},
   type: 'messaging',
 };
 
