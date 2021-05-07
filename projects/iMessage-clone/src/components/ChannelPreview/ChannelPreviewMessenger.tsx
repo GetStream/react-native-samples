@@ -136,7 +136,10 @@ export const ChannelPreviewMessenger = (
   );
 
   return (
-    <Swipeable renderRightActions={renderRightActions} overshootRight={false}>
+    <Swipeable
+      renderRightActions={renderRightActions}
+      overshootRight={false}
+      overshootLeft={false}>
       <TouchableOpacity
         onPress={() => {
           if (onSelect) {
