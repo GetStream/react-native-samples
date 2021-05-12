@@ -53,9 +53,24 @@ npx react-native run-ios
 
 ## Environment variables & Setting up mocked data
 
-- Create a new app in [our dashboard](https://dashboard.getstream.io/dashboard)
-- Create a `.env` file and add the app `key` as `STREAM_API_KEY`
-- Add the `STREAM_USER_ID=vishal` to the `.env`
-- Follow the [setup guide](https://github.com/GetStream/stream-chat-test-data-cli#-setup) of our `test data cli`, but instead of `cp config.js.template dev.config.js`, use `cp react-native.config.js.template dev.config.js`
-- Run `create-channels` in order to generate initial data
-- [Generate a user token](https://getstream.io/chat/docs/react-native/token_generator) and add it to the `.env` as `STREAM_USER_TOKEN`
+- Create an .env file in root folder of this project:
+
+```sh
+touch .env
+```
+- And set following environment variables in `.env` file.
+
+- `STREAM_API_KEY`
+- `STREAM_USER_ID`
+- `STREAM_USER_TOKEN`
+
+## Generate Test Users and Chat Data
+
+- Create a new app in [our dashboard](https://dashboard.getstream.io/dashboard) (or use existing one if you have already)
+- Set your `api key` and `api secret` in `test-data-cli.config.js` file.
+- Run the following command:
+
+```sh
+yarn create-channels --config="test-data-cli.config.js"
+```
+- The output of this command will include bunch of user ids and their respective token. You can copy-paste any of the listed user id & token to .env file.

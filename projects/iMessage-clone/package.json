@@ -16,7 +16,6 @@
     "@react-navigation/native": "^5.9.2",
     "@react-navigation/stack": "^5.14.2",
     "@stream-io/flat-list-mvcp": "^0.0.5",
-    "global": "^4.4.0",
     "react": "16.13.1",
     "react-devtools": "^4.10.1",
     "react-native": "0.63.4",
@@ -32,7 +31,8 @@
     "react-native-screens": "^2.17.1",
     "react-native-share": "^5.1.1",
     "react-native-svg": "^12.1.0",
-    "stream-chat-react-native": "^3.3.3"
+    "stream-chat-react-native": "^3.3.3",
+    "stream-chat-test-data-cli": "^0.1.0-beta.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
