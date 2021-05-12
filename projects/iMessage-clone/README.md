@@ -6,7 +6,7 @@ iMessage Clone is a sample app implemented using Stream Chat and React Native. I
 
 ## Getting Started
 
-Before running this project please ensure React Native is installed and configured on your machine. If you're new to Flutter, please checkout the [official guide](https://reactnative.dev/docs/environment-setup) with installation instructions for your OS. 
+Before running this project please ensure React Native is installed and configured on your machine. If you're new to React Native, please checkout the [official guide](https://reactnative.dev/docs/environment-setup) with installation instructions for your OS. 
 
  
 
@@ -51,7 +51,7 @@ npx pod-install
 npx react-native run-ios
 ```
 
-## Environment variables & Setting up mocked data
+## Environment variables
 
 - Create an .env file in root folder of this project:
 
