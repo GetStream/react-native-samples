@@ -1,14 +1,14 @@
 # React Native samples
 
-![](https://raw.githubusercontent.com/GetStream/stream-chat-react-native/master/screenshots/readme/cover.png)
+**[** Built with ♥  at [<strong>Stream</strong>](https://getstream.io/) **]**
 
-**Quick Links**
+This repo contains projects and samples developed by the team and [Stream](http://getstream.io/) community, using React Native. Projects are broke up into directories under the `projects` folder.
+Each project contains a README with build and execution instructions. 
 
-- [Register](https://getstream.io/chat/trial/) to get an API key for Stream Chat
-- [React Native Chat Tutorial](https://getstream.io/chat/react-native-chat/tutorial/)
-- [Chat UI Kit](https://getstream.io/chat/ui-kit/)
-- [React Native SDK Repo](https://github.com/GetStream/stream-chat-react-native)
+## **Projects 🚀**
 
+- [iMessage Clone](https://github.com/GetStream/react-native-samples/tree/main/projects/iMessage-clone)
+- [Slack Clone](https://github.com/GetStream/react-native-samples/tree/main/projects/slack-clone)
 
 ## What is Stream?
 
@@ -22,18 +22,16 @@ With Stream's chat components, developers quickly add chat to their app for a va
 - Messaging style chat like Whatsapp or Facebook's messenger
 - Commerce chat like Drift or Intercom
 
-## Repo Overview 😎
-
-This repo contains projects and samples developed by the team and Stream community. Projects are broke up into directories under the `projects` folder.
-Each project contains a README with build and execution instructions. 
-
-## **Projects 🚀**
-
-- [iMessage clone](https://github.com/GetStream/react-native-samples/tree/main/projects/iMessage-clone): an iMessage clone implemented using React Native and the `stream-chat-react-native` package.
-
 ## Requirements 🛠
 
 Before running this project please ensure React Native is installed and configured on your machine. If you're new to React Native, please checkout the [official guide](https://reactnative.dev/docs/environment-setup) with installation instructions for your OS. 
+
+## Quick Links
+
+- [Register](https://getstream.io/chat/trial/) to get an API key for Stream Chat
+- [React Native Chat Tutorial](https://getstream.io/chat/react-native-chat/tutorial/)
+- [Chat UI Kit](https://getstream.io/chat/ui-kit/)
+- [React Native SDK Repo](https://github.com/GetStream/stream-chat-react-native)
 
 ## Contributing
 
