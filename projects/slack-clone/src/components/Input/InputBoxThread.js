@@ -16,12 +16,12 @@ import {
 } from 'stream-chat-react-native';
 import { useMessageInputContext } from 'stream-chat-react-native';
 
-import { useKeyboard } from '../hooks/useKeaboard';
-import { notImplemented } from '../utils';
-import { getChannelDisplayName } from '../utils/channelUtils';
-import { SCText } from './SCText';
-import { SVGIcon } from './SVGIcon';
-import { SendButton } from './SendButton';
+import { useKeyboard } from '../../hooks/useKeaboard';
+import { notImplemented } from '../../utils';
+import { getChannelDisplayName } from '../../utils/channelUtils';
+import { SCText } from './../SCText';
+import { SVGIcon } from './../SVGIcon';
+import { SendButton } from './../SendButton';
 
 const styles = StyleSheet.create({
   actionButton: {

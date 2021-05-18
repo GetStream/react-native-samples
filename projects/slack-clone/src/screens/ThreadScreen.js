@@ -13,8 +13,7 @@ import { Channel, Thread } from 'stream-chat-react-native';
 
 import { CustomKeyboardCompatibleView } from '../components/CustomKeyboardCompatibleView';
 import { Gallery } from '../components/Gallery';
-import { Giphy } from '../components/Giphy';
-import { InputBoxThread } from '../components/InputBoxThread';
+import { InputBoxThread } from '../components/Input/InputBoxThread';
 import { MessageActionSheet } from '../components/MessageActionSheet/MessageActionSheet';
 import { MessageAvatar } from '../components/MessageAvatar';
 import { MessageFooter } from '../components/MessageFooter';
@@ -161,7 +160,6 @@ export const ThreadScreen = () => {
               channel={channel}
               forceAlignMessages={'left'}
               Gallery={Gallery}
-              Giphy={Giphy}
               Input={InputBoxThread}
               KeyboardCompatibleView={CustomKeyboardCompatibleView}
               MessageAvatar={MessageAvatar}

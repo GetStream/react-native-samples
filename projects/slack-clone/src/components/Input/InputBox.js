@@ -5,14 +5,14 @@ import {
   AutoCompleteInput,
   FileUploadPreview,
   ImageUploadPreview,
-  useChannelContext,
   useMessageInputContext,
 } from 'stream-chat-react-native';
 
-import { useKeyboard } from '../hooks/useKeaboard';
-import { notImplemented } from '../utils';
-import { SVGIcon } from './SVGIcon';
-import { SendButton } from './SendButton';
+import { useKeyboard } from '../../hooks/useKeaboard';
+import { notImplemented } from '../../utils';
+import { SVGIcon } from './../SVGIcon';
+import { SendButton } from './../SendButton';
+import { GiphyActiveIndicator } from './GiphyActiveIndicator';
 
 const styles = StyleSheet.create({
   actionsContainer: {
@@ -23,7 +23,13 @@ const styles = StyleSheet.create({
   autoCompleteInput: {
     minHeight: 25,
   },
+  autocompleteContainer: {
+    flex: 1,
+  },
   buttonSection: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     width: 100,
   },
   container: {
@@ -34,10 +40,22 @@ const styles = StyleSheet.create({
     paddingVertical: Platform.OS === 'ios' ? 10 : 0,
     width: '100%',
   },
+  giphyContainer: {
+    alignItems: 'center',
+    borderRadius: 12,
+    flexDirection: 'row',
+    height: 24,
+    marginRight: 8,
+    paddingHorizontal: 8,
+    width: 100,
+  },
+  giphyText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
   row: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   textActionLabel: {
     fontSize: 18,
@@ -46,7 +64,7 @@ const styles = StyleSheet.create({
 
 export const InputBox = () => {
   const { colors } = useTheme();
-  const { channel } = useChannelContext();
+  const { channel } = useMessageInputContext();
   const {
     openAttachmentPicker,
     openCommandsPicker,
@@ -100,9 +118,12 @@ export const InputBox = () => {
         },
       ]}>
       <View style={styles.row}>
-        <AutoCompleteInput
-          additionalTextInputProps={additionalTextInputProps}
-        />
+        <GiphyActiveIndicator />
+        <View style={styles.autocompleteContainer}>
+          <AutoCompleteInput
+            additionalTextInputProps={additionalTextInputProps}
+          />
+        </View>
         {!isKeyboardOpen && <SendButton />}
       </View>
       <ImageUploadPreview />
@@ -113,7 +134,7 @@ export const InputBox = () => {
             styles.actionsContainer,
             { backgroundColor: colors.background },
           ]}>
-          <View style={[styles.row, styles.buttonSection]}>
+          <View style={styles.buttonSection}>
             <TouchableOpacity onPress={openCommandsPicker}>
               <SVGIcon
                 height='18'
@@ -133,7 +154,7 @@ export const InputBox = () => {
               />
             </TouchableOpacity>
           </View>
-          <View style={[styles.row, styles.buttonSection]}>
+          <View style={styles.buttonSection}>
             <TouchableOpacity onPress={openFilePicker}>
               <SVGIcon height='18' type='file-attachment' width='18' />
             </TouchableOpacity>

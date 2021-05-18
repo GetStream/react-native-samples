@@ -30,15 +30,21 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Giphy = React.memo(({ image_url, thumb_url, title }) => (
-  <TouchableOpacity style={styles.container}>
-    <SCText style={styles.title}>{title}</SCText>
-    <SCText style={styles.description}>Posted using Giphy.com</SCText>
-    <Image
-      source={{
-        url: makeImageCompatibleUrl(image_url || thumb_url),
-      }}
-      style={styles.thumbnail}
-    />
-  </TouchableOpacity>
-));
+export const Giphy = ({ attachment }) => {
+  const { image_url, thumb_url, title } = attachment;
+
+  if (!image_url && !thumb_url) return null;
+
+  return (
+    <TouchableOpacity style={styles.container}>
+      <SCText style={styles.title}>{title}</SCText>
+      <SCText style={styles.description}>Posted using Giphy.com</SCText>
+      <Image
+        source={{
+          url: makeImageCompatibleUrl(image_url || thumb_url),
+        }}
+        style={styles.thumbnail}
+      />
+    </TouchableOpacity>
+  );
+};

@@ -1,4 +1,9 @@
-import { useNavigation, useRoute, useTheme } from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+  useTheme,
+} from '@react-navigation/native';
 import React, {
   useCallback,
   useContext,
@@ -18,10 +23,9 @@ import {
 
 import { CustomKeyboardCompatibleView } from '../../components/CustomKeyboardCompatibleView';
 import { Gallery } from '../../components/Gallery';
-import { Giphy } from '../../components/Giphy';
 import { InlineDateSeparator } from '../../components/InlineDateSeparator';
 import { InlineUnreadIndicator } from '../../components/InlineUnreadIndicator';
-import { InputBox } from '../../components/InputBox';
+import { InputBox } from '../../components/Input/InputBox';
 import { MessageActionSheet } from '../../components/MessageActionSheet/MessageActionSheet';
 import { MessageAvatar } from '../../components/MessageAvatar';
 import { MessageFooter } from '../../components/MessageFooter';
@@ -110,6 +114,7 @@ export const ChannelScreen = () => {
   const reactionPickerRef = useRef(null);
   const messageListRef = useRef(null);
 
+  const [activeThread, setActiveThread] = useState();
   const [draftText, setDraftText] = useState('');
   const [isReady, setIsReady] = useState(false);
   const [text, setText] = useState('');
@@ -163,6 +168,7 @@ export const ChannelScreen = () => {
    */
   const openThread = useCallback(
     (thread) => {
+      setActiveThread(thread);
       navigation.navigate('ThreadScreen', {
         channelId: channel.id,
         threadId: thread.id,
@@ -256,6 +262,10 @@ export const ChannelScreen = () => {
     };
   }, [channelId, messageId]);
 
+  useFocusEffect(() => {
+    setActiveThread(undefined);
+  });
+
   if (!isReady) {
     return null;
   }
@@ -281,7 +291,6 @@ export const ChannelScreen = () => {
             DateHeader={RenderNothing}
             forceAlignMessages={'left'}
             Gallery={Gallery}
-            Giphy={Giphy}
             initialValue={draftText}
             InlineDateSeparator={InlineDateSeparator}
             InlineUnreadIndicator={InlineUnreadIndicator}
@@ -306,6 +315,7 @@ export const ChannelScreen = () => {
               messageId ? JumpToRecentMessagesButton : RenderNothing
             }
             supportedReactions={supportedReactions}
+            thread={activeThread}
             UrlPreview={UrlPreview}>
             <MessageList
               additionalFlatListProps={additionalFlatListProps}
