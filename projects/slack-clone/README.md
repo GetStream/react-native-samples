@@ -1,6 +1,6 @@
 # Slack Clone
 
-![](https://stream-blog-v2.imgix.net/blog/wp-content/uploads/80af4fbb74a77a4465679f6118af7427/image.png)
+![1280x640px-2](https://user-images.githubusercontent.com/11586388/118734233-3fa20d00-b83e-11eb-9527-65f09666e65c.jpg)
 
 Slack Clone is a sample app implemented using Stream Chat and React Native. It is a fully fledged messaging app built using core packages.
 
