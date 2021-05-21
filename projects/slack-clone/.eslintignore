@@ -1,0 +1,10 @@
+node_modules/
+build/
+dist/
+.expo/
+vendor/
+*.md
+src/components/docs/
+src/utils/supportedReactions.js
+lib/
+test-data-cli.config.js
