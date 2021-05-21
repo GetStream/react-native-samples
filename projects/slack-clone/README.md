@@ -4,6 +4,8 @@
 
 Slack Clone is a sample app implemented using Stream Chat and React Native. It is a fully fledged messaging app built using core packages.
 
+> ⚠️  Please don't simply copy-paste the code in your project. Projects in this repository are just the demostrations for power of Stream Chat and React Native, and should not be used as source for ready to publish application.
+
 ## Getting Started
 
 Before running this project please ensure React Native is installed and configured on your machine. If you're new to React Native, please checkout the [official guide](https://reactnative.dev/docs/environment-setup) with installation instructions for your OS. 
