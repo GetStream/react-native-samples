@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   LogBox,
   SafeAreaView,
   StyleSheet,
@@ -67,6 +68,13 @@ export default () => {
     // Initializes Stream's chat client.
     // Documentation: https://getstream.io/chat/docs/init_and_users/?language=js
     const initChat = async () => {
+      if (!defaultUser.id || !defaultUser.token) {
+        Alert.alert(
+          'Please set API_KEY, USER_ID and USER_TOKEN in .env file as mentioned in README file and restart the project',
+        );
+        return;
+      }
+
       await chatClient.connectUser(
         {
           id: currentUser.id,
