@@ -1,4 +1,4 @@
-# Slack Clone
+# Slack Clone Using React Native And Stream Chat
 
 ![1280x640px-2](https://user-images.githubusercontent.com/11586388/118734233-3fa20d00-b83e-11eb-9527-65f09666e65c.jpg)
 
