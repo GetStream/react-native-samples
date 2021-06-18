@@ -7,7 +7,7 @@ Each project contains a README with build and execution instructions.
 
 ## **Projects 🚀**
 
-- [iMessage Clone](https://github.com/GetStream/react-native-samples/tree/main/projects/iMessage-clone)
+- [iMessage Clone](https://github.com/GetStream/react-native-samples/tree/main/projects/iMessageClone)
 - [Slack Clone](https://github.com/GetStream/react-native-samples/tree/main/projects/slack-clone)
 
 ## What is Stream?
