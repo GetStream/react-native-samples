@@ -94,10 +94,15 @@ export const ChannelHeader: React.FC<ChannelHeader> = ({
             <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
               <View style={styles.backButtonContainer}>
                 <BackButton pathFill={accent_blue} width={22} />
-                <View
-                  style={[styles.counterBadge, {backgroundColor: accent_blue}]}>
-                  <Text style={{color: white}}>{count ? count : null}</Text>
-                </View>
+                {count ? (
+                  <View
+                    style={[
+                      styles.counterBadge,
+                      {backgroundColor: accent_blue},
+                    ]}>
+                    <Text style={{color: white}}>{count}</Text>
+                  </View>
+                ) : null}
               </View>
             </TouchableWithoutFeedback>
           </View>
