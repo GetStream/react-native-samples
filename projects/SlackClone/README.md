@@ -38,9 +38,6 @@ cd react-native-samples/projects/slack-clone
 # Install npm dependencies
 yarn
 
-# Link the assets
-npx react-native link
-
 # Install pod dependencies
 npx pod-install
 ```
