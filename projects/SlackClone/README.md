@@ -39,7 +39,7 @@ cd react-native-samples/projects/slack-clone
 yarn
 
 # Install pod dependencies
-cd ios && npx pod-install && cd ..
+npx pod-install
 ```
 
 ## Generate Test Users and Chat Data
