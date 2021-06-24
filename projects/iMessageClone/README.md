@@ -39,12 +39,8 @@ cd react-native-samples/iMessageClone
 # Install npm dependencies
 yarn
 
-# Link the assets
-
-npx react-native link
-
 # Install pod dependencies
-npx pod-install
+cd ios && npx pod-install && cd ..
 ```
 
 **Run the project on your device or emulator:**
