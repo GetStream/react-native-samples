@@ -4,19 +4,18 @@
 
 Slack Clone is a sample app implemented using Stream Chat and React Native. It is a fully fledged messaging app built using core packages.
 
-> ⚠️  Please don't simply copy-paste the code in your project. Projects in this repository are just the demostrations for power of Stream Chat and React Native, and should not be used as source for ready to publish application.
+> ⚠️ Please don't simply copy-paste the code in your project. Projects in this repository are just the demostrations for power of Stream Chat and React Native, and should not be used as source for ready to publish application.
 
 ## Getting Started
 
-Before running this project please ensure React Native is installed and configured on your machine. If you're new to React Native, please checkout the [official guide](https://reactnative.dev/docs/environment-setup) with installation instructions for your OS. 
-
+Before running this project please ensure React Native is installed and configured on your machine. If you're new to React Native, please checkout the [official guide](https://reactnative.dev/docs/environment-setup) with installation instructions for your OS.
 
 This project is only configured to support the following platforms:
 
 - Android
 - iOS
 
-Web and Desktop are not supported at this time. 
+Web and Desktop are not supported at this time.
 
 After installing React Native and the necessary toolchain for your device (Android or iOS), connect your device or open your emulator before running the following:
 
@@ -26,7 +25,7 @@ After installing React Native and the necessary toolchain for your device (Andro
 git clone https://github.com/GetStream/react-native-samples
 ```
 
-**Open the app folder** 
+**Open the app folder**
 
 ```bash
 cd react-native-samples/projects/slack-clone
@@ -51,6 +50,7 @@ npx pod-install
 ```sh
 yarn create-channels --config="test-data-cli.config.js"
 ```
+
 - The output of this command will include bunch of user ids and their respective token. You can copy-paste any one of the listed user id & token to `.env` file (as mentioned in next section)
 
 ## Set Environment variables
@@ -58,14 +58,14 @@ yarn create-channels --config="test-data-cli.config.js"
 - Create an .env file in root folder of this project:
 
 ```sh
-mv .env.template .env
+touch .env
 ```
 
 - Set following environment variables in `.env` file.
 
-  - `STREAM_API_KEY`
-  - `STREAM_USER_ID`
-  - `STREAM_USER_TOKEN`
+  - `API_KEY`
+  - `USER_ID`
+  - `USER_TOKEN`
 
 **Run the project on your device or emulator:**
 
