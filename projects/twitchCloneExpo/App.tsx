@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, View,Image } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
@@ -79,7 +78,7 @@ export default function App() {
             ),
           }}
         />
-        <Stack.Screen name="Live" component={LiveScreen} />
+        <Stack.Screen name="Live" component={LiveScreen} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

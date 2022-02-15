@@ -3,28 +3,30 @@ import { Image, View, Dimensions, StyleSheet, Text } from "react-native";
 import * as VideoThumbnails from "expo-video-thumbnails";
 
 export default function ThumbNailComponent({ uri }: { uri: string }) {
-  const [image, setImage] = useState(
-    "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-  );
+  // const [image, setImage] = useState(
+  //   "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+  // );
 
-  useEffect(() => {
-    VideoThumbnails.getThumbnailAsync(uri, {
-      time: 15000,
-    })
-      .then(({ uri }) => {
-        setImage(uri);
-      })
-      .catch((e) => console.warn(e));
-  }, [uri]);
+  // useEffect(() => {
+  //   VideoThumbnails.getThumbnailAsync(uri, {
+  //     time: 15000,
+  //   })
+  //     .then(({ uri }) => {
+  //       setImage(uri);
+  //     })
+  //     .catch((e) => console.warn(e));
+  // }, [uri]);
 
   return (
     <View style={styles.boxContainer}>
       <View>
-        <Image source={{ uri: image }} style={styles.image} />
+        <Image source={{ uri: uri }} style={styles.image} />
       </View>
       <View>
         <Text style={{ paddingHorizontal: 20, paddingVertical: 4 }}>User</Text>
-        <Text style={{ paddingHorizontal: 20, paddingVertical: 4 }}>Stream</Text>
+        <Text style={{ paddingHorizontal: 20, paddingVertical: 4 }}>
+          Stream
+        </Text>
       </View>
     </View>
   );
@@ -39,9 +41,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingVertical: 4,
     paddingLeft: 20,
-
   },
   image: {
+    resizeMode: "cover",
     flex: 1,
     alignSelf: "center",
     width: Dimensions.get("window").width / 4,
