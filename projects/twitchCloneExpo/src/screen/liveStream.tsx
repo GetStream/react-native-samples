@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Platform } from "react-native";
 import { StreamChat } from "stream-chat";
 import VideoComponent from "../components/videoComponent";
 import {
@@ -8,28 +8,59 @@ import {
   MessageInput,
   MessageList,
   OverlayProvider as ChatOverlayProvider,
+  KeyboardCompatibleView,
+  MessageContent,
+  useMessageContext,
+  MessageFooter,
 } from "stream-chat-expo";
 import {
   SafeAreaProvider,
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { LiveScreenProps } from "../../types";
 
 const chatClient = StreamChat.getInstance("62mwbdkdfv8j");
 const userToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoib2tlY2h1a3d1In0.7SNsBLTxoBlGX7KfXvP-dDAZ7pGJF-sO-NPZwXkYk4o";
+const getRandomColor = (): string => {
+  let textColor = ["red", "blue", "yellow"];
+  var item = textColor[Math.floor(Math.random() * textColor.length)];
+  return item;
+};
 
 const user = {
   id: "okechukwu",
+  username: "enigma",
+  color: getRandomColor(),
 };
 
 const connectUserPromise = chatClient.connectUser(user, userToken);
 
 const channel = chatClient.channel("messaging", "channel_id");
 
-function LiveScreen() {
+const CustomMessageHeader = () => {
+  <MessageFooter formattedDate={""} />;
+};
+
+const SimpleChatText = () => {
+  const { message } = useMessageContext();
+  const displayName = message.user?.username ?? message.user?.id;
+  const colour: string = message.user?.color as string;
+  return (
+    <View style={{ flexDirection: "row" }}>
+      <Text style={{ color: colour }}>{displayName}: </Text>
+      <Text>{message.text}</Text>
+    </View>
+  );
+};
+
+function LiveScreen({ route, navigation }: LiveScreenProps) {
+  const { url } = route.params;
   const { bottom } = useSafeAreaInsets();
   const [ready, setReady] = useState(false);
+  const [error, setError] = useState("");
+  const iosVerticalOffset = bottom > 0 ? 0 : 0;
 
   useEffect(() => {
     const initChat = async () => {
@@ -38,37 +69,59 @@ function LiveScreen() {
       setReady(true);
     };
 
-    initChat();
+    initChat().catch((error) => {
+      setError("Error Loading Stream");
+    });
   }, []);
 
+  if (error.length > 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>{error}</Text>
+      </View>
+    );
+  }
   if (!ready) {
     return (
-      <View>
-        <Text>Failed to load</Text>;
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>loading...</Text>
       </View>
     );
   }
 
   return (
-    <SafeAreaProvider>
-      <View style={StyleSheet.absoluteFill}>
-        <View style={{ flex: 2 }}>
-          <VideoComponent url="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+    <ChatOverlayProvider bottomInset={bottom} topInset={0}>
+      <SafeAreaProvider>
+        <View style={StyleSheet.absoluteFill}>
+          <View style={{ flex: 2.2 }}>
+            <VideoComponent url={url} />
+          </View>
+          <KeyboardCompatibleView
+            style={{ flex: 4 }}
+            keyboardVerticalOffset={
+              Platform.OS === "android" ? undefined : iosVerticalOffset
+            }
+          >
+            <Chat client={chatClient}>
+              <Channel
+                channel={channel}
+                keyboardVerticalOffset={0}
+                MessageSimple={SimpleChatText}
+                hasImagePicker={false}
+                hasCommands={false}
+                hasFilePicker={false}
+                hideStickyDateHeader={true}
+                hideDateSeparators={true}
+              >
+                <MessageList />
+                <MessageInput giphyActive={false} />
+                <View style={{ paddingBottom: 16 }} />
+              </Channel>
+            </Chat>
+          </KeyboardCompatibleView>
         </View>
-        <View style={{ flex: 4 }}>
-          <ChatOverlayProvider bottomInset={bottom} topInset={0}>
-            <SafeAreaView>
-              <Chat client={chatClient}>
-                <Channel channel={channel} keyboardVerticalOffset={0}>
-                  <MessageList />
-                  <MessageInput />
-                </Channel>
-              </Chat>
-            </SafeAreaView>
-          </ChatOverlayProvider>
-        </View>
-      </View>
-    </SafeAreaProvider>
+      </SafeAreaProvider>
+    </ChatOverlayProvider>
   );
 }
 

@@ -78,7 +78,7 @@ export default function App() {
             ),
           }}
         />
-        <Stack.Screen name="Live" component={LiveScreen} options={{headerShown:false}} />
+        <Stack.Screen name="Live" component={LiveScreen} options={{headerShown:false}} initialParams={{url:""}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
