@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, Platform } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
 import { StreamChat } from "stream-chat";
 import VideoComponent from "../components/videoComponent";
 import {
@@ -12,12 +18,16 @@ import {
   MessageContent,
   useMessageContext,
   MessageFooter,
+  RootSvg,
+  RootPath,
+  useMessageInputContext,
 } from "stream-chat-expo";
 import {
   SafeAreaProvider,
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 import { LiveScreenProps } from "../../types";
 
 const chatClient = StreamChat.getInstance("62mwbdkdfv8j");
@@ -39,8 +49,20 @@ const connectUserPromise = chatClient.connectUser(user, userToken);
 
 const channel = chatClient.channel("messaging", "channel_id");
 
-const CustomMessageHeader = () => {
-  <MessageFooter formattedDate={""} />;
+const SendButton = () => {
+  const { sendMessage, text, imageUploads, fileUploads } =
+    useMessageInputContext();
+  const isDisabled = !text && !imageUploads.length && !fileUploads.length;
+
+  return (
+    <TouchableOpacity disabled={isDisabled} onPress={sendMessage}>
+      <Ionicons
+        name={"ios-send-outline"}
+        color={isDisabled ? "grey" : "blue"}
+        size={21}
+      />
+    </TouchableOpacity>
+  );
 };
 
 const SimpleChatText = () => {
@@ -112,6 +134,7 @@ function LiveScreen({ route, navigation }: LiveScreenProps) {
                 hasFilePicker={false}
                 hideStickyDateHeader={true}
                 hideDateSeparators={true}
+                SendButton={SendButton}
               >
                 <MessageList />
                 <MessageInput giphyActive={false} />

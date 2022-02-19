@@ -35,7 +35,7 @@ function MainScreen() {
         <Tab.Screen name="Following" component={FollowingScreen} />
         <Tab.Screen name="Discover" component={DiscoverScreen} />
         <Tab.Screen name="Browse" component={BrowseScreen} />
-        <Tab.Screen name="Search" component={SearchScreen} />
+
       </Tab.Navigator>
     // </NavigationContainer>
   );

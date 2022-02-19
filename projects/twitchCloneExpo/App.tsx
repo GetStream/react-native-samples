@@ -1,10 +1,11 @@
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { Pressable, View,Image } from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainScreen from './src/screen/mainScreen';
 import LiveScreen from './src/screen/liveStream';
-import { RootStackParamList } from './types';
+import { RootStackParamList, SearchScreenProps } from './types';
+import SearchScreen from "./src/screen/main_screens/search";
 
 
 
@@ -39,8 +40,8 @@ export default function App() {
                     opacity: pressed ? 0.5 : 1,
                   })}
                 >
-                  <Ionicons
-                    name="ios-notifications-outline"
+                  <AntDesign
+                    name="videocamera"
                     size={25}
                     color="black"
                     style={{ marginRight: 15 }}
@@ -53,8 +54,8 @@ export default function App() {
                     opacity: pressed ? 0.5 : 1,
                   })}
                 >
-                  <Ionicons
-                    name="ios-chatbubble-outline"
+                  <AntDesign
+                    name="inbox"
                     size={25}
                     color="black"
                     style={{ marginRight: 15 }}
@@ -67,8 +68,25 @@ export default function App() {
                     opacity: pressed ? 0.5 : 1,
                   })}
                 >
-                  <Ionicons
-                    name="ios-link-outline"
+                  <AntDesign
+                    name="message1"
+                    size={25}
+                    color="black"
+                    style={{ marginRight: 15 }}
+                  />
+                </Pressable>
+
+                <Pressable
+                  onPress={({ }) => {
+                    // const navigation = useNavigation();
+                    // navigation.navigate({ key: "Search" });
+                  }}
+                  style={({ pressed }) => ({
+                    opacity: pressed ? 0.5 : 1,
+                  })}
+                >
+                  <AntDesign
+                    name="search1"
                     size={25}
                     color="black"
                     style={{ marginRight: 15 }}
@@ -78,7 +96,13 @@ export default function App() {
             ),
           }}
         />
-        <Stack.Screen name="Live" component={LiveScreen} options={{headerShown:false}} initialParams={{url:""}} />
+        <Stack.Screen
+          name="Live"
+          component={LiveScreen}
+          options={{ headerShown: false }}
+          initialParams={{ url: "" }}
+        />
+        <Stack.Screen name="Search" component={SearchScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

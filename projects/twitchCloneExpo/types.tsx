@@ -1,10 +1,9 @@
-import {
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
   Home: undefined; // undefined because you aren't passing any params to the home screen
   Live: { url: string };
+  Search: undefined;
 };
 
 export type LiveScreenProps = NativeStackScreenProps<
@@ -17,4 +16,7 @@ export type MainScreenProps = NativeStackScreenProps<
   "Home"
 >;
 
-
+export type SearchScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  "Search"
+>;
