@@ -6,8 +6,11 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import { StreamChat } from "stream-chat";
-import VideoComponent from "../components/videoComponent";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
+import { StreamChat, Channel as ChannelType } from "stream-chat";
 import {
   Channel,
   Chat,
@@ -15,24 +18,19 @@ import {
   MessageList,
   OverlayProvider as ChatOverlayProvider,
   KeyboardCompatibleView,
-  MessageContent,
   useMessageContext,
-  MessageFooter,
-  RootSvg,
-  RootPath,
   useMessageInputContext,
+  DefaultChannelType,
 } from "stream-chat-expo";
-import {
-  SafeAreaProvider,
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
+
 import { LiveScreenProps } from "../../types";
+import VideoComponent from "../components/videoComponent";
 
 const chatClient = StreamChat.getInstance("62mwbdkdfv8j");
 const userToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoib2tlY2h1a3d1In0.7SNsBLTxoBlGX7KfXvP-dDAZ7pGJF-sO-NPZwXkYk4o";
+
 const getRandomColor = (): string => {
   let textColor = ["red", "blue", "yellow"];
   var item = textColor[Math.floor(Math.random() * textColor.length)];
@@ -47,7 +45,6 @@ const user = {
 
 const connectUserPromise = chatClient.connectUser(user, userToken);
 
-const channel = chatClient.channel("messaging", "channel_id");
 
 const SendButton = () => {
   const { sendMessage, text, imageUploads, fileUploads } =
@@ -68,44 +65,56 @@ const SendButton = () => {
 const SimpleChatText = () => {
   const { message } = useMessageContext();
   const displayName = message.user?.username ?? message.user?.id;
-  const colour: string = message.user?.color as string;
+  const userNameColor = message.user?.color as string;
   return (
-    <View style={{ flexDirection: "row" }}>
-      <Text style={{ color: colour }}>{displayName}: </Text>
-      <Text>{message.text}</Text>
+    <View style={styles.messageContainer}>
+      <Text style={[styles.messageUserName, { color: userNameColor }]}>{displayName}: </Text>
+      <Text style={styles.messageText}>{message.text}</Text>
     </View>
   );
 };
 
-function LiveScreen({ route, navigation }: LiveScreenProps) {
-  const { url } = route.params;
+function LiveScreen({ route }: LiveScreenProps) {
+  const { url, ID: liveStreamID } = route.params;
   const { bottom } = useSafeAreaInsets();
   const [ready, setReady] = useState(false);
-  const [error, setError] = useState("");
-  const iosVerticalOffset = bottom > 0 ? 0 : 0;
+  const [errorMessage, setErrorMessage] = useState("");
+  const [channel, setChannel] = useState<ChannelType | null>(null);
+  const iosVerticalOffset = 0;
 
   useEffect(() => {
     const initChat = async () => {
-      await connectUserPromise;
-      await channel.watch();
-      setReady(true);
+      try {
+        if (!chatClient.userID) {
+            await connectUserPromise;
+        }
+        // TODO: Dynamically select channel
+        const newChannel = chatClient.channel("livestream", liveStreamID);
+        await newChannel.watch();
+
+        setChannel(newChannel as ChannelType);
+        setReady(true);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setErrorMessage(`Error Loading Stream: ${error.message}`);
+        }
+      }
     };
 
-    initChat().catch((error) => {
-      setError("Error Loading Stream");
-    });
+      initChat();
   }, []);
 
-  if (error.length > 0) {
+  if (errorMessage) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>{error}</Text>
+      <View style={styles.statusMessageContainer}>
+        <Text>{errorMessage}</Text>
       </View>
     );
   }
+
   if (!ready) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={styles.statusMessageContainer}>
         <Text>loading...</Text>
       </View>
     );
@@ -115,11 +124,11 @@ function LiveScreen({ route, navigation }: LiveScreenProps) {
     <ChatOverlayProvider bottomInset={bottom} topInset={0}>
       <SafeAreaProvider>
         <View style={StyleSheet.absoluteFill}>
-          <View style={{ flex: 2.2 }}>
+          <View style={styles.videoContainer}>
             <VideoComponent url={url} />
           </View>
           <KeyboardCompatibleView
-            style={{ flex: 4 }}
+            style={styles.chatContainer}
             keyboardVerticalOffset={
               Platform.OS === "android" ? undefined : iosVerticalOffset
             }
@@ -138,7 +147,7 @@ function LiveScreen({ route, navigation }: LiveScreenProps) {
               >
                 <MessageList />
                 <MessageInput giphyActive={false} />
-                <View style={{ paddingBottom: 16 }} />
+                <View style={styles.bottomSpaces} />
               </Channel>
             </Chat>
           </KeyboardCompatibleView>
@@ -147,5 +156,32 @@ function LiveScreen({ route, navigation }: LiveScreenProps) {
     </ChatOverlayProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  videoContainer: {
+    flex: 2.2,
+  },
+  chatContainer: {
+    flex: 4,
+  },
+  bottomSpaces: {
+    paddingBottom: 18,
+  },
+  statusMessageContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  messageContainer: {
+    flexDirection: "row"
+  },
+  messageUserName: {
+
+  },
+  messageText: {
+
+  }
+
+});
 
 export default LiveScreen;

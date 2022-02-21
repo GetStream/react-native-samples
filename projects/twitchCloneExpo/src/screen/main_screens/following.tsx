@@ -1,28 +1,19 @@
 import * as React from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
   Pressable,
   FlatList,
-  ScrollView,
   SafeAreaView,
 } from "react-native";
-import VideoComponent from "../../components/videoComponent";
-import {  MainScreenProps } from "../../../types";
+import { MainScreenProps } from "../../../types";
 import ThumbNailComponent from "../../components/thumbnail";
 import useStreamChannel from "../../hooks/channelHook";
 import { LiveStreamChannel } from "../../models/channel";
-
-
-
-
 
 function FollowingScreen({ navigation }: MainScreenProps) {
   const { channels } = useStreamChannel();
   const renderItem = ({ item }: { item: LiveStreamChannel }) => (
     <Pressable
-      onPress={() => navigation.navigate("Live", { url: item.channelStream })}
+      onPress={() => navigation.navigate("Live", { url: item.channelStream, ID: item.ID })}
     >
       <ThumbNailComponent
         uri={item.channelImg}

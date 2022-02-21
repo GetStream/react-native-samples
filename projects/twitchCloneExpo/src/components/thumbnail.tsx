@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingVertical: 4,
     paddingLeft: 20,
-    marginVertical:15
+    marginVertical: 15,
   },
   image: {
     resizeMode: "cover",

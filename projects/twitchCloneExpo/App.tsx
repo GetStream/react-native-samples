@@ -1,19 +1,14 @@
+import { Pressable, View, Image, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { Pressable, View,Image } from 'react-native';
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MainScreen from './src/screen/mainScreen';
-import LiveScreen from './src/screen/liveStream';
-import { RootStackParamList, SearchScreenProps } from './types';
+
+import MainScreen from "./src/screen/mainScreen";
+import LiveScreen from "./src/screen/liveStream";
 import SearchScreen from "./src/screen/main_screens/search";
-
-
-
-
-
+import { RootStackParamList } from "./types";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
 
 export default function App() {
   return (
@@ -29,7 +24,7 @@ export default function App() {
                 source={{
                   uri: "https://avatars.githubusercontent.com/u/24194413?s=96&v=4",
                 }}
-                style={{ width: 30, height: 30, borderRadius: 200 / 2 }}
+                style={styles.avatar}
               />
             ),
             headerRight: () => (
@@ -77,7 +72,7 @@ export default function App() {
                 </Pressable>
 
                 <Pressable
-                  onPress={({ }) => {
+                  onPress={({}) => {
                     // const navigation = useNavigation();
                     // navigation.navigate({ key: "Search" });
                   }}
@@ -87,9 +82,9 @@ export default function App() {
                 >
                   <AntDesign
                     name="search1"
-                    size={25}
+                    size={styles.icon.height}
                     color="black"
-                    style={{ marginRight: 15 }}
+                    style={styles.icon}
                   />
                 </Pressable>
               </View>
@@ -108,4 +103,14 @@ export default function App() {
   );
 }
 
-
+const styles = StyleSheet.create({
+  icon: {
+    marginRight: 15,
+    height: 25,
+  },
+  avatar: {
+    width: 30,
+    height: 30,
+    borderRadius: 200 / 2
+  }
+})

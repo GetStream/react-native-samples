@@ -3,8 +3,6 @@ import { StyleSheet, Dimensions } from "react-native";
 import { Video, AVPlaybackStatus } from "expo-av";
 
 const VideoComponent = ({ url }: { url: string }) => {
-
-
   return (
     <Video
       isMuted={true}
@@ -24,7 +22,7 @@ const VideoComponent = ({ url }: { url: string }) => {
 
 const styles = StyleSheet.create({
   video: {
-    backgroundColor:"black",
+    backgroundColor: "black",
     flex: 1,
     alignSelf: "auto",
     width: Dimensions.get("window").width,
