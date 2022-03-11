@@ -92,10 +92,11 @@ export default function App() {
           }}
         />
         <Stack.Screen
+          
           name="Live"
           component={LiveScreen}
-          options={{ headerShown: false }}
-          initialParams={{ url: "" }}
+          options={{ headerShown: true ,headerTintColor:"black", title:"",}}
+          initialParams={{ url: "" ,}}
         />
         <Stack.Screen name="Search" component={SearchScreen} />
       </Stack.Navigator>

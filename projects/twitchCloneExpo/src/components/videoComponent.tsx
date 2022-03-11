@@ -5,7 +5,8 @@ import { Video, AVPlaybackStatus } from "expo-av";
 const VideoComponent = ({ url }: { url: string }) => {
   return (
     <Video
-      isMuted={true}
+    
+      isMuted={false}
       shouldPlay={true}
       // ref={video}
       style={styles.video}
