@@ -13,6 +13,7 @@ import {
   Platform,
   TouchableOpacity,
   Image,
+  SafeAreaView,
 } from "react-native";
 import {
   SafeAreaProvider,
@@ -32,23 +33,15 @@ import {
   Colors,
   AutoCompleteInput,
 } from "stream-chat-expo";
-import {
-  HtmlNodeOutput,
-  ReactNodeOutput,
-  SingleASTNode,
-  State,
-  ReactOutput,
-} from "simple-markdown";
+import { SingleASTNode, State, ReactOutput } from "simple-markdown";
 
 import { Ionicons } from "@expo/vector-icons";
 
 import { LiveScreenProps } from "../../types";
 import VideoComponent from "../components/videoComponent";
-import {
-  BottomSheetModal,
-  BottomSheetModalProvider,
-  useBottomSheetModal,
-} from "@gorhom/bottom-sheet";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { FlatList } from "react-native-gesture-handler";
+import { emoticons } from "../utils/supportedReactions";
 
 const chatClient = StreamChat.getInstance("62mwbdkdfv8j");
 const userToken =
@@ -68,15 +61,58 @@ const user = {
 
 const connectUserPromise = chatClient.connectUser(user, userToken);
 
-const SendButton = () => {
-  const { sendMessage, text, imageUploads, fileUploads } =
-    useMessageInputContext();
-  const snapPoints = useMemo(() => ["50%", "25%"], []);
+// TODO: figure out why this hook doesn't work while trying to set the text of the autocomplete inputfiled
+// const messageTextHook = () => {
+//   const [messageText, setmessageText] = useState("");
 
+//    const setText = ({text}:{text:string}) => {
+//      setmessageText((prevText) => `${prevText} ${text}`);
+//    };
+  
+//   return { messageText, setText };
+// }
+
+const SendButton = () => {
+
+  const { sendMessage, text, imageUploads, fileUploads, appendText } =
+    useMessageInputContext();
+  const snapPoints = useMemo(() => ["50%", "50%"], []);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const handlePresentPress = () => bottomSheetModalRef?.current?.present();
+  const handleClosePress = () => bottomSheetModalRef?.current?.close();
 
   const isDisabled = !text && !imageUploads.length && !fileUploads.length;
+
+  const data = emoticons;
+  // render
+  const renderItem = useCallback(
+    ({
+      item,
+    }: {
+      item: {
+        image: string;
+        tag: string;
+      };
+    }) => (
+      <TouchableOpacity
+        onPress={() => {
+
+          appendText(`${item.tag} `);
+
+        }}
+      >
+        <Text>
+          {" "}
+          <Image
+            key={item.tag}
+            source={{ uri: item.image }}
+            style={{ width: 30, height: 30 }}
+          />
+        </Text>
+      </TouchableOpacity>
+    ),
+    []
+  );
 
   return (
     <View style={{ flexDirection: "column" }}>
@@ -109,22 +145,24 @@ const SendButton = () => {
         index={1}
         snapPoints={snapPoints}
       >
-        <View style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
-        </View>
+        <SafeAreaView>
+          <FlatList
+            data={data}
+            keyExtractor={(i) => i.tag}
+            renderItem={renderItem}
+            numColumns={11}
+          />
+        </SafeAreaView>
       </BottomSheetModal>
     </View>
   );
 };
 
 const CustomInput = () => {
-  const { sendMessage, text, toggleAttachmentPicker, openCommandsPicker } =
-    useMessageInputContext();
-
   return (
     <View style={[styles.fullWidth, styles.row]}>
       <View style={[styles.input]}>
-        <AutoCompleteInput />
+        <AutoCompleteInput/>
       </View>
       <View style={{ width: 5 }} />
       <SendButton />
@@ -183,7 +221,6 @@ const SimpleChatText = memo((props) => {
                 state: any
               ) {
                 return {
-                  // content: parse(capture[1], state),
                   text: capture[0],
                 };
               },
@@ -285,42 +322,40 @@ function LiveScreen({ route }: LiveScreenProps) {
       }}
     >
       <SafeAreaProvider>
-        <BottomSheetModalProvider>
-          <View style={StyleSheet.absoluteFill}>
-            <View style={styles.videoContainer}>
-              <VideoComponent url={url} />
-            </View>
-            <KeyboardCompatibleView
-              style={styles.chatContainer}
-              keyboardVerticalOffset={
-                Platform.OS === "android" ? undefined : iosVerticalOffset
-              }
-            >
-              <Chat client={chatClient} style={themeStyle}>
-                <Channel
-                  Input={CustomInput}
-                  channel={channel!}
-                  keyboardVerticalOffset={0}
-                  forceAlignMessages="left"
-                  MessageSimple={SimpleChatText}
-                  hasImagePicker={false}
-                  hasCommands={false}
-                  hasFilePicker={false}
-                  hideStickyDateHeader={true}
-                  hideDateSeparators={true}
-                  SendButton={SendButton}
-                  MessageHeader={() => null}
-                  MessageFooter={() => null}
-                  onLongPressMessage={() => {}}
-                >
-                  <MessageList />
-                  <MessageInput giphyActive={false} />
-                  <View style={styles.bottomSpaces} />
-                </Channel>
-              </Chat>
-            </KeyboardCompatibleView>
+        <View style={StyleSheet.absoluteFill}>
+          <View style={styles.videoContainer}>
+            <VideoComponent url={url} />
           </View>
-        </BottomSheetModalProvider>
+          <KeyboardCompatibleView
+            style={styles.chatContainer}
+            keyboardVerticalOffset={
+              Platform.OS === "android" ? undefined : iosVerticalOffset
+            }
+          >
+            <Chat client={chatClient} style={themeStyle}>
+              <Channel
+                Input={CustomInput}
+                channel={channel!}
+                keyboardVerticalOffset={0}
+                forceAlignMessages="left"
+                MessageSimple={SimpleChatText}
+                hasImagePicker={false}
+                hasCommands={false}
+                hasFilePicker={false}
+                hideStickyDateHeader={true}
+                hideDateSeparators={true}
+                SendButton={SendButton}
+                MessageHeader={() => null}
+                MessageFooter={() => null}
+                onLongPressMessage={() => {}}
+              >
+                <MessageList />
+                <MessageInput giphyActive={false} />
+                <View style={styles.bottomSpaces} />
+              </Channel>
+            </Chat>
+          </KeyboardCompatibleView>
+        </View>
       </SafeAreaProvider>
     </ChatOverlayProvider>
   );
@@ -342,6 +377,14 @@ const themeStyle = {
 };
 
 const styles = StyleSheet.create({
+  emoteItemContainer: {
+    padding: 6,
+    margin: 6,
+    backgroundColor: "#eee",
+    flexDirection: "column",
+    flex: 1,
+    alignItems: "center",
+  },
   container: {
     flex: 1,
     padding: 24,
