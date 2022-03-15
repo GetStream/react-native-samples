@@ -174,7 +174,8 @@ export const ThreadScreen = () => {
               ShowThreadMessageInChannelButton={RenderNothing}
               supportedReactions={supportedReactions}
               thread={thread}
-              UrlPreview={UrlPreview}>
+              UrlPreview={UrlPreview}
+              threadList>
               <Thread />
             </Channel>
             <MessageActionSheet {...actionSheetData} ref={actionSheetRef} />

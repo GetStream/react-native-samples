@@ -5,13 +5,13 @@ module.exports = {
   //          Set your API key and secret here
   // ============================================================================
 
-  apiKey: 'samf9ubytcez',
-  secret: 'jrw8bkcq6g7pjqkperfzgrgb8pn5555ycqf2zx8qadszzt3tamkshr9jnpvchvsy',
+  apiKey: '',
+  secret: '',
 
   // ============================================================================
   // ============================================================================
 
-  baseUrl: 'https://chat-us-east-1.stream-io-api.com',
+  // baseUrl: 'https://chat-us-east-1.stream-io-api.com',
   channelType: 'messaging',
   serverSideUser: 'vishal',
   channelIdPrefix: 'slack-clone',

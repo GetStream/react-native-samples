@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 });
 
 const GalleryWithContext = (props) => {
-  const { images, message, setBlurType, setImage, setOverlay } = props;
+  const { images, message, setImages, setImage, setOverlay } = props;
 
   if (!images?.length) {
     return null;
@@ -53,7 +53,7 @@ const GalleryWithContext = (props) => {
               key={`${message.id}-${attachmentUrl}-${colIndex}`}
               onPress={() => {
                 setImage({ messageId: message.id, url: attachmentUrl });
-                setBlurType('dark');
+                setImages([message]);
                 setOverlay('gallery');
               }}
               style={styles.imageContainer}>
@@ -99,7 +99,9 @@ const areEqual = (prevProps, nextProps) => {
         image.image_url === nextImages[index].image_url &&
         image.thumb_url === nextImages[index].thumb_url,
     );
-  if (!imagesEqual) return false;
+  if (!imagesEqual) {
+    return false;
+  }
 
   return true;
 };
@@ -107,7 +109,7 @@ const areEqual = (prevProps, nextProps) => {
 const MemoizedGallery = React.memo(GalleryWithContext, areEqual);
 
 export const Gallery = () => {
-  const { setImage } = useImageGalleryContext();
+  const { setImage, setImages } = useImageGalleryContext();
   const { setBlurType, setOverlay } = useOverlayContext();
   const { images, message } = useMessageContext();
 
@@ -118,6 +120,7 @@ export const Gallery = () => {
   return (
     <MemoizedGallery
       images={images}
+      setImages={setImages}
       message={message}
       setBlurType={setBlurType}
       setImage={setImage}
