@@ -31,7 +31,7 @@ git clone https://github.com/GetStream/react-native-samples
 **Open the app folder**
 
 ```bash
-cd react-native-samples/projects/whatsapp-clone
+cd react-native-samples/projects/WhatsAppClone
 ```
 
 **Install package dependencies:**
@@ -46,7 +46,7 @@ npx pod-install
 
 ## Generate Test Users and Chat Data
 
-- Create a new app in [our dashboard](https://dashboard.getstream.io/dashboard) (or use existing one if you have already)
+- Create a new app by [registering](https://getstream.io/chat/trial/) or use an existing app, if you have already.
 - Set your `api key` and `api secret` in `test-data-cli.config.js` file.
 - Run the following command:
 
