@@ -262,6 +262,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.facebook.fresco:fresco:2.6.0'
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion
