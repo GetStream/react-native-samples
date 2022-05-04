@@ -57,6 +57,7 @@ yarn seed-chat
 - The output of this command will include bunch of user ids and their respective token. You can copy-paste any one of the listed user id & token to `.env` file (as mentioned in next section)
 
 ## Set Environment variables
+- [Register](https://getstream.io/chat/trial/) to get an API key for Stream Chat.
 
 - Create an .env file in root folder of this project:
 
