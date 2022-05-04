@@ -64,11 +64,13 @@ yarn seed-chat
 touch .env
 ```
 
-- Set following environment variables in `.env` file.
+- Fill all environment variables in `.env` file after pasting this content:
 
-    - `STREAM_API_KEY`
-    - `STREAM_USER_ID`
-    - `STREAM_USER_TOKEN`
+```
+STREAM_API_KEY=""
+STREAM_USER_ID=""
+STREAM_USER_TOKEN=""
+```
 
 **Run the project on your device or emulator:**
 
