@@ -55,17 +55,6 @@ export default ({
     initChannel()
   }, [channelId, setChannel])
 
-  if (!channel)
-    return (
-      <View
-        style={{
-          ...flex.itemsContentCenter1,
-          backgroundColor: colors.dark.background,
-        }}>
-        <ActivityIndicator size={'large'} />
-      </View>
-    )
-
   return (
     <Chat client={chatClient}>
       <WhatsAppChannelWrapper channel={channel}>

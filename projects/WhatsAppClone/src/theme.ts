@@ -225,6 +225,9 @@ export const theme: DeepPartial<Theme> = {
       },
     },
     status: {
+      timeIcon: {
+        pathFill: colors.dark.primaryTransparent,
+      },
       readByCount: {
         display: 'none',
       },

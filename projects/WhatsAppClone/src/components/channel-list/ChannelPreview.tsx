@@ -4,6 +4,7 @@ import {useChannelPreviewDisplayName} from 'stream-chat-react-native-core/src/co
 import {
   ChannelPreviewMessage,
   ChannelPreviewTitle,
+  LatestMessagePreview,
 } from 'stream-chat-react-native'
 import {AppContext, StreamChannel} from '../../App'
 import {ChannelPreviewMessengerProps} from 'stream-chat-react-native-core/src/components/ChannelPreview/ChannelPreviewMessenger'
@@ -19,7 +20,6 @@ import PeekabooView from '../PeekabooView'
 import Mic from '../../icons/Mic'
 import {get} from 'lodash'
 import moment from 'moment'
-import {LatestMessagePreview} from 'stream-chat-react-native-core/lib/typescript/components/ChannelPreview/hooks/useLatestMessagePreview'
 import {parseDurationTextToMs} from '../../utils/conversion'
 
 export default ({
@@ -31,7 +31,6 @@ export default ({
   const {selectedChannelsForEditing, setSelectedChannelsForEditing} =
     useContext(AppContext)
   const displayName = useChannelPreviewDisplayName(channel)
-  const [somneState, setSomeState] = useState(0)
   const {
     theme: {
       channelPreview: {checkAllIcon, checkIcon, date},
@@ -77,8 +76,7 @@ export default ({
           : styles.container.backgroundColor,
       }}
       onPress={handleOnPress}
-      onLongPress={handleOnLongPress}
-      key={somneState}>
+      onLongPress={handleOnLongPress}>
       <SuperAvatar
         channel={channel}
         isSelected={isSelectedForEditing}
@@ -112,8 +110,10 @@ export default ({
             : latestMessagePreview.created_at}
         </Text>
         <View style={flex.directionRowContentEnd}>
-          <PeekabooView isEnabled={isChannelMuted} style={{marginRight: 12}}>
-            <Muted pathFill={colors.dark.secondaryLight} width={16} />
+          <PeekabooView isEnabled={isChannelMuted}>
+            <View style={{marginRight: 12}}>
+              <Muted pathFill={colors.dark.secondaryLight} width={16} />
+            </View>
           </PeekabooView>
           <PeekabooView isEnabled={isPinned}>
             <Pinned pathFill={colors.dark.secondaryLight} width={16} />
