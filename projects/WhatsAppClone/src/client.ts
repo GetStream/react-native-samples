@@ -1,6 +1,6 @@
 import {StreamChat} from 'stream-chat'
-import {ChatContextValue} from 'stream-chat-react-native-core/lib/typescript/contexts/chatContext/ChatContext'
 import {STREAM_API_KEY, STREAM_USER_TOKEN, STREAM_USER_ID} from '@env'
+import {ChatContextValue} from 'stream-chat-react-native'
 
 export const chatClient = StreamChat.getInstance(
   STREAM_API_KEY,

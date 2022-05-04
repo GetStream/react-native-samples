@@ -1,13 +1,13 @@
 import React, {useMemo} from 'react'
 import {ChannelList, Chat} from 'stream-chat-react-native'
 import {ChannelSort} from 'stream-chat'
-import {chatClient} from '../../client'
+import {chatClient, user} from '../../client'
 import ChannelPreview from './ChannelPreview'
 import {View} from 'react-native'
 import {colors} from '../../theme'
 
 const filters = {
-  members: {$in: ['steve']},
+  members: {$in: [user.id]},
   type: 'messaging',
 }
 const sort: ChannelSort = {last_message_at: -1}
