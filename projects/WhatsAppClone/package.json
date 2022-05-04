@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "seed-chat": "create-channels --config=\"test-data-cli.config.js\""
   },
   "dependencies": {
     "react": "17.0.2",
