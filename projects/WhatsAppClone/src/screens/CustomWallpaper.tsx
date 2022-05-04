@@ -44,7 +44,6 @@ export default ({
   const displayName = useChannelPreviewDisplayName(channel, 30)
   const {dimValue} = channelPreferences
 
-  // if (!dimValue) return null
   const handleOnValueChange = (value: number) => setProperty('dimValue', value)
 
   const handleChangeOnPress = () =>

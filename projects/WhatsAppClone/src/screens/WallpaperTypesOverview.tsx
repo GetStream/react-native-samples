@@ -55,6 +55,7 @@ export default ({
     clearPreferences()
     navigate('CustomWallpaper', {channelId})
   }
+
   return (
     <>
       <Header title={'Custom Wallpaper'} />
@@ -63,14 +64,7 @@ export default ({
           ...flex.contentCenter1,
           backgroundColor: colors.dark.background,
         }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignContent: 'stretch',
-            flexWrap: 'wrap',
-            flex: 1,
-            padding: sizes.sm,
-          }}>
+        <View style={styles.container}>
           {Object.values(BackgroundTypes).map((type, i) => {
             return (
               <Pressable
@@ -78,17 +72,9 @@ export default ({
                 onPress={() =>
                   navigate('WallpaperTypeDetails', {type, channelId})
                 }
-                style={{
-                  borderRadius: sizes.m,
-                  margin: sizes.s,
-                  width: GRID_ITEM_WIDTH,
-                }}>
+                style={styles.imageButton}>
                 <Image
-                  style={{
-                    flex: 1,
-                    borderRadius: sizes.m,
-                    marginBottom: sizes.m,
-                  }}
+                  style={styles.image}
                   source={{uri: get(backgroundTypeToImageUri, type)}}
                 />
                 <Text style={{color: colors.dark.text}}>{type}</Text>
@@ -116,4 +102,21 @@ export default ({
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    ...flex.directionRow1,
+    alignContent: 'stretch',
+    flexWrap: 'wrap',
+    padding: sizes.sm,
+  },
+  imageButton: {
+    borderRadius: sizes.m,
+    margin: sizes.s,
+    width: GRID_ITEM_WIDTH,
+  },
+  image: {
+    flex: 1,
+    borderRadius: sizes.m,
+    marginBottom: sizes.m,
+  },
+})

@@ -23,6 +23,7 @@ import Trash from '../icons/Trash'
 import Images from '../icons/Images'
 import Star from '../icons/Star'
 import Unstar from '../icons/Unstar'
+import Muted from '../icons/Muted'
 
 const iconNameToComponentLookUp = {
   Video,
@@ -44,6 +45,7 @@ const iconNameToComponentLookUp = {
   Images,
   Star,
   Unstar,
+  Muted,
 }
 
 interface IconButtonProps extends PressableProps {
