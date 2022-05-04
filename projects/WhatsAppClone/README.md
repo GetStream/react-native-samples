@@ -58,7 +58,7 @@ yarn seed-chat
 
 ## Set Environment variables
 
-- Create an .env file in root folder of this project:
+- Create an .env file in root folder of the WhatsAppClone project:
 
 ```sh
 touch .env
