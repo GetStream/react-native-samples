@@ -72,6 +72,8 @@ STREAM_USER_ID=""
 STREAM_USER_TOKEN=""
 ```
 
+- You can find all users ids and tokens in a table that was printend after you ran the `seed-chat` command.
+
 **Run the project on your device or emulator:**
 
 ```bash
