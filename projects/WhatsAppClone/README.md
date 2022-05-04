@@ -31,7 +31,7 @@ git clone https://github.com/GetStream/react-native-samples
 **Open the app folder**
 
 ```bash
-cd react-native-samples/projects/whatsapp-clone
+cd react-native-samples/projects/WhatsAppClone
 ```
 
 **Install package dependencies:**
