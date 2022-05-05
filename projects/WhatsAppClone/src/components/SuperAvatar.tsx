@@ -4,6 +4,7 @@ import {StyleSheet, View} from 'react-native'
 import {colors} from '../theme'
 import {Check} from 'stream-chat-react-native-core/src/icons/index'
 import {StreamChannel} from '../App'
+import {sizes} from '../global'
 
 export interface SuperAvatarProps {
   channel: StreamChannel
@@ -11,7 +12,11 @@ export interface SuperAvatarProps {
   size?: number
 }
 
-export default ({channel, isSelected = false, size = 32}: SuperAvatarProps) => {
+export default ({
+  channel,
+  isSelected = false,
+  size = sizes.xl + sizes.xs,
+}: SuperAvatarProps) => {
   if (!channel) return null
 
   const {image, name} = useChannelPreviewDisplayAvatar(channel)
@@ -20,7 +25,11 @@ export default ({channel, isSelected = false, size = 32}: SuperAvatarProps) => {
       <Avatar image={image} name={name} size={size} />
       {isSelected && (
         <View style={styles.checkWrap}>
-          <Check pathFill={colors.dark.background} width={16} height={16} />
+          <Check
+            pathFill={colors.dark.background}
+            width={sizes.l}
+            height={sizes.l}
+          />
         </View>
       )}
     </View>

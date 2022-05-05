@@ -10,9 +10,9 @@ export default ({children, onPress, style = {}, ...props}: Props) => {
   const {ref, tapGestureEvent, rStyle} = useRippleEffect({onPress})
 
   return (
-    <View ref={ref} {...props} style={{zIndex: 5}}>
+    <View ref={ref} {...props}>
       <TapGestureHandler onGestureEvent={tapGestureEvent}>
-        <Animated.View style={{overflow: 'hidden', ...(style as object)}}>
+        <Animated.View style={[{overflow: 'hidden'}, style]}>
           {children}
           <Animated.View style={rStyle} />
         </Animated.View>

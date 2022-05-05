@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useMemo, useState} from 'react'
 import {StyleSheet, Text, useWindowDimensions, View} from 'react-native'
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view'
 import {colors} from '../theme'
@@ -16,6 +16,7 @@ import {
 } from '../components/channel-list/Pages'
 import Animated, {SlideOutUp} from 'react-native-reanimated'
 import ChannelListHeader from '../components/channel-list/ChannelListHeader'
+import {size} from 'lodash'
 
 const renderScene = SceneMap({
   camera: CameraPage,
@@ -24,15 +25,17 @@ const renderScene = SceneMap({
   calls: CallsPage,
 })
 
+const ROUTES = [
+  {key: 'camera'},
+  {key: 'chats', title: 'CHATS'},
+  {key: 'status', title: 'STATUS'},
+  {key: 'calls', title: 'CALLS'},
+]
+
 export default () => {
   const layout = useWindowDimensions()
   const [index, setIndex] = useState(1)
-  const [routes] = useState([
-    {key: 'camera'},
-    {key: 'chats', title: 'CHATS'},
-    {key: 'status', title: 'STATUS'},
-    {key: 'calls', title: 'CALLS'},
-  ])
+  const itemWidth = useMemo(() => layout.width / size(ROUTES), [layout.width])
 
   const renderLabel = ({
     focused,
@@ -44,7 +47,6 @@ export default () => {
     const color = focused
       ? colors.dark.primaryLight
       : colors.dark.secondaryLight
-    const itemWidth = layout.width / 4.2
 
     return route.key === 'camera' ? (
       <Camera pathFill={color} />
@@ -81,7 +83,7 @@ export default () => {
     <View style={{flex: 1, backgroundColor: colors.dark.background}}>
       <ChannelListHeader />
       <TabView
-        navigationState={{index, routes}}
+        navigationState={{index, routes: ROUTES}}
         renderScene={renderScene}
         renderTabBar={renderTabBar}
         onIndexChange={setIndex}

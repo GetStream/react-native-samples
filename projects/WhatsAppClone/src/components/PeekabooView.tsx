@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react'
-import {ViewProps} from 'react-native'
 
-interface Props extends ViewProps {
+interface Props {
   isEnabled: boolean | undefined
+  children: React.ReactNode
 }
-export default ({isEnabled, ...props}: Props) => {
+export default ({isEnabled, children}: Props) => {
   if (!isEnabled) return null
-  return <Fragment {...props} />
+  return <Fragment children={children} />
 }

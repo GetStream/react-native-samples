@@ -6,7 +6,7 @@ import {Channel, Chat, useTheme} from 'stream-chat-react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {BlurView} from '@react-native-community/blur';
 
-import {AppContext} from '../contexts/AppContext';
+import {AppContext} from '../contexts';
 import {chatClient} from '../client';
 
 import {
