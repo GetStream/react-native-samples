@@ -5,13 +5,15 @@ import {AppContext} from '../../App'
 import {flex, sizes} from '../../global'
 import IconButton from '../IconButton'
 import SuperAvatar from '../SuperAvatar'
-import {useChannelPreviewDisplayName} from 'stream-chat-react-native-core/src/components/ChannelPreview/hooks/useChannelPreviewDisplayName'
 import {useNavigation} from '@react-navigation/native'
 import PeekabooView from '../PeekabooView'
 import {get, isEmpty} from 'lodash'
 import {MessageType, useMessagesContext} from 'stream-chat-react-native-core'
 import {chatClient} from '../../client'
-import {MessageStatusTypes} from 'stream-chat-react-native'
+import {
+  MessageStatusTypes,
+  useChannelPreviewDisplayName,
+} from 'stream-chat-react-native'
 
 export default () => {
   const {navigate, goBack} = useNavigation()
@@ -110,13 +112,7 @@ export default () => {
               iconName={'ArrowLeft'}
               pathFill={colors.dark.text}
             />
-            <Text
-              numberOfLines={1}
-              style={{
-                color: colors.dark.text,
-                fontWeight: 'bold',
-                fontSize: sizes.l,
-              }}>
+            <Text numberOfLines={1} style={styles.selectedMessagesCountText}>
               {selectedMessageIdsEditing.length}
             </Text>
           </View>
@@ -137,18 +133,7 @@ export default () => {
                 pathFill={colors.dark.text}
               />
               <PeekabooView isEnabled={areAllMessagesPinned}>
-                <View
-                  style={{
-                    position: 'relative',
-                    zIndex: 10,
-                    backgroundColor: colors.dark.secondary,
-                    top: 0,
-                    right: 32,
-                    width: 4,
-                    height: 36,
-                    transform: [{rotateX: '-45deg'}, {rotateZ: '-45deg'}],
-                  }}
-                />
+                <View style={styles.unpinnedIcon} />
               </PeekabooView>
             </>
 
@@ -200,6 +185,21 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
+  selectedMessagesCountText: {
+    color: colors.dark.text,
+    fontWeight: 'bold',
+    fontSize: sizes.l,
+  },
+  unpinnedIcon: {
+    position: 'relative',
+    zIndex: 10,
+    backgroundColor: colors.dark.secondary,
+    top: 0,
+    right: 32,
+    width: 4,
+    height: 36,
+    transform: [{rotateX: '-45deg'}, {rotateZ: '-45deg'}],
+  },
   buttonWrapper: {
     marginHorizontal: sizes.m,
   },

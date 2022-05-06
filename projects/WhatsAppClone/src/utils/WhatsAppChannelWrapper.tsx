@@ -6,6 +6,7 @@ import {
   useMessageContext,
   MessageTouchableHandlerPayload,
 } from 'stream-chat-react-native'
+import type {ChannelProps} from 'stream-chat-react-native'
 import {myMessageTheme} from '../theme'
 import RenderNothing from '../components/RenderNothing'
 import Reply from '../components/channel/Reply'
@@ -14,7 +15,6 @@ import MessageContent from '../components/channel/MessageContent'
 import MessageText from '../components/channel/MessageText'
 import VoiceMessageAttachment from '../components/channel/VoiceMessageAttachment'
 import {StreamChatGenerics} from '../types'
-import {ChannelProps} from 'stream-chat-react-native-core/src/components/Channel/Channel'
 import {AppContext} from '../App'
 
 export default ({
@@ -41,12 +41,11 @@ export default ({
 
   useEffect(() => {
     setTopInset(headerHeight)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerHeight])
+  }, [headerHeight, setTopInset])
 
   useEffect(() => {
     setSelectedMessageIdsEditing([])
-  }, [channel?.id])
+  }, [channel.id, setSelectedMessageIdsEditing])
 
   useEffect(() => {
     return () => setSelectedMessageIdsEditing([])
@@ -66,7 +65,6 @@ export default ({
           deleteMessage,
           copyMessage,
         } = param
-        //  todo: should be toggle pin
         return [
           quotedReply,
           pinMessage,

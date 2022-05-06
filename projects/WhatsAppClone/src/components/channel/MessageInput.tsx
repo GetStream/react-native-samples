@@ -8,14 +8,14 @@ import React, {
 import {
   LocalMessageInputContext,
   useMessageInputContext,
+  useAttachmentPickerContext,
+  AutoCompleteInput,
 } from 'stream-chat-react-native'
+import {takePhoto} from 'stream-chat-react-native-core/src/native'
 import {Alert, SafeAreaView, StyleSheet, Text, View} from 'react-native'
 import {flex, sizes} from '../../global'
 import {colors} from '../../theme'
 import IconButton from '../IconButton'
-import {takePhoto} from 'stream-chat-react-native-core/src/native'
-import {useAttachmentPickerContext} from 'stream-chat-react-native-core/src/contexts/attachmentPickerContext/AttachmentPickerContext'
-import {AutoCompleteInput} from 'stream-chat-react-native-core/src/components/AutoCompleteInput/AutoCompleteInput'
 import Reply from './Reply'
 import {AppContext} from '../../App'
 import moment from 'moment'

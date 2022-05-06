@@ -9,12 +9,10 @@ import {ActivityIndicator, View} from 'react-native'
 import {flex} from '../global'
 
 export default () => {
-  const {
-    // @ts-ignore
-    channel: {id: channelId, initialized},
-  } = useContext(AppContext)
+  const {channel} = useContext(AppContext)
+  if (!channel) return null
 
-  if (!initialized)
+  if (!channel?.initialized || !channel?.id)
     return (
       <View
         style={{
@@ -27,7 +25,7 @@ export default () => {
 
   return (
     <ChannelBackgroundWrapper
-      channelId={channelId}
+      channelId={channel?.id}
       style={{backgroundColor: colors.dark.background, flex: 1}}>
       <ChannelHeader />
       <MessageList />

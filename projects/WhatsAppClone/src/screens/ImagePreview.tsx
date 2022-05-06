@@ -11,8 +11,10 @@ import {StackNavigationProp} from '@react-navigation/stack'
 import {flex, sizes} from '../global'
 import IconButton from '../components/IconButton'
 import {colors} from '../theme'
-import {useMessageInputContext} from 'stream-chat-react-native'
-import {AutoCompleteInput} from 'stream-chat-react-native-core/src/components/AutoCompleteInput/AutoCompleteInput'
+import {
+  useMessageInputContext,
+  AutoCompleteInput,
+} from 'stream-chat-react-native'
 import {sendButtonStyle} from '../components/channel/MessageInputCTA'
 import {messageInputStyle} from '../components/channel/MessageInput'
 import PeekabooView from '../components/PeekabooView'
@@ -56,8 +58,10 @@ export default ({navigation: {goBack}}: ChannelScreenProps) => {
       <PeekabooView isEnabled={!isEmpty(uri)}>
         <Image source={{uri}} style={{flex: 3}} />
       </PeekabooView>
-      <PeekabooView isEnabled={isEmpty(uri)} style={{flex: 3}}>
-        <ActivityIndicator />
+      <PeekabooView isEnabled={isEmpty(uri)}>
+        <View style={{flex: 3}}>
+          <ActivityIndicator />
+        </View>
       </PeekabooView>
       <View
         style={{

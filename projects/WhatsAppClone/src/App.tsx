@@ -76,11 +76,7 @@ const App = () => {
           selectedMessageIdsEditing,
           setSelectedMessageIdsEditing,
         }}>
-        <OverlayProvider
-          bottomInset={bottom}
-          value={{style: theme}}
-          // @ts-ignore
-          overlayOpacity={overlayOpacity}>
+        <OverlayProvider bottomInset={bottom} value={{style: theme}}>
           <ThemeProvider style={theme}>
             <RootStack clientReady={clientReady} />
           </ThemeProvider>

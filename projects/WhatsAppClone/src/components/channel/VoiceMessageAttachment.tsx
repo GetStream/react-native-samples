@@ -2,11 +2,11 @@ import React, {useMemo, useState} from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 import {
   Avatar,
+  CardProps,
   MessageStatus,
   MessageType,
   useMessageContext,
 } from 'stream-chat-react-native'
-import {CardProps} from 'stream-chat-react-native-core/lib/typescript/components/Attachment/Card'
 import {colors} from '../../theme'
 import IconButton from '../IconButton'
 import {flex, sizes} from '../../global'
@@ -60,12 +60,11 @@ const VoiceMessageAttachment = ({
     await pausePlayer()
   }
 
-  const onStopPlay = async () => {
+  const onStopPlay = () => {
     setPaused(false)
     setCurrentPositionInSeconds(0)
   }
 
-  // @ts-ignore
   if (type !== 'voice-message') {
     return null
   }

@@ -52,7 +52,7 @@ export default () => {
         </View>
       </PeekabooView>
       <PeekabooView isEnabled={!isInChannelSelectionMode}>
-        <View style={{padding: sizes.m, flex: 1}}>
+        <View style={styles.appNameText}>
           <Text style={styles.titleText}>WhatsApp</Text>
         </View>
         <IconButton
@@ -81,4 +81,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: sizes.l,
   },
+  appNameText: {padding: sizes.m, flex: 1},
 })

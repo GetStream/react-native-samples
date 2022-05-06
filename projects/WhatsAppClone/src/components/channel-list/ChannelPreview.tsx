@@ -1,17 +1,18 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native'
-import React, {useContext, useMemo, useState} from 'react'
-import {useChannelPreviewDisplayName} from 'stream-chat-react-native-core/src/components/ChannelPreview/hooks/useChannelPreviewDisplayName'
+import React, {useContext, useMemo} from 'react'
 import {
   ChannelPreviewMessage,
+  ChannelPreviewMessengerProps,
   ChannelPreviewTitle,
+  Check,
+  CheckAll,
   LatestMessagePreview,
+  useChannelPreviewDisplayName,
+  useTheme,
 } from 'stream-chat-react-native'
 import {AppContext, StreamChannel} from '../../App'
-import {ChannelPreviewMessengerProps} from 'stream-chat-react-native-core/src/components/ChannelPreview/ChannelPreviewMessenger'
 import {useNavigation} from '@react-navigation/native'
 import {colors} from '../../theme'
-import {Check, CheckAll} from 'stream-chat-react-native-core/src/icons/index'
-import {useTheme} from 'stream-chat-react-native-core/src/contexts/themeContext/ThemeContext'
 import {flex, sizes} from '../../global'
 import Muted from '../../icons/Muted'
 import Pinned from '../../icons/Pin'

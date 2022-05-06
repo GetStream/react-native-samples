@@ -127,3 +127,11 @@ Follow the next steps to ensure WhatsApp's behaviour.
     "priority": 70
 }
 ```
+
+### Future Thoughts/Features
+
+- Channel pinning in channel list screen
+- Real visualization of sound wave in voice messages
+- Emoji keyboard support
+- Transition animations in several components/buttons
+- Video and/or voice call support

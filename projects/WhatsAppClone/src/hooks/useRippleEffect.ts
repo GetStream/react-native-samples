@@ -7,10 +7,20 @@ import {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
-import {PressableProps, View} from 'react-native'
-import {TapGestureHandlerGestureEvent} from 'react-native-gesture-handler'
+import {GestureResponderEvent, PressableProps, View} from 'react-native'
+import {
+  GestureEventPayload,
+  TapGestureHandlerGestureEvent,
+  TapGestureHandlerEventPayload,
+} from 'react-native-gesture-handler'
 
-export default ({onPress}: PressableProps) => {
+export default ({
+  onPress,
+}: {
+  onPress: (
+    event: Readonly<GestureEventPayload & TapGestureHandlerEventPayload>,
+  ) => void
+}) => {
   const centerX = useSharedValue(0)
   const centerY = useSharedValue(0)
   const scale = useSharedValue(0)
@@ -34,10 +44,9 @@ export default ({onPress}: PressableProps) => {
         scale.value = 0
         scale.value = withTiming(1, {duration: 1000})
       },
-      onActive: () => {
+      onActive: tapEvent => {
         if (onPress) {
-          // @ts-ignore
-          runOnJS(onPress)()
+          runOnJS(onPress)(tapEvent)
         }
       },
       onFinish: () => {

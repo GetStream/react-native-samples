@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     borderColor: colors.dark.highlighted,
     backgroundColor: colors.dark.primaryLight,
     position: 'absolute',
-    bottom: -4,
-    right: -4,
+    left: sizes.xxl,
+    top: sizes.xxl,
   },
 })

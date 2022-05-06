@@ -13,7 +13,6 @@ import AudioRecorderPlayer from 'react-native-audio-recorder-player'
 import moment from 'moment'
 import {MessageResponse} from 'stream-chat'
 import {set} from 'lodash'
-import {Message} from 'stream-chat/src/types'
 
 const audioRecorderPlayer = new AudioRecorderPlayer()
 
@@ -62,7 +61,6 @@ export default ({
     updateMessage(message)
 
     const res = await channel.sendFile(uri, 'test.mp4', 'audio/mp4')
-    /* eslint-disable @typescript-eslint/no-unused-vars */
     const {
       created_at,
       html,
@@ -71,9 +69,8 @@ export default ({
       user,
       ...messageWithoutReservedFields
     } = message
-    /* eslint-enable @typescript-eslint/no-unused-vars  */
     set(messageWithoutReservedFields, ['attachments', 0, 'asset_url'], res.file)
-    await channel.sendMessage(messageWithoutReservedFields as Message)
+    await channel.sendMessage(messageWithoutReservedFields)
   }
 
   const onStartRecord = async () => {

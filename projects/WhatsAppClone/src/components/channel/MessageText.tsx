@@ -1,15 +1,18 @@
-import {useTheme} from 'stream-chat-react-native-core/src/contexts/themeContext/ThemeContext'
 import moment from 'moment'
 import {StyleSheet, Text, View} from 'react-native'
 import {flex, sizes} from '../../global'
 import Star from '../../icons/Star'
 import {colors} from '../../theme'
-import {MessageStatus, useMessageContext} from 'stream-chat-react-native'
+import {
+  MessageStatus,
+  MessageTextProps,
+  RenderTextParams,
+  useMessageContext,
+  useTheme,
+} from 'stream-chat-react-native'
 import React, {useMemo} from 'react'
-import {MessageTextProps} from 'stream-chat-react-native-core/lib/typescript/components/Message/MessageSimple/MessageTextContainer'
 import PeekabooView from '../PeekabooView'
 import {StreamChatGenerics} from '../../types'
-import {RenderTextParams} from 'stream-chat-react-native-core/lib/typescript/components/Message/MessageSimple/utils/renderText'
 import {isEmpty} from 'lodash'
 
 const MessageText = ({renderText, ...props}: MessageTextProps) => {
