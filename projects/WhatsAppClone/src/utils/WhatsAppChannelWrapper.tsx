@@ -57,22 +57,6 @@ export default ({
       MessageAvatar={RenderNothing}
       ReactionList={RenderNothing}
       channel={channel}
-      messageActions={param => {
-        const {
-          pinMessage,
-          unpinMessage,
-          quotedReply,
-          deleteMessage,
-          copyMessage,
-        } = param
-        return [
-          quotedReply,
-          pinMessage,
-          unpinMessage,
-          deleteMessage,
-          copyMessage,
-        ]
-      }}
       MessageReplies={RenderNothing}
       MessageText={MessageText}
       keyboardVerticalOffset={headerHeight}

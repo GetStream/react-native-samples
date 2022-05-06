@@ -13,10 +13,8 @@ import CustomWallpaper from '../screens/CustomWallpaper'
 import WallpaperTypesOverview from '../screens/WallpaperTypesOverview'
 import WhatsAppChannelWrapper from '../utils/WhatsAppChannelWrapper'
 import ImagePreview from '../screens/ImagePreview'
-import {ActivityIndicator, View} from 'react-native'
-import {colors} from '../theme'
-import {flex} from '../global'
 import WallpaperTypeDetails from '../screens/WallpaperTypeDetails'
+import ChannelHeader from '../components/channel/ChannelHeader'
 
 export type ChannelScreenNavigationProp = StackNavigationProp<
   StackNavigatorParamList,
@@ -67,7 +65,7 @@ export default ({
             component={Channel}
             name="Channel"
             options={{
-              headerShown: false,
+              header: ChannelHeader,
             }}
           />
           <Stack.Screen

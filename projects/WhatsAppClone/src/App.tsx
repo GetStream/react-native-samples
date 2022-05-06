@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import {LogBox, TextInput} from 'react-native'
+import {TextInput} from 'react-native'
 import {NavigationContainer} from '@react-navigation/native'
 import {
   SafeAreaProvider,
@@ -14,7 +14,7 @@ import {
 } from 'react-native-safe-area-context'
 import {OverlayProvider, ThemeProvider} from 'stream-chat-react-native'
 import {chatClient, user, userToken} from './client'
-import {theme} from './theme'
+import {colors, theme} from './theme'
 import 'moment/min/moment-with-locales'
 import 'moment/min/locales'
 import {ChannelPreviewMessengerProps} from 'stream-chat-react-native-core/src/components/ChannelPreview/ChannelPreviewMessenger'
@@ -63,7 +63,7 @@ const App = () => {
   }, [])
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={{colors: {background: colors.dark.background}}}>
       <AppContext.Provider
         value={{
           messageInputRef,

@@ -140,8 +140,9 @@ export default ({
 
 export const sendButtonStyle = {
   backgroundColor: colors.dark.primaryLight,
-  padding: 10,
-  borderRadius: 24,
+  padding: globalStyles.iconWrap.padding + sizes.s,
+  marginVertical: 0,
+  borderRadius: 50,
 }
 const styles = StyleSheet.create({
   send: sendButtonStyle,
