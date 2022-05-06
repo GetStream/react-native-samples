@@ -5,11 +5,10 @@ import Star from '../../icons/Star'
 import {colors} from '../../theme'
 import {
   MessageStatus,
-  MessageTextProps,
-  RenderTextParams,
   useMessageContext,
   useTheme,
 } from 'stream-chat-react-native'
+import type {MessageTextProps, RenderTextParams} from 'stream-chat-react-native'
 import React, {useMemo} from 'react'
 import PeekabooView from '../PeekabooView'
 import {StreamChatGenerics} from '../../types'

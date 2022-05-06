@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, {useContext, useMemo} from 'react'
 import {
   useChannelContext,
   useChatContext,
@@ -13,6 +13,7 @@ import AudioRecorderPlayer from 'react-native-audio-recorder-player'
 import moment from 'moment'
 import {MessageResponse} from 'stream-chat'
 import {set} from 'lodash'
+import {AppContext} from '../../App'
 
 const audioRecorderPlayer = new AudioRecorderPlayer()
 
@@ -33,6 +34,7 @@ export default ({
   const {client} = useChatContext()
   const {updateMessage} = useMessagesContext()
   const {channel} = useChannelContext()
+  const {messageInputRef} = useContext(AppContext)
 
   const isMessageEmpty = useMemo(
     () => !text && !imageUploads.length && !fileUploads.length,
@@ -96,6 +98,11 @@ export default ({
     await sendVoiceMessage(result)
   }
 
+  const handleSendOnPress = async () => {
+    messageInputRef?.current?.blur()
+    await sendMessage()
+  }
+
   if (isMessageEmpty) {
     return (
       <View style={styles.micWrap}>
@@ -123,7 +130,7 @@ export default ({
 
   return (
     <IconButton
-      onPress={sendMessage}
+      onPress={handleSendOnPress}
       iconName={'Send'}
       pathFill={colors.dark.text}
       style={styles.send}

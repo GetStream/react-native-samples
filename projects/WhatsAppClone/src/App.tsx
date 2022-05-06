@@ -21,8 +21,6 @@ import {ChannelPreviewMessengerProps} from 'stream-chat-react-native-core/src/co
 import RootStack from './stacks/RootStack'
 import {useSharedValue} from 'react-native-reanimated'
 
-LogBox.ignoreAllLogs(true)
-
 export type StreamChannel = ChannelPreviewMessengerProps['channel'] | undefined
 export type StreamChannelId = string | undefined
 export type StreamMessageId = string | undefined
@@ -36,7 +34,7 @@ type AppContextType = {
   selectedMessageIdsEditing: StreamMessageId[]
   setSelectedMessageIdsEditing: Dispatch<SetStateAction<StreamMessageId[]>>
 }
-// @ts-ignore
+
 export const AppContext = React.createContext<AppContextType>(
   {} as AppContextType,
 )

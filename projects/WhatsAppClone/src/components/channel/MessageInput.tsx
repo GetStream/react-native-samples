@@ -6,10 +6,10 @@ import React, {
   useState,
 } from 'react'
 import {
-  LocalMessageInputContext,
-  useMessageInputContext,
-  useAttachmentPickerContext,
   AutoCompleteInput,
+  LocalMessageInputContext,
+  useAttachmentPickerContext,
+  useMessageInputContext,
 } from 'stream-chat-react-native'
 import {takePhoto} from 'stream-chat-react-native-core/src/native'
 import {Alert, SafeAreaView, StyleSheet, Text, View} from 'react-native'

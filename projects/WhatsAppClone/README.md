@@ -135,3 +135,4 @@ Follow the next steps to ensure WhatsApp's behaviour.
 - Emoji keyboard support
 - Transition animations in several components/buttons
 - Video and/or voice call support
+- Consider date-fns over Moment JS (became legacy)
