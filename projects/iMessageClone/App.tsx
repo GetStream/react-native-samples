@@ -1,76 +1,50 @@
-import React, {useEffect, useState, useCallback} from 'react';
-import {LogBox} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import {Channel as ChannelType} from 'stream-chat';
-import {Chat, OverlayProvider} from 'stream-chat-react-native';
+import {Chat, OverlayProvider, ThemeProvider} from 'stream-chat-react-native';
 
 import {Screens} from './src/screens';
 import {AppContext} from './src/contexts/AppContext';
-import {theme} from './src/theme';
-import {chatClient, userToken, user} from './src/client';
+import {StreamChatGenerics} from './src/client';
 import {SearchContextProvider} from './src/contexts/SearchContext';
 import {NewMessageProvider} from './src/contexts/NewMessageContext';
-
-LogBox.ignoreAllLogs(true);
-
-type State = {
-  channel?: ChannelType;
-  messageId?: string;
-};
+import {Channel as ChannelType} from 'stream-chat';
+import {useStreamChatTheme} from './useStreamChatTheme';
+import {chatClient, user, userToken} from './src/client';
 
 const App = () => {
   const {bottom} = useSafeAreaInsets();
+  const theme = useStreamChatTheme();
 
-  const [state, setState] = useState<State>({});
-  const {channel, messageId} = state;
+  const [channel, setChannel] = useState<ChannelType<StreamChatGenerics>>();
   const [clientReady, setClientReady] = useState(false);
 
   useEffect(() => {
     const setupClient = async () => {
       await chatClient.connectUser(user, userToken);
-
       setClientReady(true);
     };
 
     setupClient();
   }, []);
 
-  const setChannelWithId = useCallback(
-    async (channelId: string, innerMessageId?: string) => {
-      const newChannel = chatClient?.channel('messaging', channelId);
-
-      if (!newChannel?.initialized) {
-        await newChannel?.watch();
-      }
-      setState({channel: newChannel, messageId: innerMessageId});
-    },
-    [],
-  );
-
-  const setChannel = useCallback(
-    (newChannel: ChannelType) => setState({channel: newChannel}),
-    [],
-  );
-
   return (
     <NavigationContainer>
-      <AppContext.Provider
-        value={{chatClient, channel, setChannel, setChannelWithId, messageId}}>
+      <AppContext.Provider value={{channel, setChannel}}>
         <SearchContextProvider>
           <OverlayProvider bottomInset={bottom} value={{style: theme}}>
-            <Chat style={theme} client={chatClient}>
+            <ThemeProvider style={theme}>
               {clientReady && (
-                <>
-                  <NewMessageProvider>
+                <NewMessageProvider>
+                  <Chat client={chatClient}>
                     <Screens />
-                  </NewMessageProvider>
-                </>
+                  </Chat>
+                </NewMessageProvider>
               )}
-            </Chat>
+            </ThemeProvider>
           </OverlayProvider>
         </SearchContextProvider>
       </AppContext.Provider>

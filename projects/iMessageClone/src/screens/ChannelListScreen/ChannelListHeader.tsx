@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   TextInput,
-  TouchableWithoutFeedback,
   TouchableOpacity,
   Text,
 } from 'react-native';
@@ -97,10 +96,9 @@ export const ChannelListHeader = () => {
     reset();
   }, [reset, searchInputRef, setSearchInputText, setSearchQuery]);
 
-  const onClickNewMessage = useCallback(
-    () => navigation.navigate('NewMessage'),
-    [navigation],
-  );
+  const onClickNewMessage = () => {
+    return navigation.navigate('NewMessage');
+  };
 
   return (
     <>
@@ -108,9 +106,9 @@ export const ChannelListHeader = () => {
         <View style={[styles.flex]}>
           <View style={[styles.headerContainer]}>
             <Text style={[styles.titleText]}>Messages</Text>
-            <TouchableWithoutFeedback onPress={onClickNewMessage}>
+            <TouchableOpacity onPress={onClickNewMessage}>
               <Compose height={30} width={30} pathFill={accent_blue} />
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
           </View>
 
           <View
