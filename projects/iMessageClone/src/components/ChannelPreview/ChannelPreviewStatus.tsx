@@ -1,7 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import {useTheme, Right} from 'stream-chat-react-native';
+import {useTheme} from 'stream-chat-react-native';
 import type {ChannelPreviewStatusProps} from 'stream-chat-react-native';
+import {Right} from '../../icons';
 
 const styles = StyleSheet.create({
   date: {

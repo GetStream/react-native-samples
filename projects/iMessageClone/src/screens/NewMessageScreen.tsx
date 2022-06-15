@@ -237,10 +237,6 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedUsersLength]);
 
-  useEffect(() => {
-    reset();
-  });
-
   /**
    * 1. If the current channel is draft, then we create the channel and then send message
    * Otherwise we simply send the message.

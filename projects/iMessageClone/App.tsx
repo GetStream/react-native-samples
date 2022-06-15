@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   SafeAreaProvider,
@@ -15,12 +15,19 @@ import {Channel as ChannelType} from 'stream-chat';
 import {useStreamChatTheme} from './useStreamChatTheme';
 import {chatClient, user, userToken} from './src/client';
 
+type State = {
+  channel?: ChannelType;
+  messageId?: string;
+};
+
 const App = () => {
   const {bottom} = useSafeAreaInsets();
   const theme = useStreamChatTheme();
 
-  const [channel, setChannel] = useState<ChannelType<StreamChatGenerics>>();
   const [clientReady, setClientReady] = useState(false);
+  const [state, setState] = useState<State>({});
+
+  const {channel, messageId} = state;
 
   useEffect(() => {
     const setupClient = async () => {
@@ -31,9 +38,28 @@ const App = () => {
     setupClient();
   }, []);
 
+  const setChannelWithId = useCallback(
+    async (channelId: string, innerMessageId?: string) => {
+      const newChannel = chatClient?.channel('messaging', channelId);
+
+      if (!newChannel?.initialized) {
+        await newChannel?.watch();
+      }
+      console.log(channel, innerMessageId, 'nebebeh');
+      setState({channel: newChannel, messageId: innerMessageId});
+    },
+    [],
+  );
+
+  const setChannel = useCallback(
+    (newChannel: ChannelType) => setState({channel: newChannel}),
+    [],
+  );
+
   return (
     <NavigationContainer>
-      <AppContext.Provider value={{channel, setChannel}}>
+      <AppContext.Provider
+        value={{channel, setChannel, chatClient, setChannelWithId, messageId}}>
         <SearchContextProvider>
           <OverlayProvider bottomInset={bottom} value={{style: theme}}>
             <ThemeProvider style={theme}>

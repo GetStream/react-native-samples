@@ -4,7 +4,6 @@ import {NavigatorScreenParams} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Channel, useTheme} from 'stream-chat-react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {BlurView} from '@react-native-community/blur';
 
 import {AppContext} from '../contexts';
 
@@ -57,8 +56,7 @@ const MainStackScreen = () => {
                     translucent
                     barStyle="dark-content"
                   />
-                  <BlurView
-                    blurType="light"
+                  <View
                     style={{
                       paddingTop: insets.top,
                       height: CHANNEL_SCREEN_HEADER_HEIGHT + insets.top,
@@ -66,7 +64,7 @@ const MainStackScreen = () => {
                     <Channel channel={channel}>
                       <ChannelHeader {...props} channel={channel} />
                     </Channel>
-                  </BlurView>
+                  </View>
                 </>
               ),
           };
