@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import {useHeaderHeight} from '@react-navigation/stack';
 
 import {useAttachmentPickerContext} from 'stream-chat-react-native';
 
 import {Channel} from '../../components';
+import {AppContext} from '../../contexts';
 
 export const ChannelScreen = () => {
   const headerHeight = useHeaderHeight();
   const {setTopInset} = useAttachmentPickerContext();
+  const {channel} = useContext(AppContext);
 
   useEffect(() => {
     setTopInset(headerHeight);
@@ -17,7 +19,7 @@ export const ChannelScreen = () => {
 
   return (
     <SafeAreaView>
-      <Channel keyboardVerticalOffset={headerHeight} />
+      <Channel channel={channel} keyboardVerticalOffset={headerHeight} />
     </SafeAreaView>
   );
 };

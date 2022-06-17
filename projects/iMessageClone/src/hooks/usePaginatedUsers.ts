@@ -1,8 +1,7 @@
-import {useContext, useEffect, useRef, useState} from 'react';
-
-import {AppContext} from '../contexts/AppContext';
+import {useEffect, useRef, useState} from 'react';
 
 import type {UserFilters, UserResponse} from 'stream-chat';
+import {chatClient} from '../client';
 
 export type PaginatedUsers = {
   clearText: () => void;
@@ -27,8 +26,6 @@ export type PaginatedUsers = {
 };
 
 export function usePaginatedUsers(): PaginatedUsers {
-  const {chatClient} = useContext(AppContext);
-
   const [initialResults, setInitialResults] = useState<UserResponse[] | null>(
     null,
   );
