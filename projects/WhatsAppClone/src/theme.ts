@@ -99,6 +99,7 @@ export const theme: DeepPartial<Theme> = {
   },
   messageList: {
     scrollToBottomButton: {
+      chevronColor: colors.dark.text,
       container: {
         backgroundColor: colors.dark.secondary,
       },

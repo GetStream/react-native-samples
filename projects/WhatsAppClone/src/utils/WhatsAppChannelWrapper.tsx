@@ -1,12 +1,10 @@
 import React, {PropsWithChildren, useContext, useEffect} from 'react'
-import {useHeaderHeight} from '@react-navigation/stack'
+import type {ChannelProps} from 'stream-chat-react-native'
 import {
   Channel,
-  useAttachmentPickerContext,
-  useMessageContext,
   MessageTouchableHandlerPayload,
+  useMessageContext,
 } from 'stream-chat-react-native'
-import type {ChannelProps} from 'stream-chat-react-native'
 import {myMessageTheme} from '../theme'
 import RenderNothing from '../components/RenderNothing'
 import Reply from '../components/channel/Reply'
@@ -22,8 +20,6 @@ export default ({
   ...props
 }: PropsWithChildren<ChannelProps<StreamChatGenerics>>) => {
   const {setSelectedMessageIdsEditing} = useContext(AppContext)
-  const headerHeight = useHeaderHeight()
-  const {setTopInset} = useAttachmentPickerContext()
 
   const handleToggleMessageSelection = ({
     message,
@@ -38,10 +34,6 @@ export default ({
         : [...ids, messageId]
     })
   }
-
-  useEffect(() => {
-    setTopInset(headerHeight)
-  }, [headerHeight, setTopInset])
 
   useEffect(() => {
     setSelectedMessageIdsEditing([])
@@ -59,7 +51,7 @@ export default ({
       channel={channel}
       MessageReplies={RenderNothing}
       MessageText={MessageText}
-      keyboardVerticalOffset={headerHeight}
+      keyboardVerticalOffset={0}
       Reply={() => {
         const {
           message: {quoted_message: quotedMessage},
