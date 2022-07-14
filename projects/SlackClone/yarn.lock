@@ -851,13 +851,6 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
-"@babel/runtime@7.13.10":
-  version "7.13.10"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.10.tgz#47d42a57b6095f4468da440388fdbad8bebf0d7d"
-  integrity sha512-4QPkjJq6Ns3V/RgpEahRk+AGfL0eO6RHHtTWoNNr5mO49G6B5+X6d6THgWEAvTrznU5xYpbAlVKRYcsCgh/Akw==
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/runtime@^7.12.0", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.8.4":
   version "7.14.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.6.tgz#535203bc0892efc7dec60bdc27b2ecf6e409062d"
@@ -973,16 +966,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@gorhom/bottom-sheet@4.1.5":
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-4.1.5.tgz#35341d45799de28082c380db6639537b04fa0b26"
-  integrity sha512-3F5P8jK3NXwT2lGwkAdkdLwDVHaRvMZalUTXjK6Ogf0Tki6idffJ3TNlQZlg8k6+OnXAx0+i80f4XaI+J4GFrA==
-  dependencies:
-    "@gorhom/portal" "^1.0.11"
-    invariant "^2.2.4"
-    nanoid "^3.1.20"
-    react-native-redash "^16.1.1"
-
 "@gorhom/bottom-sheet@^3.6.5":
   version "3.6.6"
   resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-3.6.6.tgz#73e8ffaba6b417c353a8933a3ed09f10a8fd3e9d"
@@ -993,12 +976,22 @@
     nanoid "^3.1.20"
     react-native-redash "^16.0.10"
 
-"@gorhom/portal@^1.0.11":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@gorhom/portal/-/portal-1.0.12.tgz#1c0deabb3f9057c736352a88bae9ca891a100346"
-  integrity sha512-JOYe85RUwiksgdMbhLWDCLpH3kgFFz+LCu1lnxOMMBQSfAKtL5kkTKVrhtmQ3Lq3lJM2paGnLc4wJrlVuaC5Jw==
+"@gorhom/bottom-sheet@^4.1.6":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-4.4.2.tgz#16e4a1271574c13c0b6ab970256767262c1cd35f"
+  integrity sha512-KpHWP/DYMGk3T+i6NshrPWpe9M/WzBlNk34Hadvw9+7MZPOkKJVDYcmuSfUzCG2kRNaPnGGbJJFO8dhwtOYbig==
   dependencies:
-    nanoid "^3.1.23"
+    "@gorhom/portal" "1.0.13"
+    invariant "^2.2.4"
+    nanoid "^3.3.3"
+    react-native-redash "^16.1.1"
+
+"@gorhom/portal@1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@gorhom/portal/-/portal-1.0.13.tgz#da3af4d427e1fa68d264107de4b3072a4adf35ce"
+  integrity sha512-ViClKPkyGnj8HVMW45OGQSnGbWBVh8i3tgMOkGqpm6Cv0WVcDfUL7SER6zyGQy8Wdoj3GUDpAJFMqVOxpmRpzw==
+  dependencies:
+    nanoid "^3.3.1"
 
 "@gorhom/portal@^1.0.4":
   version "1.0.7"
@@ -5380,52 +5373,6 @@ metro-minify-uglify@0.66.2:
   dependencies:
     uglify-es "^3.1.9"
 
-metro-react-native-babel-preset@0.66.0:
-  version "0.66.0"
-  resolved "https://registry.yarnpkg.com/metro-react-native-babel-preset/-/metro-react-native-babel-preset-0.66.0.tgz#a4495df4b24a2eb9f82705e0a53f4cbbd36d983e"
-  integrity sha512-rO3yayxplLNxFDc7HyMShN+psgEb2mbw15EMreNvgV8QnXNYHmgU6e15tLbtEvC8LuftOLuSufEdSmR/ykm+aA==
-  dependencies:
-    "@babel/core" "^7.0.0"
-    "@babel/plugin-proposal-class-properties" "^7.0.0"
-    "@babel/plugin-proposal-export-default-from" "^7.0.0"
-    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.0.0"
-    "@babel/plugin-proposal-object-rest-spread" "^7.0.0"
-    "@babel/plugin-proposal-optional-catch-binding" "^7.0.0"
-    "@babel/plugin-proposal-optional-chaining" "^7.0.0"
-    "@babel/plugin-syntax-dynamic-import" "^7.0.0"
-    "@babel/plugin-syntax-export-default-from" "^7.0.0"
-    "@babel/plugin-syntax-flow" "^7.2.0"
-    "@babel/plugin-syntax-nullish-coalescing-operator" "^7.0.0"
-    "@babel/plugin-syntax-optional-chaining" "^7.0.0"
-    "@babel/plugin-transform-arrow-functions" "^7.0.0"
-    "@babel/plugin-transform-async-to-generator" "^7.0.0"
-    "@babel/plugin-transform-block-scoping" "^7.0.0"
-    "@babel/plugin-transform-classes" "^7.0.0"
-    "@babel/plugin-transform-computed-properties" "^7.0.0"
-    "@babel/plugin-transform-destructuring" "^7.0.0"
-    "@babel/plugin-transform-exponentiation-operator" "^7.0.0"
-    "@babel/plugin-transform-flow-strip-types" "^7.0.0"
-    "@babel/plugin-transform-for-of" "^7.0.0"
-    "@babel/plugin-transform-function-name" "^7.0.0"
-    "@babel/plugin-transform-literals" "^7.0.0"
-    "@babel/plugin-transform-modules-commonjs" "^7.0.0"
-    "@babel/plugin-transform-object-assign" "^7.0.0"
-    "@babel/plugin-transform-parameters" "^7.0.0"
-    "@babel/plugin-transform-react-display-name" "^7.0.0"
-    "@babel/plugin-transform-react-jsx" "^7.0.0"
-    "@babel/plugin-transform-react-jsx-self" "^7.0.0"
-    "@babel/plugin-transform-react-jsx-source" "^7.0.0"
-    "@babel/plugin-transform-regenerator" "^7.0.0"
-    "@babel/plugin-transform-runtime" "^7.0.0"
-    "@babel/plugin-transform-shorthand-properties" "^7.0.0"
-    "@babel/plugin-transform-spread" "^7.0.0"
-    "@babel/plugin-transform-sticky-regex" "^7.0.0"
-    "@babel/plugin-transform-template-literals" "^7.0.0"
-    "@babel/plugin-transform-typescript" "^7.5.0"
-    "@babel/plugin-transform-unicode-regex" "^7.0.0"
-    "@babel/template" "^7.0.0"
-    react-refresh "^0.4.0"
-
 metro-react-native-babel-preset@0.66.2:
   version "0.66.2"
   resolved "https://registry.yarnpkg.com/metro-react-native-babel-preset/-/metro-react-native-babel-preset-0.66.2.tgz#fddebcf413ad4ea617d4f47f7c1da401052de734"
@@ -5791,6 +5738,11 @@ nanoid@^3.1.15, nanoid@^3.1.20, nanoid@^3.1.23:
   version "3.1.23"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.23.tgz#f744086ce7c2bc47ee0a8472574d5c78e4183a81"
   integrity sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==
+
+nanoid@^3.3.1, nanoid@^3.3.3:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
+  integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -7336,32 +7288,32 @@ stream-buffers@~2.2.0:
   resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"
   integrity sha1-kdX1Ew0c75bc+n9yaUUYh0HQnuQ=
 
-stream-chat-react-native-core@4.1.4:
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/stream-chat-react-native-core/-/stream-chat-react-native-core-4.1.4.tgz#2fd5599f9d2d44b75d278c30319da5dd67c6f390"
-  integrity sha512-HaYZNtNryJ1cJ6D0O0B6xW3YBVuezVxL0lUFg5pAP19M+sae7v7zw5ofU/dyEmP5/aQbeRuQj/cym3dQuvyxDg==
+stream-chat-react-native-core@4.10.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react-native-core/-/stream-chat-react-native-core-4.10.0.tgz#bed5dc54fb8fda3c186e2d10c19e33f115cf5b31"
+  integrity sha512-+p+LzC45pPjxoZWBjjkvQWp3mjOyN+oN1Dfdd7JpxPSbvx+yLvxp5uOFN9erWqMrUOgcFxqoEkjMt/e0gLB3qw==
   dependencies:
-    "@babel/runtime" "7.13.10"
-    "@gorhom/bottom-sheet" "4.1.5"
+    "@babel/runtime" "^7.12.5"
+    "@gorhom/bottom-sheet" "^4.1.6"
     dayjs "1.10.5"
     file-loader "6.2.0"
     i18next "20.2.4"
     lodash-es "4.17.21"
-    metro-react-native-babel-preset "0.66.0"
+    metro-react-native-babel-preset "0.66.2"
     mime-types "^2.1.34"
     path "0.12.7"
     react-art "^17.0.2"
     react-native-markdown-package "1.8.1"
     react-native-url-polyfill "^1.3.0"
-    stream-chat "6.0.0"
+    stream-chat "6.7.0"
 
-stream-chat-react-native@4.1.4:
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/stream-chat-react-native/-/stream-chat-react-native-4.1.4.tgz#0f2b1503ae736b5fa93435e16e1a486cc00edb97"
-  integrity sha512-d5FcbIR7ybk4IJrOFoZYKPbxGaUEmiYfe42aLMYuls3sWIwwenjRva7M7rArieSsGpAaxiAgrVUaj3OATtZzXg==
+stream-chat-react-native@4.10.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react-native/-/stream-chat-react-native-4.10.0.tgz#ebfdf489c421801aab791d9658a5b56ce583b809"
+  integrity sha512-A8haggtn6I45cZBS2xFizFfzwnG/pZQvjd5YleNElO646z/mZOTWIrMVSjwc8y6CgIlOG2OQ8GsB27oSwZz07w==
   dependencies:
     es6-symbol "^3.1.3"
-    stream-chat-react-native-core "4.1.4"
+    stream-chat-react-native-core "4.10.0"
 
 stream-chat-test-data-cli@0.1.0-beta.3:
   version "0.1.0-beta.3"
@@ -7373,10 +7325,10 @@ stream-chat-test-data-cli@0.1.0-beta.3:
     commander "^5.1.0"
     stream-chat "^3.7.0"
 
-stream-chat@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-6.0.0.tgz#39ec7cefc911a1cbb4debccce142222b05167f4d"
-  integrity sha512-zpzpiMsR2eTYS7UluimGwVcA4vsaP/GQtEUufwlZWhxS07GaSd9SCIDYbJlmdtV47TfiMDOcDKRrm50adkBlBQ==
+stream-chat@6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-6.7.0.tgz#1add1e612f0009f9e7a69d35f2a2fae1296d85ef"
+  integrity sha512-usH/kh0ZjbjOP8TTlsbXS53UZRUmwP0r1dOYf0jrQg3HPfwG51iTkrXGNlzPF9ueNXkPB8ObSm7bcdVRoo+4bg==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@types/jsonwebtoken" "^8.5.6"
