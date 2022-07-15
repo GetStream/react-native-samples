@@ -1,4 +1,4 @@
-package com.whatsappclone.newarchitecture;
+package io.getstream.reactnative.whatsappclone.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.whatsappclone.BuildConfig;
-import com.whatsappclone.newarchitecture.components.MainComponentsRegistry;
-import com.whatsappclone.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import io.getstream.reactnative.whatsappclone.BuildConfig;
+import io.getstream.reactnative.whatsappclone.newarchitecture.components.MainComponentsRegistry;
+import io.getstream.reactnative.whatsappclone.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

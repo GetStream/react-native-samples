@@ -1,4 +1,4 @@
-package com.whatsappclone.newarchitecture.modules;
+package io.getstream.reactnative.whatsappclone.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
