@@ -36,7 +36,7 @@ end
 
 platform :ios do
   desc "Deploy iOS build to Firebase"
-  lane :deploy_to_firebase do
+  lane :deploy_to_firebase do |options|
       match_me
 
       settings_to_override = {
@@ -46,8 +46,9 @@ platform :ios do
 
 
       package = load_json(json_path: "./package.json")
+      version_name_addition = (options[:branch] == "main") ? "-pub" : "-dev"
       increment_version_number(
-        version_number: package["version"],
+        version_number: package["version"] + version_name_addition,
         xcodeproj: "./ios/WhatsAppCloneReactNative.xcodeproj"
       )
 
@@ -66,34 +67,36 @@ platform :ios do
           include_symbols: true,
           output_directory: "./dist",
       )
-
+      firebase_groups_addition = (options[:branch] == "main") ? ", whatsapp-public-1" : ""
       firebase_app_distribution(
         app: "1:296557120037:ios:e315faab5af9cde0f60dcc",
-        groups: "react-native-dev",
+        groups: "react-native-dev" + firebase_groups_addition,
       )
   end
 end
 
 platform :android do
   desc "Deploy Android build to Firebase"
-  lane :deploy_to_firebase do
+  lane :deploy_to_firebase do |options|
       increment_version_code(
         gradle_file_path:"./android/app/build.gradle"
       )
       package = load_json(json_path: "./package.json")
+      version_name_addition = (options[:branch] == "main") ? "-pub" : "-dev"
       increment_version_name(
         gradle_file_path:"./android/app/build.gradle",
-        version_name: package["version"]
+        version_name: package["version"] + version_name_addition
       )
       gradle(
         project_dir: "./android",
         tasks: ["clean", "assembleRelease"]
       )
+      firebase_groups_addition = (options[:branch] == "main") ? ", whatsapp-public-1" : ""
       firebase_app_distribution(
           app: "1:296557120037:android:c200ee23e884e68ef60dcc",
           android_artifact_type: "APK",
           android_artifact_path: "./android/app/build/outputs/apk/release/app-release.apk",
-          groups: "react-native-dev"
+          groups: "react-native-dev" + firebase_groups_addition
       )
   end
 end
