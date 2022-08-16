@@ -12,17 +12,15 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context'
-import {OverlayProvider, ThemeProvider} from 'stream-chat-react-native'
+import {Chat, OverlayProvider, ThemeProvider} from 'stream-chat-react-native'
 import {chatClient, user, userToken} from './client'
 import {colors, theme} from './theme'
 import 'moment/min/moment-with-locales'
 import 'moment/min/locales'
 import {ChannelPreviewMessengerProps} from 'stream-chat-react-native-core/src/components/ChannelPreview/ChannelPreviewMessenger'
 import RootStack from './stacks/RootStack'
-import {useSharedValue} from 'react-native-reanimated'
 
 export type StreamChannel = ChannelPreviewMessengerProps['channel'] | undefined
-export type StreamChannelId = string | undefined
 export type StreamMessageId = string | undefined
 
 type AppContextType = {
@@ -50,13 +48,12 @@ const App = () => {
     StreamMessageId[]
   >([])
   const {bottom} = useSafeAreaInsets()
-  const overlayOpacity = useSharedValue(0)
 
   useEffect(() => {
     const setupClient = async () => {
-      await chatClient.connectUser(user, userToken)
-
+      const connectPromise = chatClient.connectUser(user, userToken)
       setClientReady(true)
+      await connectPromise
     }
 
     setupClient()
@@ -76,7 +73,9 @@ const App = () => {
         }}>
         <OverlayProvider bottomInset={bottom} value={{style: theme}}>
           <ThemeProvider style={theme}>
-            <RootStack clientReady={clientReady} />
+            <Chat client={chatClient} enableOfflineSupport>
+              <RootStack clientReady={clientReady} />
+            </Chat>
           </ThemeProvider>
         </OverlayProvider>
       </AppContext.Provider>

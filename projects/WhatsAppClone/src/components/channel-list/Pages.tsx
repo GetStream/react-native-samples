@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react'
-import {ChannelList, Chat} from 'stream-chat-react-native'
+import {ChannelList} from 'stream-chat-react-native'
 import {ChannelSort} from 'stream-chat'
-import {chatClient, user} from '../../client'
+import {user} from '../../client'
 import ChannelPreview from './ChannelPreview'
 import {View} from 'react-native'
 import {colors} from '../../theme'
@@ -16,13 +16,11 @@ export const ChatsPage = () => {
   const memoizedFilters = useMemo(() => filters, [])
 
   return (
-    <Chat client={chatClient}>
-      <ChannelList
-        Preview={ChannelPreview}
-        filters={memoizedFilters}
-        sort={sort}
-      />
-    </Chat>
+    <ChannelList
+      Preview={ChannelPreview}
+      filters={memoizedFilters}
+      sort={sort}
+    />
   )
 }
 
