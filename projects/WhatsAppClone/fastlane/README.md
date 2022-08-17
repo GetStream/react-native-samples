@@ -21,6 +21,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Installs all Certs and Profiles necessary for ad-hoc
 
+### match_appstore
+
+```sh
+[bundle exec] fastlane match_appstore
+```
+
+Installs all Certs and Profiles necessary for appstore
+
 ----
 
 
@@ -33,6 +41,14 @@ Installs all Certs and Profiles necessary for ad-hoc
 ```
 
 Deploy iOS build to Firebase
+
+### ios deploy_to_testflight
+
+```sh
+[bundle exec] fastlane ios deploy_to_testflight
+```
+
+Deploy iOS build to TestFlight
 
 ----
 

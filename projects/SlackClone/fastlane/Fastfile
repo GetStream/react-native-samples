@@ -34,19 +34,31 @@ lane :match_me do
   )
 end
 
+desc "Installs all Certs and Profiles necessary for appstore"
+lane :match_appstore do
+  match(
+    type: "appstore",
+    app_identifier: [
+      "io.getstream.reactnative.slackclone",
+    ],
+    readonly: is_ci
+  )
+end
+
 platform :ios do
   desc "Deploy iOS build to Firebase"
-  lane :deploy_to_firebase do
+  lane :deploy_to_firebase do |options|
       match_me
 
       settings_to_override = {
-        :BUNDLE_IDENTIFIER => "io.getstream.reactnative.imessageclone",
-        :PROVISIONING_PROFILE_SPECIFIER => "match AdHoc io.getstream.reactnative.imessageclone"
+        :BUNDLE_IDENTIFIER => "io.getstream.reactnative.slackclone",
+        :PROVISIONING_PROFILE_SPECIFIER => "match AdHoc io.getstream.reactnative.slackclone"
       } 
 
       package = load_json(json_path: "./package.json")
+      version_name_addition = (options[:branch] == "main") ? "-pub" : "-dev"
       increment_version_number(
-        version_number: package["version"],
+        version_number: package["version"] + version_name_addition,
         xcodeproj: "./ios/SlackCloneReactNative.xcodeproj"
       )
 
@@ -66,33 +78,91 @@ platform :ios do
           output_directory: "./dist",
       )
 
+      firebase_groups_addition = (options[:branch] == "main") ? ", slack-public-1" : ""
       firebase_app_distribution(
         app: "1:296557120037:ios:c96ba73046f424b8f60dcc",
-        groups: "react-native-dev",
+        groups: "react-native-dev" + firebase_groups_addition,
       )
+  end
+end
+
+platform :ios do
+  desc "Deploy iOS build to TestFlight"
+  lane :deploy_to_testflight do
+      app_store_connect_api_key()
+
+      match_appstore
+
+      settings_to_override = {
+        :BUNDLE_IDENTIFIER => "io.getstream.reactnative.slackclone",
+        :PROVISIONING_PROFILE_SPECIFIER => "match AppStore io.getstream.reactnative.slackclone"
+      } 
+
+      package = load_json(json_path: "./package.json")
+      increment_version_number(
+        version_number: package["version"],
+        xcodeproj: "./ios/SlackCloneReactNative.xcodeproj"
+      )
+      current_build_number = app_store_build_number(
+        live: false,
+        app_identifier: "io.getstream.reactnative.slackclone",
+      )
+      increment_build_number(
+        build_number: current_build_number + 1,
+        xcodeproj: "./ios/SlackCloneReactNative.xcodeproj"
+      )
+
+      gym(
+          workspace: "./ios/SlackCloneReactNative.xcworkspace",
+          scheme: "SlackCloneReactNative",
+          export_method: "app-store",
+          silent: true,
+          clean: true,
+          xcargs: settings_to_override,
+          include_symbols: true,
+          output_directory: "./dist",
+      )
+
+      begin
+        upload_to_testflight(
+            groups: ['Dev Testers', 'Public Testers'],
+            changelog: "Lots of amazing new features to test out!",
+            reject_build_waiting_for_review: false,
+            skip_waiting_for_build_processing: true,
+        )
+      rescue Exception => e
+        if e.message.include? "Another build is in review"
+          UI.important("Another build is already in beta review. Skipping beta review submission")
+        else
+          raise
+        end
+      end
+
   end
 end
 
 platform :android do
   desc "Deploy Android build to Firebase"
-  lane :deploy_to_firebase do
+  lane :deploy_to_firebase do |options|
       increment_version_code(
         gradle_file_path:"./android/app/build.gradle"
       )
       package = load_json(json_path: "./package.json")
+      version_name_addition = (options[:branch] == "main") ? "-pub" : "-dev"
       increment_version_name(
         gradle_file_path:"./android/app/build.gradle",
-        version_name: package["version"]
+        version_name: package["version"] + version_name_addition
       )
       gradle(
         project_dir: "./android",
         tasks: ["clean", "assembleRelease"]
       )
+      firebase_groups_addition = (options[:branch] == "main") ? ", slack-public-1" : ""
       firebase_app_distribution(
           app: "1:296557120037:android:13ccb281a7750765f60dcc",
           android_artifact_type: "APK",
           android_artifact_path: "./android/app/build/outputs/apk/release/app-release.apk",
-          groups: "react-native-dev"
+          groups: "react-native-dev" + firebase_groups_addition
       )
   end
 end
