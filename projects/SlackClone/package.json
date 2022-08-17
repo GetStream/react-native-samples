@@ -1,6 +1,6 @@
 {
   "name": "slackclone",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -43,7 +43,7 @@
     "react-native-share": "^6.2.1",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
-    "stream-chat-react-native": "4.1.4"
+    "stream-chat-react-native": "4.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -1745,12 +1745,12 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/react-native@^0.64.5":
-  version "0.64.10"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.10.tgz#5eb6a72c77ce0f7e6e14b19c61a6bc585975eef5"
-  integrity sha512-3Kb9QM5/WZ6p58yZ7VPbvjvi6Wc/ZkESgJhKso1gKkNuHBe/4WL6586R2JRDiz9Tsxal9lMnbj3fligBVGl8PA==
+"@types/react-native@^0.67.1":
+  version "0.67.12"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.67.12.tgz#bcb55fcdc1fa8136face21aeef5ba0728b7cdd6e"
+  integrity sha512-2ee/MhGWpOLJML2YSgHymAf+FOyGQ6T/CmM94AoQr8Rdm9u7PfzIr5gVS7iMuDPyZpwKdtQFhOE26QFGD/AD4A==
   dependencies:
-    "@types/react" "*"
+    "@types/react" "^17"
 
 "@types/react-test-renderer@^16.9.2":
   version "16.9.5"
@@ -1759,7 +1759,7 @@
   dependencies:
     "@types/react" "^16"
 
-"@types/react@*", "@types/react@>=16.0.0", "@types/react@^16", "@types/react@^17":
+"@types/react@>=16.0.0", "@types/react@^16", "@types/react@^17":
   version "17.0.11"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.11.tgz#67fcd0ddbf5a0b083a0f94e926c7d63f3b836451"
   integrity sha512-yFRQbD+whVonItSk7ZzP/L+gPTJVBkL/7shLEF+i9GC/1cV3JmUxEQz6+9ylhUpWSDuqo1N9qEvqS6vTj4USUA==
