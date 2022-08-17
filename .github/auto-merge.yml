@@ -1,0 +1,9 @@
+# configuration of probot-auto-merge
+# see more: https://github.com/bobvanderlinden/probot-auto-merge
+minApprovals:
+  NONE: 0
+requiredLabels:
+  - regex: .+-dependencies$
+updateBranch: true
+mergeMethod: rebase
+deleteBranchAfterMerge: true
