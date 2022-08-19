@@ -37,11 +37,13 @@ export default ({
 
   useEffect(() => {
     setSelectedMessageIdsEditing([])
-  }, [channel.id, setSelectedMessageIdsEditing])
+  }, [channel?.id, setSelectedMessageIdsEditing])
 
   useEffect(() => {
     return () => setSelectedMessageIdsEditing([])
   }, [])
+
+  if (!channel) return <RenderNothing />
 
   return (
     <Channel
