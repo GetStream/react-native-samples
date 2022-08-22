@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "projects/iMessageClone"
+    schedule:
+      interval: "daily"
+    allow:
+      - dependency-name: "stream-chat-react-native"
+    labels:
+      - imessageclone-dependencies
+  - package-ecosystem: "npm"
+    directory: "projects/SlackClone"
+    schedule:
+      interval: "daily"
+    allow:
+      - dependency-name: "stream-chat-react-native"
+    labels:
+      - slackclone-dependencies
+  - package-ecosystem: "npm"
+    directory: "projects/WhatsAppClone"
+    schedule:
+      interval: "daily"
+    allow:
+      - dependency-name: "stream-chat-react-native"
+    labels:
+      - whatsappclone-dependencies

@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.imessageclone"
+        applicationId "io.getstream.reactnative.imessageclone"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

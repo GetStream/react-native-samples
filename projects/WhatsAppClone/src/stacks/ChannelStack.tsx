@@ -3,7 +3,6 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack'
-import {Chat} from 'stream-chat-react-native'
 import {AppContext, noHeaderOptions} from '../App'
 import {chatClient} from '../client'
 import {RouteProp} from '@react-navigation/native'
@@ -54,42 +53,40 @@ export default ({
   }, [channelId, setChannel])
 
   return (
-    <Chat client={chatClient}>
-      <WhatsAppChannelWrapper channel={channel}>
-        <Stack.Navigator
-          initialRouteName="Channel"
-          screenOptions={{
-            headerTitleStyle: {alignSelf: 'center', fontWeight: 'bold'},
-          }}>
-          <Stack.Screen
-            component={Channel}
-            name="Channel"
-            options={{
-              header: ChannelHeader,
-            }}
-          />
-          <Stack.Screen
-            component={ImagePreview}
-            name="ImagePreview"
-            options={noHeaderOptions}
-          />
-          <Stack.Screen
-            component={CustomWallpaper}
-            name="CustomWallpaper"
-            options={noHeaderOptions}
-          />
-          <Stack.Screen
-            component={WallpaperTypesOverview}
-            name="WallpaperTypesOverview"
-            options={noHeaderOptions}
-          />
-          <Stack.Screen
-            component={WallpaperTypeDetails}
-            name="WallpaperTypeDetails"
-            options={noHeaderOptions}
-          />
-        </Stack.Navigator>
-      </WhatsAppChannelWrapper>
-    </Chat>
+    <WhatsAppChannelWrapper channel={channel}>
+      <Stack.Navigator
+        initialRouteName="Channel"
+        screenOptions={{
+          headerTitleStyle: {alignSelf: 'center', fontWeight: 'bold'},
+        }}>
+        <Stack.Screen
+          component={Channel}
+          name="Channel"
+          options={{
+            header: ChannelHeader,
+          }}
+        />
+        <Stack.Screen
+          component={ImagePreview}
+          name="ImagePreview"
+          options={noHeaderOptions}
+        />
+        <Stack.Screen
+          component={CustomWallpaper}
+          name="CustomWallpaper"
+          options={noHeaderOptions}
+        />
+        <Stack.Screen
+          component={WallpaperTypesOverview}
+          name="WallpaperTypesOverview"
+          options={noHeaderOptions}
+        />
+        <Stack.Screen
+          component={WallpaperTypeDetails}
+          name="WallpaperTypeDetails"
+          options={noHeaderOptions}
+        />
+      </Stack.Navigator>
+    </WhatsAppChannelWrapper>
   )
 }
