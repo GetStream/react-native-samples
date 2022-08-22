@@ -46,49 +46,8 @@ lane :match_appstore do
 end
 
 platform :ios do
-  desc "Deploy iOS build to Firebase"
-  lane :deploy_to_firebase do |options|
-      match_me
-
-      settings_to_override = {
-        :BUNDLE_IDENTIFIER => "io.getstream.reactnative.slackclone",
-        :PROVISIONING_PROFILE_SPECIFIER => "match AdHoc io.getstream.reactnative.slackclone"
-      } 
-
-      package = load_json(json_path: "./package.json")
-      version_name_addition = (options[:branch] == "main") ? "-pub" : "-dev"
-      increment_version_number(
-        version_number: package["version"] + version_name_addition,
-        xcodeproj: "./ios/SlackCloneReactNative.xcodeproj"
-      )
-
-      increment_build_number(
-        xcodeproj:"./ios/SlackCloneReactNative.xcodeproj"
-      )
-
-      gym(
-          workspace: "./ios/SlackCloneReactNative.xcworkspace",
-          scheme: "SlackCloneReactNative",
-          export_method: "ad-hoc",
-          export_options: "./fastlane/beta_gym_export_options.plist",
-          silent: true,
-          clean: true,
-          xcargs: settings_to_override,
-          include_symbols: true,
-          output_directory: "./dist",
-      )
-
-      firebase_groups_addition = (options[:branch] == "main") ? ", slack-public-1" : ""
-      firebase_app_distribution(
-        app: "1:296557120037:ios:c96ba73046f424b8f60dcc",
-        groups: "react-native-dev" + firebase_groups_addition,
-      )
-  end
-end
-
-platform :ios do
   desc "Deploy iOS build to TestFlight"
-  lane :deploy_to_testflight do
+  lane :deploy_to_testflight do |options|
       app_store_connect_api_key()
 
       match_appstore
@@ -123,9 +82,11 @@ platform :ios do
           output_directory: "./dist",
       )
 
+      testflight_groups = (options[:branch] == "main") ? ['Dev Testers', 'Public Testers'] : ['Dev Testers']
+
       begin
         upload_to_testflight(
-            groups: ['Dev Testers', 'Public Testers'],
+            groups: testflight_groups,
             changelog: "Lots of amazing new features to test out!",
             reject_build_waiting_for_review: false,
             skip_waiting_for_build_processing: true,

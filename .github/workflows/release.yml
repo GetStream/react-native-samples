@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy_imessageclone_ios:
-    name: Deploy iMessage clone iOS to Firebase App Distribution
+    name: Deploy iMessage clone iOS to Testflight
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@master
@@ -49,12 +49,15 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
         run: |
           cd projects/iMessageClone;
-          bundle exec fastlane ios deploy_to_firebase branch:${{ github.head_ref || github.ref_name }};
+          bundle exec fastlane ios deploy_to_testflight branch:${{ github.head_ref || github.ref_name }};
 
   deploy_slackclone_ios:
-    name: Deploy Slack clone iOS to Firebase App Distribution
+    name: Deploy Slack clone iOS to Testflight
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@master
@@ -94,12 +97,15 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
         run: |
           cd projects/SlackClone;
-          bundle exec fastlane ios deploy_to_firebase branch:${{ github.head_ref || github.ref_name }};
+          bundle exec fastlane ios deploy_to_testflight branch:${{ github.head_ref || github.ref_name }};
 
   deploy_whatsappclone_ios:
-    name: Deploy Whatsapp clone iOS to Firebase App Distribution
+    name: Deploy Whatsapp clone iOS to Testflight
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@master
@@ -139,9 +145,12 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
         run: |
           cd projects/WhatsAppClone;
-          bundle exec fastlane ios deploy_to_firebase branch:${{ github.head_ref || github.ref_name }};
+          bundle exec fastlane ios deploy_to_testflight branch:${{ github.head_ref || github.ref_name }};
 
   deploy_imessageclone_android:
     name: Deploy iMessage clone Android to Firebase App Distribution
