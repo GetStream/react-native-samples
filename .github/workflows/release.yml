@@ -7,6 +7,10 @@ on:
     branches:
       - automated-deployment
 
+concurrency:
+  group: release
+  cancel-in-progress: true
+
 jobs:
   deploy_imessageclone_ios:
     name: Deploy iMessage clone iOS to Testflight
@@ -277,57 +281,3 @@ jobs:
         run: |
           cd projects/WhatsAppClone;
           bundle exec fastlane android deploy_to_firebase branch:${{ github.head_ref || github.ref_name }};
-
-  push_version_changes:
-    name: Push version code updates
-    runs-on: macos-latest
-    needs:
-      [
-        deploy_imessageclone_ios,
-        deploy_slackclone_ios,
-        deploy_whatsappclone_ios,
-        deploy_imessageclone_android,
-        deploy_slackclone_android,
-        deploy_whatsappclone_android,
-      ]
-    steps:
-      - uses: actions/checkout@master
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Install Ruby and Gems for iMessageClone
-        uses: ruby/setup-ruby@v1
-        with:
-          working-directory: projects/iMessageClone
-          bundler-cache: true
-      - name: Build and deploy iMessageClone
-        run: |
-          cd projects/iMessageClone;
-          bundle exec fastlane run increment_build_number xcodeproj:"./ios/iMessageCloneReactNative.xcodeproj";
-          bundle exec fastlane run increment_version_code gradle_file_path:"./android/app/build.gradle";
-      - name: Install Ruby and Gems for Slack Clone
-        uses: ruby/setup-ruby@v1
-        with:
-          working-directory: projects/SlackClone
-          bundler-cache: true
-      - name: Build and deploy SlackClone
-        run: |
-          cd projects/WhatsAppClone;
-          bundle exec fastlane run increment_build_number xcodeproj:"./ios/SlackCloneReactNative.xcodeproj";
-          bundle exec fastlane run increment_version_code gradle_file_path:"./android/app/build.gradle";
-            - name: Install Ruby and Gems for Slack Clone
-        uses: ruby/setup-ruby@v1
-        with:
-          working-directory: projects/WhatsAppClone
-          bundler-cache: true
-      - name: Build and deploy WhatsAppClone
-        run: |
-          cd projects/WhatsAppClone;
-          bundle exec fastlane run increment_build_number xcodeproj:"./ios/WhatsAppCloneReactNative.xcodeproj";
-          bundle exec fastlane run increment_version_code gradle_file_path:"./android/app/build.gradle";
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          message: "chore: bump iOS and Android version [skip ci]"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.head_ref || github.ref_name }}
