@@ -14,13 +14,11 @@
 # update_fastlane
 default_platform(:ios)
 
-
 before_all do
   if is_ci
     setup_ci()
   end
 end
-
 
 desc "Installs all Certs and Profiles necessary for ad-hoc"
 lane :match_me do
