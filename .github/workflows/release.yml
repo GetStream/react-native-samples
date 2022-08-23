@@ -57,7 +57,7 @@ jobs:
           APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
         run: |
           cd projects/iMessageClone;
-          bundle exec fastlane ios deploy_to_testflight branch:${{ github.head_ref || github.ref_name }};
+          bundle exec fastlane ios deploy_to_testflight;
 
   deploy_slackclone_ios:
     name: Deploy Slack clone iOS to Testflight
@@ -105,7 +105,7 @@ jobs:
           APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
         run: |
           cd projects/SlackClone;
-          bundle exec fastlane ios deploy_to_testflight branch:${{ github.head_ref || github.ref_name }};
+          bundle exec fastlane ios deploy_to_testflight;
 
   deploy_whatsappclone_ios:
     name: Deploy Whatsapp clone iOS to Testflight
@@ -153,7 +153,7 @@ jobs:
           APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
         run: |
           cd projects/WhatsAppClone;
-          bundle exec fastlane ios deploy_to_testflight branch:${{ github.head_ref || github.ref_name }};
+          bundle exec fastlane ios deploy_to_testflight;
 
   deploy_imessageclone_android:
     name: Deploy iMessage clone Android to Firebase App Distribution
@@ -195,7 +195,7 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
         run: |
           cd projects/iMessageClone;
-          bundle exec fastlane android deploy_to_firebase branch:${{ github.head_ref || github.ref_name }};
+          bundle exec fastlane android deploy_to_firebase;
 
   deploy_slackclone_android:
     name: Deploy Slack clone Android to Firebase App Distribution
@@ -237,7 +237,7 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
         run: |
           cd projects/SlackClone;
-          bundle exec fastlane android deploy_to_firebase branch:${{ github.head_ref || github.ref_name }};
+          bundle exec fastlane android deploy_to_firebase;
 
   deploy_whatsappclone_android:
     name: Deploy WhatsApp clone Android to Firebase App Distribution
@@ -279,4 +279,4 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
         run: |
           cd projects/WhatsAppClone;
-          bundle exec fastlane android deploy_to_firebase branch:${{ github.head_ref || github.ref_name }};
+          bundle exec fastlane android deploy_to_firebase;

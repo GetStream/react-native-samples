@@ -82,7 +82,7 @@ platform :ios do
         output_directory: "./dist",
       )
 
-      testflight_groups = (options[:branch] == "main") ? ['Dev Testers', 'Public Testers'] : ['Dev Testers']
+      testflight_groups = (git_branch() == "main") ? ['Dev Testers', 'Public Testers'] : ['Dev Testers']
 
       begin
         upload_to_testflight(
@@ -109,7 +109,7 @@ platform :android do
         gradle_file_path:"./android/app/build.gradle"
       )
       package = load_json(json_path: "./package.json")
-      version_name_addition = (options[:branch] == "main") ? "-pub" : "-dev"
+      version_name_addition = (git_branch() == "main") ? "-pub" : "-dev"
       increment_version_name(
         gradle_file_path:"./android/app/build.gradle",
         version_name: package["version"] + version_name_addition
@@ -118,7 +118,7 @@ platform :android do
         project_dir: "./android",
         tasks: ["clean", "assembleRelease"]
       )
-      firebase_groups_addition = (options[:branch] == "main") ? ", imessage-public-1" : ""
+      firebase_groups_addition = (git_branch() == "main") ? ", imessage-public-1" : ""
       firebase_app_distribution(
           app: "1:296557120037:android:a96d3423171fce2af60dcc",
           android_artifact_type: "APK",
