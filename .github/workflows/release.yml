@@ -2,10 +2,9 @@ name: Deploy
 
 on:
   push:
-    paths:
-      - "projects/**"
     branches:
-      - automated-deployment
+      - main
+      - develop
 
 concurrency:
   group: release
