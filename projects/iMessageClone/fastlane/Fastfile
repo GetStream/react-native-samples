@@ -89,7 +89,6 @@ platform :ios do
             groups: testflight_groups,
             changelog: "Lots of amazing new features to test out!",
             reject_build_waiting_for_review: false,
-            skip_waiting_for_build_processing: true,
         )
       rescue Exception => e
         if e.message.include? "Another build is in review"
