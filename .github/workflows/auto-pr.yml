@@ -1,0 +1,21 @@
+name: Sync main with develop via a PR
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  productionPromotion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Reset develop branch
+        run: |
+          git fetch origin develop:develop
+          git reset --hard develop
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: main-sync-with-develop
+          reviewers: vishalnarkhede, madsroskar, khushal87, santhoshvai, vanGalilea
