@@ -4,7 +4,7 @@ on:
     branches:
       - develop
 jobs:
-  productionPromotion:
+  syncMainWithDevelop:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,3 +19,6 @@ jobs:
         with:
           branch: main-sync-with-develop
           reviewers: vishalnarkhede, madsroskar, khushal87, santhoshvai, vanGalilea
+          title: Sync main with develop
+          body: This automated PR is to keep our main branch updated with develop as soon as possible. Any change to main branch is deployed as a new app in testflight and firebase. And it is accessible to the public.
+          delete-branch: true
