@@ -113,6 +113,14 @@ platform :android do
         gradle_file_path:"./android/app/build.gradle",
         version_name: package["version"] + version_name_addition
       )
+      latest_app_distribution_release = firebase_app_distribution_get_latest_release(
+        app: "1:296557120037:android:a96d3423171fce2af60dcc"
+      )
+      latest_app_distribution_version_code = latest_app_distribution_release[:buildVersion].to_i 
+      increment_version_code(
+        gradle_file_path:"./android/app/build.gradle",
+        version_code: latest_app_distribution_version_code + 1
+      )
       gradle(
         project_dir: "./android",
         tasks: ["clean", "assembleRelease"]
