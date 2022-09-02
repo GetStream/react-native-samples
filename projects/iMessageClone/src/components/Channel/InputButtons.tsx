@@ -15,7 +15,6 @@ export const InputButtons = () => {
     hasFilePicker,
     hasImagePicker,
     toggleAttachmentPicker,
-    uploadsEnabled,
   } = useMessageInputContext();
 
   const {
@@ -30,7 +29,7 @@ export const InputButtons = () => {
 
   return (
     <>
-      {(hasImagePicker || hasFilePicker) && uploadsEnabled !== false && (
+      {(hasImagePicker || hasFilePicker) && (
         <View
           style={[
             hasCommands ? styles.attachButtonContainer : undefined,

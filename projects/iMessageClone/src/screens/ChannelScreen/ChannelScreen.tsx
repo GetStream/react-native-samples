@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
-import {useHeaderHeight} from '@react-navigation/stack';
+import {useHeaderHeight} from '@react-navigation/elements';
 
 import {useAttachmentPickerContext} from 'stream-chat-react-native';
 

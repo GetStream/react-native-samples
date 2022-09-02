@@ -42,7 +42,9 @@ const MainStackScreen = () => {
   } = useTheme();
 
   return (
-    <MainStack.Navigator initialRouteName="ChannelList" headerMode="screen">
+    <MainStack.Navigator
+      initialRouteName="ChannelList"
+      screenOptions={{headerMode: 'screen'}}>
       <MainStack.Screen
         component={ChannelScreen}
         name="Channel"
@@ -107,7 +109,7 @@ export const Screens = () => {
   } = useTheme();
 
   return (
-    <RootStack.Navigator mode="modal">
+    <RootStack.Navigator screenOptions={{presentation: 'modal'}}>
       <RootStack.Screen
         name="Main"
         component={MainStackScreen}

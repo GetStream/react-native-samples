@@ -14,6 +14,7 @@ import {NewMessageProvider} from './src/contexts/NewMessageContext';
 import {Channel as ChannelType} from 'stream-chat';
 import {useStreamChatTheme} from './useStreamChatTheme';
 import {chatClient, user, userToken} from './src/client';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 type State = {
   channel?: ChannelType;
@@ -61,17 +62,19 @@ const App = () => {
       <AppContext.Provider
         value={{channel, setChannel, chatClient, setChannelWithId, messageId}}>
         <SearchContextProvider>
-          <OverlayProvider bottomInset={bottom} value={{style: theme}}>
-            <ThemeProvider style={theme}>
-              {clientReady && (
-                <NewMessageProvider>
-                  <Chat client={chatClient}>
-                    <Screens />
-                  </Chat>
-                </NewMessageProvider>
-              )}
-            </ThemeProvider>
-          </OverlayProvider>
+          <GestureHandlerRootView style={{flex: 1}}>
+            <OverlayProvider bottomInset={bottom} value={{style: theme}}>
+              <ThemeProvider style={theme}>
+                {clientReady && (
+                  <NewMessageProvider>
+                    <Chat client={chatClient}>
+                      <Screens />
+                    </Chat>
+                  </NewMessageProvider>
+                )}
+              </ThemeProvider>
+            </OverlayProvider>
+          </GestureHandlerRootView>
         </SearchContextProvider>
       </AppContext.Provider>
     </NavigationContainer>
