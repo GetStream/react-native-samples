@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Avatar, useTheme, vw, Right} from 'stream-chat-react-native';
+import {Avatar, useTheme, vw} from 'stream-chat-react-native';
 import type {MessageResponse} from 'stream-chat';
 
 import {formatLatestMessageDate} from '../../utils';
+import {Right} from '../../icons';
 
 const styles = StyleSheet.create({
   container: {

@@ -26,4 +26,4 @@ export const NewMessageProvider: React.FC<{
 };
 
 export const useNewMessageContext = () =>
-  (useContext(NewMessageContext) as unknown) as NewMessageContextValue;
+  useContext(NewMessageContext) as unknown as NewMessageContextValue;

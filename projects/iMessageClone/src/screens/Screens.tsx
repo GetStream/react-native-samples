@@ -2,12 +2,10 @@ import React, {useContext} from 'react';
 import {StatusBar, View} from 'react-native';
 import {NavigatorScreenParams} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Channel, Chat, useTheme} from 'stream-chat-react-native';
+import {Channel, useTheme} from 'stream-chat-react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {BlurView} from '@react-native-community/blur';
 
-import {AppContext} from '../contexts/AppContext';
-import {chatClient} from '../client';
+import {AppContext} from '../contexts';
 
 import {
   ChannelListScreen,
@@ -58,18 +56,15 @@ const MainStackScreen = () => {
                     translucent
                     barStyle="dark-content"
                   />
-                  <BlurView
-                    blurType="light"
+                  <View
                     style={{
                       paddingTop: insets.top,
                       height: CHANNEL_SCREEN_HEADER_HEIGHT + insets.top,
                     }}>
-                    <Chat client={chatClient}>
-                      <Channel channel={channel}>
-                        <ChannelHeader {...props} channel={channel} />
-                      </Channel>
-                    </Chat>
-                  </BlurView>
+                    <Channel channel={channel}>
+                      <ChannelHeader {...props} channel={channel} />
+                    </Channel>
+                  </View>
                 </>
               ),
           };

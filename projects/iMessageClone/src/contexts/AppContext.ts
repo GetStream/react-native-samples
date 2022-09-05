@@ -1,11 +1,12 @@
 import React from 'react';
 
-import {StreamChat, Channel as ChannelType} from 'stream-chat';
+import {Channel as ChannelType, StreamChat} from 'stream-chat';
+import {StreamChatGenerics} from '../client';
 
 type AppContextType = {
-  chatClient: StreamChat;
-  channel: ChannelType | undefined;
-  setChannel: (channel: ChannelType) => void;
+  chatClient: StreamChat<StreamChatGenerics>;
+  channel: ChannelType<StreamChatGenerics> | undefined;
+  setChannel: (channel: ChannelType<StreamChatGenerics>) => void;
   setChannelWithId: (channelId: string, messageId?: string) => Promise<void>;
   messageId?: string;
 };

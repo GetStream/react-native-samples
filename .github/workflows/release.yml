@@ -1,0 +1,284 @@
+name: Deploy
+
+on:
+  push:
+    paths:
+      - "projects/**"
+    branches:
+      - main
+      - develop
+
+concurrency:
+  group: release
+  cancel-in-progress: true
+
+jobs:
+  deploy_imessageclone_ios:
+    name: Deploy iMessage clone iOS to Testflight
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install Ruby and Gems
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: projects/iMessageClone
+          bundler-cache: true
+      - name: Install Yarn dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            cd projects/iMessageClone;
+            yarn install --frozen-lockfile;
+      - name: Cache pods
+        uses: actions/cache@v2
+        with:
+          path: projects/iMessageClone/ios/Pods
+          key: ${{ runner.os }}-iMessageClone-pods-${{ hashFiles('projects/iMessageClone/ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - name: iOS pods setup
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          command: |
+            cd projects/iMessageClone/ios;
+            bundle exec pod install;
+      - name: Build and deploy
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+        run: |
+          cd projects/iMessageClone;
+          bundle exec fastlane ios deploy_to_testflight;
+
+  deploy_slackclone_ios:
+    name: Deploy Slack clone iOS to Testflight
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install Ruby and Gems
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: projects/SlackClone
+          bundler-cache: true
+      - name: Install Yarn dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            cd projects/SlackClone;
+            yarn install --frozen-lockfile;
+      - name: Cache pods
+        uses: actions/cache@v2
+        with:
+          path: projects/SlackClone/ios/Pods
+          key: ${{ runner.os }}-SlackClone-pods-${{ hashFiles('projects/SlackClone/ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - name: iOS pods setup
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          command: |
+            cd projects/SlackClone/ios;
+            bundle exec pod install;
+      - name: Build and deploy
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+        run: |
+          cd projects/SlackClone;
+          bundle exec fastlane ios deploy_to_testflight;
+
+  deploy_whatsappclone_ios:
+    name: Deploy Whatsapp clone iOS to Testflight
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install Ruby and Gems
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: projects/WhatsAppClone
+          bundler-cache: true
+      - name: Install Yarn dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            cd projects/WhatsAppClone;
+            yarn install --frozen-lockfile;
+      - name: Cache pods
+        uses: actions/cache@v2
+        with:
+          path: projects/WhatsAppClone/ios/Pods
+          key: ${{ runner.os }}-WhatsAppClone-pods-${{ hashFiles('projects/WhatsAppClone/ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - name: iOS pods setup
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          command: |
+            cd projects/WhatsAppClone/ios;
+            bundle exec pod install;
+      - name: Build and deploy
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+        run: |
+          cd projects/WhatsAppClone;
+          bundle exec fastlane ios deploy_to_testflight;
+
+  deploy_imessageclone_android:
+    name: Deploy iMessage clone Android to Firebase App Distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install Ruby and Gems
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: projects/iMessageClone
+          bundler-cache: true
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "11"
+          check-latest: true
+      - name: Install Yarn dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            cd projects/iMessageClone;
+            yarn install --frozen-lockfile;
+      - name: Cache Gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-iMessageClone-gradle-${{ hashFiles('projects/iMessageClone/*.gradle*', 'projects/iMessageClone/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Build and deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+        run: |
+          cd projects/iMessageClone;
+          bundle exec fastlane android deploy_to_firebase;
+
+  deploy_slackclone_android:
+    name: Deploy Slack clone Android to Firebase App Distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install Ruby and Gems
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: projects/SlackClone
+          bundler-cache: true
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "11"
+          check-latest: true
+      - name: Install Yarn dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            cd projects/SlackClone;
+            yarn install --frozen-lockfile;
+      - name: Cache Gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('projects/SlackClone/*.gradle*', 'projects/SlackClone/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Build and deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+        run: |
+          cd projects/SlackClone;
+          bundle exec fastlane android deploy_to_firebase;
+
+  deploy_whatsappclone_android:
+    name: Deploy WhatsApp clone Android to Firebase App Distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install Ruby and Gems
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: projects/WhatsAppClone
+          bundler-cache: true
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "11"
+          check-latest: true
+      - name: Install Yarn dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            cd projects/WhatsAppClone;
+            yarn install --frozen-lockfile;
+      - name: Cache Gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-WhatsAppClone-gradle-${{ hashFiles('projects/WhatsAppClone/*.gradle*', 'projects/WhatsAppClone/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Build and deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+        run: |
+          cd projects/WhatsAppClone;
+          bundle exec fastlane android deploy_to_firebase;

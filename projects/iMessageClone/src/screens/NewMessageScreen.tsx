@@ -20,6 +20,7 @@ import {
 import {
   MessageInput,
   MessageList,
+  useChatContext,
   useTheme,
   vw,
 } from 'stream-chat-react-native';
@@ -161,7 +162,7 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
       colors: {black, border, grey, white, accent_blue, grey_whisper},
     },
   } = useTheme();
-  const {chatClient, setChannelWithId} = useContext(AppContext);
+  const {setChannel} = useContext(AppContext);
 
   const {
     onChangeSearchText,
@@ -184,12 +185,16 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
   const [focusOnSearchInput, setFocusOnSearchInput] = useState(true);
   const [, setMessageInputText] = useState('');
 
+  const {client: chatClient} = useChatContext();
+
   // When selectedUsers are changed, initiate a channel with those users as members,
   // and set it as a channel on current screen.
   const selectedUsersLength = selectedUsers.length;
   useEffect(() => {
     const initChannel = async () => {
-      if (!chatClient?.user?.id) return;
+      if (!chatClient?.user?.id) {
+        return;
+      }
 
       // If there are no selected users, then set dummy channel.
       if (selectedUsers.length === 0) {
@@ -232,11 +237,6 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedUsersLength]);
 
-  useEffect(() => {
-    return reset;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   /**
    * 1. If the current channel is draft, then we create the channel and then send message
    * Otherwise we simply send the message.
@@ -261,7 +261,7 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
         const response = await currentChannel.current.sendMessage(message);
 
         if (currentChannel.current.id) {
-          await setChannelWithId(currentChannel.current.id);
+          await setChannel(currentChannel.current);
           navigation.replace('Main', {screen: 'Channel'});
         }
 
@@ -271,7 +271,7 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
         throw e;
       }
     },
-    [navigation, selectedUsers, setChannelWithId],
+    [navigation, selectedUsers, setChannel],
   );
 
   const onSearchPress = useCallback(() => {

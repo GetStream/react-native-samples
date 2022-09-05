@@ -74,7 +74,6 @@ export const Channel: React.FC<ChannelProps> = ({
         return acceptedActions;
       }}
       supportedReactions={SUPPORTED_REACTIONS}
-      channel={channel}
       myMessageTheme={myMessageTheme}
       keyboardVerticalOffset={headerHeight}
       MessageAvatar={() => null}

@@ -8,3 +8,4 @@ export * from './Mute';
 export * from './QuestionReaction';
 export * from './TrashCan';
 export * from './Unmute';
+export * from './Right';

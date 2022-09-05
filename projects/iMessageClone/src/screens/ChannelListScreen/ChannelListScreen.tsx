@@ -2,11 +2,11 @@ import React, {useContext, useCallback} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ChannelSort} from 'stream-chat';
-import {ChannelList, Chat, Search, useTheme} from 'stream-chat-react-native';
+import {ChannelList, Search, useTheme} from 'stream-chat-react-native';
 
 import {ChannelPreviewMessenger} from '../../components/ChannelPreview';
 import {MessageSearchList} from '../../components/MessageSearch';
-import {chatClient, user} from '../../client';
+import {user} from '../../client';
 import {AppContext} from '../../contexts/AppContext';
 import {SearchContext} from '../../contexts/SearchContext';
 import {NavigationParamsList} from '../Screens';
@@ -83,14 +83,8 @@ export const ChannelListScreen: React.FC<ChannelListScreenProps> = ({
     },
   } = useTheme();
 
-  const {
-    searchQuery,
-    loading,
-    loadMore,
-    messages,
-    refreshing,
-    refreshList,
-  } = useContext(SearchContext);
+  const {searchQuery, loading, loadMore, messages, refreshing, refreshList} =
+    useContext(SearchContext);
 
   const EmptySearchIndicator = () => (
     <View style={styles.emptyIndicatorContainer}>
@@ -110,38 +104,33 @@ export const ChannelListScreen: React.FC<ChannelListScreenProps> = ({
   );
 
   return (
-    <Chat client={chatClient}>
-      <View style={StyleSheet.absoluteFill}>
-        {(!!searchQuery || (messages && messages.length > 0)) && (
-          <MessageSearchList
-            EmptySearchIndicator={EmptySearchIndicator}
-            loading={loading}
-            loadMore={loadMore}
-            messages={messages}
-            refreshing={refreshing}
-            refreshList={refreshList}
-            setChannelWithId={setChannelWithId}
+    <View style={StyleSheet.absoluteFill}>
+      {(!!searchQuery || (messages && messages.length > 0)) && (
+        <MessageSearchList
+          EmptySearchIndicator={EmptySearchIndicator}
+          loading={loading}
+          loadMore={loadMore}
+          messages={messages}
+          refreshing={refreshing}
+          refreshList={refreshList}
+          setChannelWithId={setChannelWithId}
+        />
+      )}
+      <View style={{flex: searchQuery ? 0 : 1}}>
+        <View
+          style={[styles.channelListContainer, {opacity: searchQuery ? 0 : 1}]}>
+          <ChannelList
+            additionalFlatListProps={additionalFlatListProps}
+            filters={filters}
+            HeaderNetworkDownIndicator={() => null}
+            maxUnreadCount={99}
+            onSelect={onSelect}
+            options={options}
+            Preview={ChannelPreviewMessenger}
+            sort={sort}
           />
-        )}
-        <View style={{flex: searchQuery ? 0 : 1}}>
-          <View
-            style={[
-              styles.channelListContainer,
-              {opacity: searchQuery ? 0 : 1},
-            ]}>
-            <ChannelList
-              additionalFlatListProps={additionalFlatListProps}
-              filters={filters}
-              HeaderNetworkDownIndicator={() => null}
-              maxUnreadCount={99}
-              onSelect={onSelect}
-              options={options}
-              Preview={ChannelPreviewMessenger}
-              sort={sort}
-            />
-          </View>
         </View>
       </View>
-    </Chat>
+    </View>
   );
 };

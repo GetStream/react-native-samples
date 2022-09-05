@@ -1,0 +1,136 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+default_platform(:ios)
+
+
+before_all do
+  if is_ci
+    setup_ci()
+  end
+end
+
+
+desc "Installs all Certs and Profiles necessary for ad-hoc"
+lane :match_me do
+  match(
+    type: "adhoc",
+    app_identifier: [
+        "io.getstream.reactnative.whatsappclone",
+    ],
+    readonly: true,
+    force_for_new_devices: !is_ci
+  )
+end
+
+desc "Installs all Certs and Profiles necessary for appstore"
+lane :match_appstore do
+  match(
+    type: "appstore",
+    app_identifier: [
+      "io.getstream.reactnative.whatsappclone",
+    ],
+    readonly: is_ci
+  )
+end
+
+platform :ios do
+  desc "Deploy iOS build to TestFlight"
+  lane :deploy_to_testflight do |options|
+      app_store_connect_api_key()
+
+      match_appstore
+
+      settings_to_override = {
+        :BUNDLE_IDENTIFIER => "io.getstream.reactnative.whatsappclone",
+        :PROVISIONING_PROFILE_SPECIFIER => "match AppStore io.getstream.reactnative.whatsappclone"
+      } 
+
+      package = load_json(json_path: "./package.json")
+      increment_version_number(
+        version_number: package["version"],
+        xcodeproj: "./ios/WhatsAppCloneReactNative.xcodeproj"
+      )
+      current_build_number = app_store_build_number(
+        live: false,
+        app_identifier: "io.getstream.reactnative.whatsappclone",
+      )
+      increment_build_number(
+        build_number: current_build_number + 1,
+        xcodeproj: "./ios/WhatsAppCloneReactNative.xcodeproj"
+      )
+
+      gym(
+          workspace: "./ios/WhatsAppCloneReactNative.xcworkspace",
+          scheme: "WhatsAppCloneReactNative",
+          export_method: "app-store",
+          silent: true,
+          clean: true,
+          xcargs: settings_to_override,
+          include_symbols: true,
+          output_directory: "./dist",
+      )
+
+      testflight_groups = (git_branch() == "main") ? ['Dev Testers', 'Public Testers'] : ['Dev Testers']
+
+      begin
+        upload_to_testflight(
+            groups: testflight_groups,
+            changelog: "Lots of amazing new features to test out!",
+            reject_build_waiting_for_review: false,
+        )
+      rescue Exception => e
+        if e.message.include? "Another build is in review"
+          UI.important("Another build is already in beta review. Skipping beta review submission")
+        else
+          raise
+        end
+      end
+
+  end
+end
+
+platform :android do
+  desc "Deploy Android build to Firebase"
+  lane :deploy_to_firebase do |options|
+      increment_version_code(
+        gradle_file_path:"./android/app/build.gradle"
+      )
+      package = load_json(json_path: "./package.json")
+      version_name_addition = (git_branch() == "main") ? "-pub" : "-dev"
+      increment_version_name(
+        gradle_file_path:"./android/app/build.gradle",
+        version_name: package["version"] + version_name_addition
+      )
+      latest_app_distribution_release = firebase_app_distribution_get_latest_release(
+        app: "1:296557120037:android:c200ee23e884e68ef60dcc"
+      )
+      latest_app_distribution_version_code = latest_app_distribution_release[:buildVersion].to_i 
+      increment_version_code(
+        gradle_file_path:"./android/app/build.gradle",
+        version_code: latest_app_distribution_version_code + 1
+      )
+      gradle(
+        project_dir: "./android",
+        tasks: ["clean", "assembleRelease"]
+      )
+      firebase_groups_addition = (git_branch() == "main") ? ", whatsapp-public-1" : ""
+      firebase_app_distribution(
+          app: "1:296557120037:android:c200ee23e884e68ef60dcc",
+          android_artifact_type: "APK",
+          android_artifact_path: "./android/app/build/outputs/apk/release/app-release.apk",
+          groups: "react-native-dev" + firebase_groups_addition
+      )
+  end
+end

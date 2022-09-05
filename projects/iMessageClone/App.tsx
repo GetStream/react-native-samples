@@ -1,21 +1,19 @@
-import React, {useEffect, useState, useCallback} from 'react';
-import {LogBox} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import {Channel as ChannelType} from 'stream-chat';
-import {Chat, OverlayProvider} from 'stream-chat-react-native';
+import {Chat, OverlayProvider, ThemeProvider} from 'stream-chat-react-native';
 
 import {Screens} from './src/screens';
 import {AppContext} from './src/contexts/AppContext';
-import {theme} from './src/theme';
-import {chatClient, userToken, user} from './src/client';
+import {StreamChatGenerics} from './src/client';
 import {SearchContextProvider} from './src/contexts/SearchContext';
 import {NewMessageProvider} from './src/contexts/NewMessageContext';
-
-LogBox.ignoreAllLogs(true);
+import {Channel as ChannelType} from 'stream-chat';
+import {useStreamChatTheme} from './useStreamChatTheme';
+import {chatClient, user, userToken} from './src/client';
 
 type State = {
   channel?: ChannelType;
@@ -24,15 +22,16 @@ type State = {
 
 const App = () => {
   const {bottom} = useSafeAreaInsets();
+  const theme = useStreamChatTheme();
 
-  const [state, setState] = useState<State>({});
-  const {channel, messageId} = state;
   const [clientReady, setClientReady] = useState(false);
+  const [state, setState] = useState<State>({});
+
+  const {channel, messageId} = state;
 
   useEffect(() => {
     const setupClient = async () => {
       await chatClient.connectUser(user, userToken);
-
       setClientReady(true);
     };
 
@@ -46,6 +45,7 @@ const App = () => {
       if (!newChannel?.initialized) {
         await newChannel?.watch();
       }
+      console.log(channel, innerMessageId, 'nebebeh');
       setState({channel: newChannel, messageId: innerMessageId});
     },
     [],
@@ -59,18 +59,18 @@ const App = () => {
   return (
     <NavigationContainer>
       <AppContext.Provider
-        value={{chatClient, channel, setChannel, setChannelWithId, messageId}}>
+        value={{channel, setChannel, chatClient, setChannelWithId, messageId}}>
         <SearchContextProvider>
           <OverlayProvider bottomInset={bottom} value={{style: theme}}>
-            <Chat style={theme} client={chatClient}>
+            <ThemeProvider style={theme}>
               {clientReady && (
-                <>
-                  <NewMessageProvider>
+                <NewMessageProvider>
+                  <Chat client={chatClient}>
                     <Screens />
-                  </NewMessageProvider>
-                </>
+                  </Chat>
+                </NewMessageProvider>
               )}
-            </Chat>
+            </ThemeProvider>
           </OverlayProvider>
         </SearchContextProvider>
       </AppContext.Provider>
