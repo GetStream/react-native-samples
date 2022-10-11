@@ -7023,10 +7023,10 @@ statuses@~1.5.0:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-react-native-core@5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react-native-core/-/stream-chat-react-native-core-5.3.1.tgz#74314f3650e714b159f5a2970d921db5f42951c6"
-  integrity sha512-XluHlEnq0PxYRF/VKB2mjHjGCQzLLp9gceF/w0HUQX7+qUsDHK8wKLlFH5n3YFF77yYl/GZShUuU+yxmaZ9cEw==
+stream-chat-react-native-core@5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react-native-core/-/stream-chat-react-native-core-5.4.0.tgz#da91b02f12151ed0b827abda4eca4139f7327618"
+  integrity sha512-KhrYSVyiJiL5meJljBiVqj5w6wp/AW/Ejcad+rkTyHHFRf/xLcAGAOMVw7NXugNrI5FG69ZI/TB/BiCArxOXdg==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@gorhom/bottom-sheet" "^4.1.6"
@@ -7042,13 +7042,13 @@ stream-chat-react-native-core@5.3.1:
     react-native-url-polyfill "^1.3.0"
     stream-chat "7.0.0"
 
-stream-chat-react-native@5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react-native/-/stream-chat-react-native-5.3.1.tgz#8cce8633b1feab6baa4f638dd606fdf10eeed3d3"
-  integrity sha512-gbSSJkyywaTPVH1iawFf+8ESAGq5A5oWnNgUCQ/aToQOZDmqcfcLQ7O/cgYBmBDTdYeOpHlF8r/TjSIbNMx9Bw==
+stream-chat-react-native@5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react-native/-/stream-chat-react-native-5.4.0.tgz#756990509f253e93ecb00ba3bce84ea7f9719f98"
+  integrity sha512-H5obkBEBd0ACB6m+m9hxjmIhcc165+abkhQOeV+N8JtXJg23QAEkatl0RMGjYR3ogPJypC23/ob5cgVeSyJy4Q==
   dependencies:
     es6-symbol "^3.1.3"
-    stream-chat-react-native-core "5.3.1"
+    stream-chat-react-native-core "5.4.0"
 
 stream-chat-test-data-cli@^0.1.0-beta.0:
   version "0.1.0-beta.0"
