@@ -1112,10 +1112,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@react-native-camera-roll/camera-roll@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-5.0.0.tgz#86564e335df5fc1e765a025f369c653283bd54ab"
-  integrity sha512-H7xfQnzNUnJ/TN+cqtepJ3A6CP4c1zaRKYkoL/DGISzcZFCLwrRcOnrgZLyeJwQhfXwgcoZMFlUtfUDiKO9YMg==
+"@react-native-camera-roll/camera-roll@~5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-5.0.4.tgz#341b8275363ee496b796fa58cb592697798d39e5"
+  integrity sha512-3kBRgW3VfmLQmQm70gPUVDu8rPSZymoPc9vmeiPLMKBqtWaqPNuPX0jQ6mZ8AEtYbBdoWC360Q4YYPalXv37zA==
 
 "@react-native-community/cli-clean@^8.0.4":
   version "8.0.4"
