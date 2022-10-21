@@ -1237,9 +1237,9 @@
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
 "@react-native-camera-roll/camera-roll@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-5.0.1.tgz#278a2280db9b1f1326fc9202f1b265cec89c51e6"
-  integrity sha512-C+6glzmhNLJV2GIZTjmd0zyNUiUVoSZ+iEWWpYTXHjqmuiAgXSfpPPKY5nv95ONLY3wL1N2O3T1vQNzdIa0O6Q==
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-5.0.4.tgz#341b8275363ee496b796fa58cb592697798d39e5"
+  integrity sha512-3kBRgW3VfmLQmQm70gPUVDu8rPSZymoPc9vmeiPLMKBqtWaqPNuPX0jQ6mZ8AEtYbBdoWC360Q4YYPalXv37zA==
 
 "@react-native-community/async-storage@^1.12.1":
   version "1.12.1"
@@ -6415,10 +6415,12 @@ react-native-codegen@^0.0.8:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-document-picker@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-5.2.0.tgz#1fb2185a56ba6b2509acdc418a8a75906c31e58e"
-  integrity sha512-zXK34hW6fM0gXoo6v7edZZxKvLT7DyjOdBXi7WrxbKqZchDokTEQ/tNTeZxky+7oI8sVz8T3uXBBEW0sp+VfXQ==
+react-native-document-picker@^8.1.2:
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-8.1.2.tgz#503cce26086020c833f08a405fe2da28f735ed08"
+  integrity sha512-R126YsjTXBuvigRRExyAQ+yn1UGV4dGcMI9x4UAY8TBTSOt6nOQcWS/AQcbzjk9MnN8ISDGqNq9GmN51Q1aHjA==
+  dependencies:
+    invariant "^2.2.4"
 
 react-native-dotenv@^2.5.5:
   version "2.6.2"
@@ -7268,10 +7270,10 @@ stream-buffers@~2.2.0:
   resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"
   integrity sha1-kdX1Ew0c75bc+n9yaUUYh0HQnuQ=
 
-stream-chat-react-native-core@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/stream-chat-react-native-core/-/stream-chat-react-native-core-5.1.0.tgz#65a867ad684add2fc6ec702a65d57010434f550b"
-  integrity sha512-jWIB5tjCPqFsnPOkB+yKD2bW18NYlt6AFMjrHIurKkdR08+8E4/wtCutZztTCTqyiJ3RXA2NL8d8vDWfBzV4zg==
+stream-chat-react-native-core@5.4.1:
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/stream-chat-react-native-core/-/stream-chat-react-native-core-5.4.1.tgz#623d678c9cef0a46a0baff48a83e10c821bcf225"
+  integrity sha512-0E/4+Cwel7Q9hhAN+QOo7FKn304kTBGIE8MW7JhQQXt7NqPPJWz9CkEyyoVuS7UNnz4g+ViiINM/eNAomGRaTA==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@gorhom/bottom-sheet" "^4.1.6"
@@ -7287,13 +7289,13 @@ stream-chat-react-native-core@5.1.0:
     react-native-url-polyfill "^1.3.0"
     stream-chat "7.0.0"
 
-stream-chat-react-native@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/stream-chat-react-native/-/stream-chat-react-native-5.1.0.tgz#28e6e5ab778157456ba2f7d2917ec80fbb7b021f"
-  integrity sha512-Zpq5l1Giy18VA15L4WKXZ5nTa0fPsS5QtwkUN03FNdGiFt4Slh5QLvdA2G2vuE870lOk4BHdiMcb0CQRGn4uag==
+stream-chat-react-native@5.4.1:
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/stream-chat-react-native/-/stream-chat-react-native-5.4.1.tgz#04226352557dc2f80de0e6756ebf9a2da7f88d52"
+  integrity sha512-K6I9Bac5hZq8PqWUhNt58/LOC7YS8Dytr9FY4O/BFmYLofgilemThhwP3grLn12yQ4uVeyuNE5YLpGAE28mppA==
   dependencies:
     es6-symbol "^3.1.3"
-    stream-chat-react-native-core "5.1.0"
+    stream-chat-react-native-core "5.4.1"
 
 stream-chat-test-data-cli@0.1.0-beta.4:
   version "0.1.0-beta.4"
