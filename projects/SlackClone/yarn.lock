@@ -966,6 +966,14 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@gorhom/bottom-sheet@4.4.5":
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-4.4.5.tgz#b9041b01ce1af9a936e7c0fc1d78f026d759eebe"
+  integrity sha512-Z5Z20wshLUB8lIdtMKoJaRnjd64wBR/q8EeVPThrg+skrcBwBPHfUwZJ2srB0rEszA/01ejSJy/ixyd7Ra7vUA==
+  dependencies:
+    "@gorhom/portal" "1.0.14"
+    invariant "^2.2.4"
+
 "@gorhom/bottom-sheet@^3.6.5":
   version "3.6.6"
   resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-3.6.6.tgz#73e8ffaba6b417c353a8933a3ed09f10a8fd3e9d"
@@ -976,20 +984,10 @@
     nanoid "^3.1.20"
     react-native-redash "^16.0.10"
 
-"@gorhom/bottom-sheet@^4.1.6":
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-4.4.2.tgz#16e4a1271574c13c0b6ab970256767262c1cd35f"
-  integrity sha512-KpHWP/DYMGk3T+i6NshrPWpe9M/WzBlNk34Hadvw9+7MZPOkKJVDYcmuSfUzCG2kRNaPnGGbJJFO8dhwtOYbig==
-  dependencies:
-    "@gorhom/portal" "1.0.13"
-    invariant "^2.2.4"
-    nanoid "^3.3.3"
-    react-native-redash "^16.1.1"
-
-"@gorhom/portal@1.0.13":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@gorhom/portal/-/portal-1.0.13.tgz#da3af4d427e1fa68d264107de4b3072a4adf35ce"
-  integrity sha512-ViClKPkyGnj8HVMW45OGQSnGbWBVh8i3tgMOkGqpm6Cv0WVcDfUL7SER6zyGQy8Wdoj3GUDpAJFMqVOxpmRpzw==
+"@gorhom/portal@1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@gorhom/portal/-/portal-1.0.14.tgz#1953edb76aaba80fb24021dc774550194a18e111"
+  integrity sha512-MXyL4xvCjmgaORr/rtryDNFy3kU4qUbKlwtQqqsygd0xX3mhKjOLn6mQK8wfu0RkoE0pBE0nAasRoHua+/QZ7A==
   dependencies:
     nanoid "^3.3.1"
 
@@ -5720,7 +5718,7 @@ nanoid@^3.1.15, nanoid@^3.1.20, nanoid@^3.1.23:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.23.tgz#f744086ce7c2bc47ee0a8472574d5c78e4183a81"
   integrity sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==
 
-nanoid@^3.3.1, nanoid@^3.3.3:
+nanoid@^3.3.1:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
   integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
@@ -6506,15 +6504,6 @@ react-native-redash@^16.0.10:
     normalize-svg-path "^1.0.1"
     parse-svg-path "^0.1.2"
 
-react-native-redash@^16.1.1:
-  version "16.2.3"
-  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-16.2.3.tgz#ee63e100c60f83275116e57d4e8bc79f26349db9"
-  integrity sha512-vSjHA6/mBY3IpDYPish3DlG06PKNLkb/b89hw7nsDM3yxAJ7Db+yMnEL3pp2YsoYblDc3s+0+wBRlvxay4X4vQ==
-  dependencies:
-    abs-svg-path "^0.1.1"
-    normalize-svg-path "^1.0.1"
-    parse-svg-path "^0.1.2"
-
 react-native-safe-area-context@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.2.0.tgz#06113c6b208f982d68ab5c3cebd199ca93db6941"
@@ -7270,13 +7259,13 @@ stream-buffers@~2.2.0:
   resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"
   integrity sha1-kdX1Ew0c75bc+n9yaUUYh0HQnuQ=
 
-stream-chat-react-native-core@5.4.1:
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react-native-core/-/stream-chat-react-native-core-5.4.1.tgz#623d678c9cef0a46a0baff48a83e10c821bcf225"
-  integrity sha512-0E/4+Cwel7Q9hhAN+QOo7FKn304kTBGIE8MW7JhQQXt7NqPPJWz9CkEyyoVuS7UNnz4g+ViiINM/eNAomGRaTA==
+stream-chat-react-native-core@5.4.2:
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/stream-chat-react-native-core/-/stream-chat-react-native-core-5.4.2.tgz#16637e592d1bae78bd4f688858612c689591403e"
+  integrity sha512-qCX7mdHvZBFTvjzTDJEH/RHE9sV1M3ileVZR51fOl9u92Vfj31C1U5WIo+Cdl8bnepSbW8zHLAFCD8MAwnxwsQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
-    "@gorhom/bottom-sheet" "^4.1.6"
+    "@gorhom/bottom-sheet" "4.4.5"
     dayjs "1.10.5"
     file-loader "6.2.0"
     i18next "20.2.4"
@@ -7289,13 +7278,13 @@ stream-chat-react-native-core@5.4.1:
     react-native-url-polyfill "^1.3.0"
     stream-chat "7.0.0"
 
-stream-chat-react-native@5.4.1:
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react-native/-/stream-chat-react-native-5.4.1.tgz#04226352557dc2f80de0e6756ebf9a2da7f88d52"
-  integrity sha512-K6I9Bac5hZq8PqWUhNt58/LOC7YS8Dytr9FY4O/BFmYLofgilemThhwP3grLn12yQ4uVeyuNE5YLpGAE28mppA==
+stream-chat-react-native@5.4.2:
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/stream-chat-react-native/-/stream-chat-react-native-5.4.2.tgz#86979c478d27958ce7c3fdf6e9f38dac2d040c1d"
+  integrity sha512-KGTkIXJKvPzNzvFYzoXg9Q8obUeB6DX1EjEExEXIANml5Ysm7AfTRpwQ/si6SnDo8RAKSGq2okD2v3UVMyFzcg==
   dependencies:
     es6-symbol "^3.1.3"
-    stream-chat-react-native-core "5.4.1"
+    stream-chat-react-native-core "5.4.2"
 
 stream-chat-test-data-cli@0.1.0-beta.4:
   version "0.1.0-beta.4"
