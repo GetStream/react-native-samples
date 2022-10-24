@@ -304,7 +304,7 @@ PODS:
     - glog
   - react-native-cameraroll (5.0.0):
     - React-Core
-  - react-native-document-picker (5.3.0):
+  - react-native-document-picker (8.1.2):
     - React-Core
   - react-native-image-resizer (1.4.5):
     - React-Core
