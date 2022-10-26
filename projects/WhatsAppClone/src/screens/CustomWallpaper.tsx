@@ -1,7 +1,6 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import React, {useContext} from 'react'
+import {Pressable, StyleSheet, Text, View} from 'react-native'
 import {StackNavigationProp} from '@react-navigation/stack'
-import PressMe from '../components/PressMe'
 import {colors} from '../theme'
 import {flex, sizes} from '../global'
 import Slider from '@react-native-community/slider'
@@ -96,16 +95,17 @@ export default ({
               </View>
             </ChannelBackgroundWrapper>
           </View>
-          <PressMe
+          <Pressable
             style={{padding: sizes.s, marginBottom: sizes.l}}
             onPress={handleChangeOnPress}>
             <Text style={{color: colors.dark.primaryLight}}>CHANGE</Text>
-          </PressMe>
+          </Pressable>
         </View>
 
         <View style={styles.footerContainer}>
           <Text style={styles.dimmingText}>Wallpaper Dimming</Text>
           <Slider
+            minimumValue={0}
             thumbTintColor={colors.dark.primaryLight}
             minimumTrackTintColor={colors.dark.primaryLight}
             maximumTrackTintColor={colors.dark.text}

@@ -67,7 +67,7 @@ export default () => {
     },
   ) => {
     return (
-      <Animated.View exiting={SlideOutUp}>
+      <Animated.View exiting={SlideOutUp} collapsable={false}>
         <TabBar
           {...props}
           indicatorStyle={styles.indicator}

@@ -8,7 +8,6 @@ import {
   View,
 } from 'react-native'
 import {StackNavigationProp} from '@react-navigation/stack'
-import PressMe from '../components/PressMe'
 import {colors} from '../theme'
 import {flex, sizes} from '../global'
 import {BackgroundTypes, StackNavigatorParamList} from '../types'
@@ -83,7 +82,7 @@ export default ({
           })}
         </View>
         <View style={{flex: 1}}>
-          <PressMe
+          <Pressable
             style={{padding: sizes.xl, ...flex.directionRowItemsCenter}}
             onPress={handleRemoveCustomBackground}>
             <Trash
@@ -95,7 +94,7 @@ export default ({
             <Text style={{color: colors.dark.danger}}>
               Remove custom wallpaper
             </Text>
-          </PressMe>
+          </Pressable>
         </View>
       </SafeAreaView>
     </>
