@@ -15,6 +15,7 @@ import {Channel as ChannelType} from 'stream-chat';
 import {useStreamChatTheme} from './useStreamChatTheme';
 import {chatClient, user, userToken} from './src/client';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {Alert} from 'react-native';
 
 type State = {
   channel?: ChannelType;
@@ -32,6 +33,12 @@ const App = () => {
 
   useEffect(() => {
     const setupClient = async () => {
+      if (!user.id || !userToken) {
+        Alert.alert(
+          'Please set API_KEY, USER_ID and USER_TOKEN in .env file as mentioned in README file and restart the project',
+        );
+        return;
+      }
       await chatClient.connectUser(user, userToken);
       setClientReady(true);
     };
