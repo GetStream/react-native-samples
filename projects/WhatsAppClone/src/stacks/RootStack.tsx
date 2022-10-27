@@ -1,9 +1,8 @@
 import ChannelList from '../screens/ChannelList'
-import ChannelStack from './ChannelStack'
+import ChannelScreen from './ChannelStack'
 import React from 'react'
 import {noHeaderOptions} from '../App'
 import {createStackNavigator} from '@react-navigation/stack'
-import WallpaperTypeDetails from '../screens/WallpaperTypeDetails'
 
 const Stack = createStackNavigator()
 
@@ -22,8 +21,8 @@ export default ({clientReady}: {clientReady: boolean}) => {
         options={noHeaderOptions}
       />
       <Stack.Screen
-        component={ChannelStack}
-        name="Channel"
+        component={ChannelScreen}
+        name="ChannelScreen"
         options={noHeaderOptions}
       />
     </Stack.Navigator>

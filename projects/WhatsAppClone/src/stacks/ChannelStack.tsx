@@ -1,13 +1,7 @@
-import React, {useContext, useEffect} from 'react'
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack'
-import {AppContext, noHeaderOptions} from '../App'
-import {chatClient} from '../client'
-import {RouteProp} from '@react-navigation/native'
-import {StackNavigatorParamList} from '../types'
-import Channel from '../screens/Channel'
+import React from 'react'
+import {createStackNavigator} from '@react-navigation/stack'
+import {noHeaderOptions, useAppContext} from '../App'
+import {ChannelScreen} from '../screens/Channel'
 import CustomWallpaper from '../screens/CustomWallpaper'
 import WallpaperTypesOverview from '../screens/WallpaperTypesOverview'
 import WhatsAppChannelWrapper from '../utils/WhatsAppChannelWrapper'
@@ -15,53 +9,21 @@ import ImagePreview from '../screens/ImagePreview'
 import WallpaperTypeDetails from '../screens/WallpaperTypeDetails'
 import ChannelHeader from '../components/channel/ChannelHeader'
 
-export type ChannelScreenNavigationProp = StackNavigationProp<
-  StackNavigatorParamList,
-  'ChannelScreen'
->
-export type ChannelScreenRouteProp = RouteProp<
-  StackNavigatorParamList,
-  'ChannelScreen'
->
-export type ChannelScreenProps = {
-  navigation: ChannelScreenNavigationProp
-  route: ChannelScreenRouteProp
-}
-
 const Stack = createStackNavigator()
 
-export default ({
-  route: {
-    params: {channelId},
-  },
-}: ChannelScreenProps) => {
-  const {channel, setChannel} = useContext(AppContext)
-
-  useEffect(() => {
-    const initChannel = async () => {
-      if (!chatClient || !channelId) return
-
-      const newChannel = chatClient?.channel('messaging', channelId)
-
-      if (!newChannel?.initialized) {
-        await newChannel?.watch()
-      }
-      setChannel(newChannel)
-    }
-
-    initChannel()
-  }, [channelId, setChannel])
+export default () => {
+  const {channel} = useAppContext()
 
   return (
     <WhatsAppChannelWrapper channel={channel}>
       <Stack.Navigator
-        initialRouteName="Channel"
+        initialRouteName="ChannelScreen"
         screenOptions={{
           headerTitleStyle: {alignSelf: 'center', fontWeight: 'bold'},
         }}>
         <Stack.Screen
-          component={Channel}
-          name="Channel"
+          component={ChannelScreen}
+          name="ChannelScreen"
           options={{
             header: ChannelHeader,
           }}

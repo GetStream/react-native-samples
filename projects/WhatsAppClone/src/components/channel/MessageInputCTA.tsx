@@ -1,4 +1,4 @@
-import React, {useContext, useMemo} from 'react'
+import React, {useMemo} from 'react'
 import {
   useChannelContext,
   useChatContext,
@@ -13,7 +13,7 @@ import AudioRecorderPlayer from 'react-native-audio-recorder-player'
 import moment from 'moment'
 import {MessageResponse} from 'stream-chat'
 import {set} from 'lodash'
-import {AppContext} from '../../App'
+import {useAppContext} from '../../App'
 
 const audioRecorderPlayer = new AudioRecorderPlayer()
 
@@ -34,7 +34,7 @@ export default ({
   const {client} = useChatContext()
   const {updateMessage} = useMessagesContext()
   const {channel} = useChannelContext()
-  const {messageInputRef} = useContext(AppContext)
+  const {messageInputRef} = useAppContext()
 
   const isMessageEmpty = useMemo(
     () => !text && !imageUploads.length && !fileUploads.length,

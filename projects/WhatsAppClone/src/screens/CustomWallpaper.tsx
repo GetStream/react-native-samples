@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import {Pressable, StyleSheet, Text, View} from 'react-native'
 import {StackNavigationProp} from '@react-navigation/stack'
 import {colors} from '../theme'
@@ -7,7 +7,7 @@ import Slider from '@react-native-community/slider'
 import {StackNavigatorParamList} from '../types'
 import {RouteProp} from '@react-navigation/native'
 import useChannelPreferences from '../hooks/useChannelPreferences'
-import {AppContext} from '../App'
+import {useAppContext} from '../App'
 import {useChannelPreviewDisplayName} from 'stream-chat-react-native-core/src/components/ChannelPreview/hooks/useChannelPreviewDisplayName'
 import SuperAvatar from '../components/SuperAvatar'
 import Header from '../components/Header'
@@ -39,7 +39,7 @@ export default ({
   },
 }: Props) => {
   const {setProperty, channelPreferences} = useChannelPreferences(channelId)
-  const {channel} = useContext(AppContext)
+  const {channel} = useAppContext()
   const displayName = useChannelPreviewDisplayName(channel, 30)
   const {dimValue} = channelPreferences
 

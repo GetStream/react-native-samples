@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import {
   AutoCompleteInput,
   LocalMessageInputContext,
@@ -17,7 +11,7 @@ import {flex, sizes} from '../../global'
 import {colors} from '../../theme'
 import IconButton from '../IconButton'
 import Reply from './Reply'
-import {AppContext} from '../../App'
+import {useAppContext} from '../../App'
 import moment from 'moment'
 import RecordingBlinking from '../../icons/RecordingBlinking'
 import PeekabooView from '../PeekabooView'
@@ -43,7 +37,7 @@ export default () => {
   const [recordingDurationInMS, setRecordingDurationInMS] = useState(0)
   const {closePicker, setSelectedImages, setSelectedPicker} =
     useAttachmentPickerContext()
-  const {messageInputRef, channel} = useContext(AppContext)
+  const {messageInputRef, channel} = useAppContext()
   const {navigate} = useNavigation()
   const numberOfFiles = fileUploads.length
   const channelMembers = get(channel, [

@@ -37,6 +37,7 @@ type AppContextType = {
 export const AppContext = React.createContext<AppContextType>(
   {} as AppContextType,
 )
+export const useAppContext = () => React.useContext(AppContext)
 
 const App = () => {
   const messageInputRef = useRef<TextInput>(null)

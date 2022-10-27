@@ -1,5 +1,5 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native'
-import React, {useContext, useMemo} from 'react'
+import React, {useMemo} from 'react'
 import {
   ChannelPreviewMessage,
   ChannelPreviewMessengerProps,
@@ -10,7 +10,7 @@ import {
   useChannelPreviewDisplayName,
   useTheme,
 } from 'stream-chat-react-native'
-import {AppContext, StreamChannel} from '../../App'
+import {StreamChannel, useAppContext} from '../../App'
 import {useNavigation} from '@react-navigation/native'
 import {colors} from '../../theme'
 import {flex, sizes} from '../../global'
@@ -29,8 +29,9 @@ export default ({
   formatLatestMessageDate,
 }: ChannelPreviewMessengerProps) => {
   const {navigate} = useNavigation()
+  const {setChannel} = useAppContext()
   const {selectedChannelsForEditing, setSelectedChannelsForEditing} =
-    useContext(AppContext)
+    useAppContext()
   const displayName = useChannelPreviewDisplayName(channel)
   const {
     theme: {
@@ -61,9 +62,9 @@ export default ({
     'voice-message'
 
   const handleOnPress = () => {
-    navigate('Channel', {
-      channelId: channel.id,
-    })
+    console.log(Object.keys(channel.state.members))
+    setChannel(channel)
+    navigate('ChannelScreen')
   }
 
   const handleOnLongPress = () => toggleChannelSelectionForEditing(channel)

@@ -1,7 +1,7 @@
 import {Alert, SafeAreaView, StyleSheet, Text, View} from 'react-native'
 import {colors} from '../../theme'
-import React, {useContext, useMemo} from 'react'
-import {AppContext} from '../../App'
+import React, {useMemo} from 'react'
+import {useAppContext} from '../../App'
 import {flex, sizes} from '../../global'
 import IconButton from '../IconButton'
 import SuperAvatar from '../SuperAvatar'
@@ -22,7 +22,7 @@ export default () => {
     selectedMessageIdsEditing,
     setSelectedMessageIdsEditing,
     messageInputRef,
-  } = useContext(AppContext)
+  } = useAppContext()
   const displayName = useChannelPreviewDisplayName(channel, 30)
   const {setQuotedMessageState, removeMessage, updateMessage} =
     useMessagesContext()
