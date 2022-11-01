@@ -11,41 +11,49 @@ import ChannelHeader from '../components/channel/ChannelHeader'
 
 const Stack = createStackNavigator()
 
+export enum CHANNEL_STACK {
+  CHANNEL_SCREEN = 'ChannelStackChannelScreen',
+  IMAGE_PREVIEW = 'ChannelStackImagePreview',
+  CUSTOM_WALLPAPER = 'ChannelStackCustomWallpaper',
+  WALLPAPER_TYPES_OVERVIEW = 'ChannelStackWallpaperTypesOverview',
+  WALLPAPER_TYPE_DETAILS = 'ChannelStackWallpaperTypeDetails',
+}
+
 export default () => {
   const {channel} = useAppContext()
 
   return (
     <WhatsAppChannelWrapper channel={channel}>
       <Stack.Navigator
-        initialRouteName="ChannelScreen"
+        initialRouteName={CHANNEL_STACK.CHANNEL_SCREEN}
         screenOptions={{
           headerTitleStyle: {alignSelf: 'center', fontWeight: 'bold'},
         }}>
         <Stack.Screen
           component={ChannelScreen}
-          name="ChannelScreen"
+          name={CHANNEL_STACK.CHANNEL_SCREEN}
           options={{
             header: ChannelHeader,
           }}
         />
         <Stack.Screen
           component={ImagePreview}
-          name="ImagePreview"
+          name={CHANNEL_STACK.IMAGE_PREVIEW}
           options={noHeaderOptions}
         />
         <Stack.Screen
           component={CustomWallpaper}
-          name="CustomWallpaper"
+          name={CHANNEL_STACK.CUSTOM_WALLPAPER}
           options={noHeaderOptions}
         />
         <Stack.Screen
           component={WallpaperTypesOverview}
-          name="WallpaperTypesOverview"
+          name={CHANNEL_STACK.WALLPAPER_TYPES_OVERVIEW}
           options={noHeaderOptions}
         />
         <Stack.Screen
           component={WallpaperTypeDetails}
-          name="WallpaperTypeDetails"
+          name={CHANNEL_STACK.WALLPAPER_TYPE_DETAILS}
           options={noHeaderOptions}
         />
       </Stack.Navigator>

@@ -6,23 +6,28 @@ import {createStackNavigator} from '@react-navigation/stack'
 
 const Stack = createStackNavigator()
 
+export enum ROOT_STACK {
+  CHANNEL_LIST = 'RootStackChannelList',
+  CHANNEL_SCREEN = 'RootStackChannelScreen',
+}
+
 export default ({clientReady}: {clientReady: boolean}) => {
   if (!clientReady) return null
 
   return (
     <Stack.Navigator
-      initialRouteName="ChannelList"
+      initialRouteName={ROOT_STACK.CHANNEL_LIST}
       screenOptions={{
         headerTitleStyle: {alignSelf: 'center', fontWeight: 'bold'},
       }}>
       <Stack.Screen
         component={ChannelList}
-        name="ChannelList"
+        name={ROOT_STACK.CHANNEL_LIST}
         options={noHeaderOptions}
       />
       <Stack.Screen
         component={ChannelScreen}
-        name="ChannelScreen"
+        name={ROOT_STACK.CHANNEL_SCREEN}
         options={noHeaderOptions}
       />
     </Stack.Navigator>

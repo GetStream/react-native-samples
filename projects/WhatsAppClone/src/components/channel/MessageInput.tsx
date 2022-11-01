@@ -19,7 +19,9 @@ import MessageInputCTA from './MessageInputCTA'
 import {useNavigation} from '@react-navigation/native'
 import {get, isEmpty, size, values} from 'lodash'
 import {ChannelState} from 'stream-chat'
-import {StreamChatGenerics} from '../../types'
+import {StackNavigatorParamList, StreamChatGenerics} from '../../types'
+import {CHANNEL_STACK} from '../../stacks/ChannelStack'
+import {StackNavigationProp} from '@react-navigation/stack'
 
 export default () => {
   const {
@@ -38,7 +40,9 @@ export default () => {
   const {closePicker, setSelectedImages, setSelectedPicker} =
     useAttachmentPickerContext()
   const {messageInputRef, channel} = useAppContext()
-  const {navigate} = useNavigation()
+  const {navigate} =
+    useNavigation<StackNavigationProp<StackNavigatorParamList>>()
+
   const numberOfFiles = fileUploads.length
   const channelMembers = get(channel, [
     'state',
@@ -62,7 +66,7 @@ export default () => {
     const photo = await takePhoto({compressImageQuality})
     if (!photo.cancelled) {
       await uploadNewImage(photo)
-      navigate('ImagePreview')
+      navigate(CHANNEL_STACK.IMAGE_PREVIEW)
     }
   }, [closePicker, compressImageQuality, setSelectedImages, setSelectedPicker])
 

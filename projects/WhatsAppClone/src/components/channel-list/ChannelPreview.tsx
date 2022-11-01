@@ -22,13 +22,18 @@ import Mic from '../../icons/Mic'
 import {get} from 'lodash'
 import moment from 'moment'
 import {parseDurationTextToMs} from '../../utils/conversion'
+import {ROOT_STACK} from '../../stacks/RootStack'
+import {StackNavigationProp} from '@react-navigation/stack'
+import {StackNavigatorParamList} from '../../types'
 
 export default ({
   channel,
   latestMessagePreview,
   formatLatestMessageDate,
 }: ChannelPreviewMessengerProps) => {
-  const {navigate} = useNavigation()
+  const {navigate} =
+    useNavigation<StackNavigationProp<StackNavigatorParamList>>()
+
   const {setChannel} = useAppContext()
   const {selectedChannelsForEditing, setSelectedChannelsForEditing} =
     useAppContext()
@@ -62,9 +67,8 @@ export default ({
     'voice-message'
 
   const handleOnPress = () => {
-    console.log(Object.keys(channel.state.members))
     setChannel(channel)
-    navigate('ChannelScreen')
+    navigate(ROOT_STACK.CHANNEL_SCREEN)
   }
 
   const handleOnLongPress = () => toggleChannelSelectionForEditing(channel)

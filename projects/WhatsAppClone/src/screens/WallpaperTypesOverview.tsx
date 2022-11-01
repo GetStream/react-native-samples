@@ -16,14 +16,15 @@ import Header from '../components/Header'
 import {get} from 'lodash'
 import Trash from '../icons/Trash'
 import useChannelPreferences from '../hooks/useChannelPreferences'
+import {CHANNEL_STACK} from '../stacks/ChannelStack'
 
 export type CustomWallPaperScreenNavigationProp = StackNavigationProp<
   StackNavigatorParamList,
-  'WallpaperTypesOverview'
+  CHANNEL_STACK.WALLPAPER_TYPES_OVERVIEW
 >
 export type CustomWallPaperRouteProp = RouteProp<
   StackNavigatorParamList,
-  'WallpaperTypesOverview'
+  CHANNEL_STACK.WALLPAPER_TYPES_OVERVIEW
 >
 
 export type Props = {
@@ -52,7 +53,7 @@ export default ({
 
   const handleRemoveCustomBackground = () => {
     clearPreferences()
-    navigate('CustomWallpaper', {channelId})
+    navigate(CHANNEL_STACK.CUSTOM_WALLPAPER, {channelId})
   }
 
   return (
@@ -69,7 +70,10 @@ export default ({
               <Pressable
                 key={i}
                 onPress={() =>
-                  navigate('WallpaperTypeDetails', {type, channelId})
+                  navigate(CHANNEL_STACK.WALLPAPER_TYPE_DETAILS, {
+                    type,
+                    channelId,
+                  })
                 }
                 style={styles.imageButton}>
                 <Image

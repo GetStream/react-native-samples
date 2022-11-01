@@ -17,6 +17,7 @@ import Smiley from '../icons/Smiley'
 import Mic from '../icons/Mic'
 import ChannelBackgroundWrapper from '../utils/ChannelBackgroundWrapper'
 import {vh} from 'stream-chat-react-native'
+import {CHANNEL_STACK} from '../stacks/ChannelStack'
 
 export type CustomWallPaperScreenNavigationProp = StackNavigationProp<
   StackNavigatorParamList,
@@ -46,7 +47,7 @@ export default ({
   const handleOnValueChange = (value: number) => setProperty('dimValue', value)
 
   const handleChangeOnPress = () =>
-    navigate('WallpaperTypesOverview', {channelId})
+    navigate(CHANNEL_STACK.WALLPAPER_TYPES_OVERVIEW, {channelId})
 
   return (
     <>
