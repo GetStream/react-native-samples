@@ -7,13 +7,12 @@ import {
 import {Chat, OverlayProvider, ThemeProvider} from 'stream-chat-react-native';
 
 import {Screens} from './src/screens';
-import {AppContext} from './src/contexts/AppContext';
-import {StreamChatGenerics} from './src/client';
-import {SearchContextProvider} from './src/contexts/SearchContext';
-import {NewMessageProvider} from './src/contexts/NewMessageContext';
+import {AppContext} from './src/contexts';
+import {chatClient, user, userToken} from './src/client';
+import {SearchContextProvider} from './src/contexts';
+import {NewMessageProvider} from './src/contexts';
 import {Channel as ChannelType} from 'stream-chat';
 import {useStreamChatTheme} from './useStreamChatTheme';
-import {chatClient, user, userToken} from './src/client';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Alert} from 'react-native';
 

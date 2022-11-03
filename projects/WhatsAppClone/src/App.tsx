@@ -19,6 +19,7 @@ import 'moment/min/moment-with-locales'
 import 'moment/min/locales'
 import {ChannelPreviewMessengerProps} from 'stream-chat-react-native-core/src/components/ChannelPreview/ChannelPreviewMessenger'
 import RootStack from './stacks/RootStack'
+import {GestureHandlerRootView} from 'react-native-gesture-handler'
 
 export type StreamChannel = ChannelPreviewMessengerProps['channel'] | undefined
 export type StreamMessageId = string | undefined
@@ -36,6 +37,7 @@ type AppContextType = {
 export const AppContext = React.createContext<AppContextType>(
   {} as AppContextType,
 )
+export const useAppContext = () => React.useContext(AppContext)
 
 const App = () => {
   const messageInputRef = useRef<TextInput>(null)
@@ -71,13 +73,15 @@ const App = () => {
           selectedMessageIdsEditing,
           setSelectedMessageIdsEditing,
         }}>
-        <OverlayProvider bottomInset={bottom} value={{style: theme}}>
-          <ThemeProvider style={theme}>
-            <Chat client={chatClient} enableOfflineSupport>
-              <RootStack clientReady={clientReady} />
-            </Chat>
-          </ThemeProvider>
-        </OverlayProvider>
+        <GestureHandlerRootView style={{flex: 1}}>
+          <OverlayProvider bottomInset={bottom} value={{style: theme}}>
+            <ThemeProvider style={theme}>
+              <Chat client={chatClient} enableOfflineSupport>
+                <RootStack clientReady={clientReady} />
+              </Chat>
+            </ThemeProvider>
+          </OverlayProvider>
+        </GestureHandlerRootView>
       </AppContext.Provider>
     </NavigationContainer>
   )
