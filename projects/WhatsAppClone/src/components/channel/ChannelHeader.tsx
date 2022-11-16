@@ -1,7 +1,7 @@
 import {Alert, SafeAreaView, StyleSheet, Text, View} from 'react-native'
 import {colors} from '../../theme'
-import React, {useContext, useMemo} from 'react'
-import {AppContext} from '../../App'
+import React, {useMemo} from 'react'
+import {useAppContext} from '../../App'
 import {flex, sizes} from '../../global'
 import IconButton from '../IconButton'
 import SuperAvatar from '../SuperAvatar'
@@ -14,15 +14,19 @@ import {
   MessageStatusTypes,
   useChannelPreviewDisplayName,
 } from 'stream-chat-react-native'
+import {CHANNEL_STACK} from '../../stacks/ChannelStack'
+import {StackNavigationProp} from '@react-navigation/stack'
+import {StackNavigatorParamList} from '../../types'
 
 export default () => {
-  const {navigate, goBack} = useNavigation()
+  const {navigate, goBack} =
+    useNavigation<StackNavigationProp<StackNavigatorParamList>>()
   const {
     channel,
     selectedMessageIdsEditing,
     setSelectedMessageIdsEditing,
     messageInputRef,
-  } = useContext(AppContext)
+  } = useAppContext()
   const displayName = useChannelPreviewDisplayName(channel, 30)
   const {setQuotedMessageState, removeMessage, updateMessage} =
     useMessagesContext()
@@ -34,7 +38,7 @@ export default () => {
   }, [channel?.id, JSON.stringify(selectedMessageIdsEditing)])
 
   const handleMenuOnPress = () =>
-    navigate('CustomWallpaper', {channelId: channel?.id})
+    navigate(CHANNEL_STACK.CUSTOM_WALLPAPER, {channelId: channel?.id})
   const clearSelectedMessageIdsEditing = () => setSelectedMessageIdsEditing([])
   const handleReplyOnPress = () => {
     const message = channel?.state.messages.find(

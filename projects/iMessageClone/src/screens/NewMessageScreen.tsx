@@ -181,7 +181,7 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
   const currentChannel = useRef<StreamChatChannel>();
   const isDraft = useRef(true);
 
-  const [, setFocusOnMessageInput] = useState(false);
+  const [focusOnMessageInput, setFocusOnMessageInput] = useState(false);
   const [focusOnSearchInput, setFocusOnSearchInput] = useState(true);
   const [, setMessageInputText] = useState('');
 
@@ -203,7 +203,6 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
       }
 
       const members = [chatClient.user.id, ...selectedUserIds];
-
       // Check if the channel already exists.
       const channels = await chatClient.queryChannels({
         distinct: true,
@@ -217,7 +216,6 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
       } else {
         // Channel doesn't exist.
         isDraft.current = true;
-
         const channel = chatClient.channel('messaging', {
           members,
         });
@@ -405,6 +403,7 @@ export const NewMessageScreen: React.FC<NewDirectMessagingScreenProps> = ({
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -300}
         myMessageTheme={myMessageTheme}
         onChangeText={setMessageInputText}
+        overrideOwnCapabilities={{sendMessage: true}}
         doSendMessageRequest={customSendMessage}
         setInputRef={ref => (messageInputRef.current = ref)}>
         {renderUserSearch()}

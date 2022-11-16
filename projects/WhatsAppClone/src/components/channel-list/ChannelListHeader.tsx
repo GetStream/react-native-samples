@@ -1,15 +1,15 @@
 import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native'
 import {colors} from '../../theme'
-import React, {useContext} from 'react'
+import React from 'react'
 import {flex, sizes} from '../../global'
 import IconButton from '../IconButton'
 import PeekabooView from '../PeekabooView'
-import {AppContext} from '../../App'
+import {useAppContext} from '../../App'
 import {isEmpty} from 'lodash'
 
 export default () => {
   const {selectedChannelsForEditing, setSelectedChannelsForEditing} =
-    useContext(AppContext)
+    useAppContext()
 
   const isInChannelSelectionMode = !isEmpty(selectedChannelsForEditing)
   const clearSelectedChannelsForEditing = () =>

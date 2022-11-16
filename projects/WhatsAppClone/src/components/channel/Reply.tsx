@@ -2,7 +2,7 @@ import {Image, StyleSheet, Text, View} from 'react-native'
 import {sizes} from '../../global'
 import {colors} from '../../theme'
 import IconButton from '../IconButton'
-import React, {useContext, useMemo} from 'react'
+import React, {useMemo} from 'react'
 import {MessageResponse} from 'stream-chat'
 import {
   MessageType,
@@ -11,7 +11,7 @@ import {
   vw,
 } from 'stream-chat-react-native'
 import {capitalize, get, isEmpty} from 'lodash'
-import {AppContext} from '../../App'
+import {useAppContext} from '../../App'
 
 interface Props {
   isPreview?: boolean
@@ -77,7 +77,7 @@ export default ({
     resetInput,
     clearQuotedMessageState,
   } = useMessageInputContext()
-  const {messageInputRef} = useContext(AppContext)
+  const {messageInputRef} = useAppContext()
   const {isMyMessage} = useMessageContext()
 
   const handleOnPress = () => {

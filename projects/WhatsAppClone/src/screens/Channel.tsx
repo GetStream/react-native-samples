@@ -1,14 +1,14 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import {MessageList} from 'stream-chat-react-native'
-import {AppContext} from '../App'
+import {useAppContext} from '../App'
 import MessageInput from '../components/channel/MessageInput'
 import ChannelBackgroundWrapper from '../utils/ChannelBackgroundWrapper'
 import {colors} from '../theme'
 import {ActivityIndicator, View} from 'react-native'
 import {flex} from '../global'
 
-export default () => {
-  const {channel} = useContext(AppContext)
+export const ChannelScreen = () => {
+  const {channel} = useAppContext()
   if (!channel) return null
 
   if (!channel?.initialized || !channel?.id)

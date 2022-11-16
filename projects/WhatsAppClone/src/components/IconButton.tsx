@@ -1,6 +1,5 @@
 import React from 'react'
 import RenderNothing from './RenderNothing'
-import PressMe from './PressMe'
 import {globalStyles, sizes} from '../global'
 import {colors} from '../theme'
 import Video from '../icons/Video'
@@ -85,10 +84,10 @@ export default ({
     )
 
   return (
-    <PressMe
+    <Pressable
       onPress={props.onPress}
       style={{...globalStyles.iconWrap, ...(style as object)}}>
       {content}
-    </PressMe>
+    </Pressable>
   )
 }

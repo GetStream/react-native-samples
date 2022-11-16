@@ -1,10 +1,9 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
+import {Pressable, StyleSheet} from 'react-native'
 import {useMessageInputContext} from 'stream-chat-react-native'
 import {colors} from '../../theme'
 import Send from '../../icons/Send'
 import Mic from '../../icons/Mic'
-import PressMe from '../PressMe'
 
 export const SendButton = () => {
   const {fileUploads, imageUploads, sendMessage, text} =
@@ -13,9 +12,9 @@ export const SendButton = () => {
   const Icon = isMessageEmpty ? Mic : Send
 
   return (
-    <PressMe onPress={sendMessage} style={styles.pressable}>
+    <Pressable onPress={sendMessage} style={styles.pressable}>
       <Icon pathFill={colors.dark.text} />
-    </PressMe>
+    </Pressable>
   )
 }
 

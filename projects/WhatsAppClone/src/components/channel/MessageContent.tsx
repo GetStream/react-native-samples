@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react'
+import React, {useRef} from 'react'
 import {Swipeable} from 'react-native-gesture-handler'
 import {
   MessageContent,
@@ -10,14 +10,14 @@ import {StyleSheet, View} from 'react-native'
 import ReplyArrow from '../../icons/ReplyArrow'
 import {colors} from '../../theme'
 import {sizes} from '../../global'
-import {AppContext} from '../../App'
+import {useAppContext} from '../../App'
 import RenderNothing from '../RenderNothing'
 
 export default ({setMessageContentWidth}: {setMessageContentWidth: any}) => {
   const swipeableRef = useRef<Swipeable | null>(null)
   const {setQuotedMessageState} = useMessagesContext()
   const {message} = useMessageContext()
-  const {selectedMessageIdsEditing, messageInputRef} = useContext(AppContext)
+  const {selectedMessageIdsEditing, messageInputRef} = useAppContext()
   const {clearQuotedMessageState} = useMessageInputContext()
   const isSelectedForEditing = selectedMessageIdsEditing.includes(message?.id)
 

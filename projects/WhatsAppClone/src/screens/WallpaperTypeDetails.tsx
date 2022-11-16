@@ -10,14 +10,15 @@ import {get} from 'lodash'
 import useChannelPreferences from '../hooks/useChannelPreferences'
 import PeekabooView from '../components/PeekabooView'
 import {BRIGHT_IMAGES, DARK_IMAGES, SOLID_COLORS} from '../consts'
+import {CHANNEL_STACK} from '../stacks/ChannelStack'
 
 export type CustomWallPaperScreenNavigationProp = StackNavigationProp<
   StackNavigatorParamList,
-  'WallpaperTypeDetails'
+  CHANNEL_STACK.WALLPAPER_TYPE_DETAILS
 >
 export type CustomWallPaperRouteProp = RouteProp<
   StackNavigatorParamList,
-  'WallpaperTypeDetails'
+  CHANNEL_STACK.WALLPAPER_TYPE_DETAILS
 >
 
 export type Props = {
@@ -57,7 +58,7 @@ export default ({
           {wallpaperItems?.map(({backgroundColor, imageUri = ''}, i) => {
             const handleOnPress = () => {
               setPreferences({backgroundColor, imageUri})
-              navigate('CustomWallpaper', {channelId})
+              navigate(CHANNEL_STACK.CUSTOM_WALLPAPER, {channelId})
             }
 
             const r = get(backgroundColor, 0)
