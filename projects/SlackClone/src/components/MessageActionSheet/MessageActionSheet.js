@@ -55,7 +55,9 @@ export const MessageActionSheet = React.forwardRef((props, fRef) => {
   };
 
   const options = useMemo(() => {
-    if (!actionHandlersExist) return [];
+    if (!actionHandlersExist) {
+      return [];
+    }
 
     const options = [];
 

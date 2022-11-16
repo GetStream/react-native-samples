@@ -39,7 +39,9 @@ const SlackReactionListWithContext = React.memo(
     }
 
     const renderReactionItem = (type) => {
-      if (!supportedReactionsByType[type]) return null;
+      if (!supportedReactionsByType[type]) {
+        return null;
+      }
 
       const Icon = supportedReactionsByType[type].Icon;
       const count = reactionCounts[type];
