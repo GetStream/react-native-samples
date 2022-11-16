@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { useColorScheme } from 'react-native-appearance';
+import { useColorScheme } from 'react-native';
 import { vw } from 'stream-chat-react-native';
 
 const maxWidth = vw(100) - 72;
