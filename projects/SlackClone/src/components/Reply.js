@@ -24,7 +24,9 @@ const styles = StyleSheet.create({
 export const Reply = ({ message, onPress }) => {
   const { colors } = useTheme();
 
-  if (!message) return null;
+  if (!message) {
+    return null;
+  }
 
   const imageAttachment = message.attachments?.find((a) => a.type === 'image');
 

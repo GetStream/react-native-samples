@@ -84,7 +84,9 @@ export const usePaginatedSearchedUsers = () => {
   };
 
   const fetchUsers = async (query = '') => {
-    if (queryInProgress.current) return;
+    if (queryInProgress.current) {
+      return;
+    }
     setLoading(true);
 
     try {

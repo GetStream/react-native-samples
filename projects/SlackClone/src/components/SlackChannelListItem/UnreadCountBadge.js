@@ -24,8 +24,9 @@ export const UnreadCountBadge = (props) => {
   const unreadMentionsCount = channel.countUnreadMentions();
   const unreadCount = channel.countUnread();
 
-  if (unreadCount === 0 || (mentionsOnly && unreadMentionsCount === 0))
+  if (unreadCount === 0 || (mentionsOnly && unreadMentionsCount === 0)) {
     return null;
+  }
 
   const unreadMentionsCountText =
     unreadMentionsCount > 9 ? '9+' : unreadMentionsCount;
