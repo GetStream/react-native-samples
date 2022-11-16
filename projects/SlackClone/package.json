@@ -12,7 +12,6 @@
     "clean-all": "yarn clean && rm -rf node_modules && rm -rf ios/Pods && rm -rf vendor && bundle install && yarn install && cd ios && bundle exec pod install && cd -"
   },
   "dependencies": {
-    "@gorhom/bottom-sheet": "^3.6.5",
     "@react-native-camera-roll/camera-roll": "^5.0.1",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/blur": "^3.6.0",
@@ -25,7 +24,7 @@
     "@react-navigation/drawer": "^5.12.5",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
-    "@stream-io/flat-list-mvcp": "^0.10.1",
+    "@stream-io/flat-list-mvcp": "^0.10.2",
     "react": "17.0.2",
     "react-native": "0.67.3",
     "react-native-appearance": "^0.3.4",
