@@ -83,9 +83,6 @@ platform :ios do
       )
 
       testflight_groups = (git_branch() == "main") ? ['Dev Testers', 'Public Testers'] : ['Dev Testers']
-
-      # https://github.com/fastlane/fastlane/issues/20741
-      ENV['ITMSTRANSPORTER_FORCE_ITMS_PACKAGE_UPLOAD'] = 'true'
       
       begin
         upload_to_testflight(
