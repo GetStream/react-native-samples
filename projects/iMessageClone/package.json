@@ -19,7 +19,7 @@
     "@stream-io/flat-list-mvcp": "0.10.2",
     "react": "^18.1.0",
     "react-native": "0.70.6",
-    "react-native-document-picker": "^5.2.0",
+    "react-native-document-picker": "^8.1.2",
     "react-native-dotenv": "^2.5.5",
     "react-native-fs": "2.20.0",
     "react-native-gesture-handler": "2.5.0",
