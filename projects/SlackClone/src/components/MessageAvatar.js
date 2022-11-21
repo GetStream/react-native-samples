@@ -48,13 +48,17 @@ const areEqual = (prevProps, nextProps) => {
   const { groupStyles: prevGroupStyles, message: prevMessage } = prevProps;
   const { groupStyles: nextGroupStyles, message: nextMessage } = nextProps;
 
-  if (prevMessage.user.image !== nextMessage.user.image) return false;
+  if (prevMessage.user.image !== nextMessage.user.image) {
+    return false;
+  }
 
   const groupStylesEqual =
     prevGroupStyles.length === nextGroupStyles.length &&
     prevGroupStyles[0] === nextGroupStyles[0];
 
-  if (!groupStylesEqual) return false;
+  if (!groupStylesEqual) {
+    return false;
+  }
 };
 const MemoizedMessageAvatar = React.memo(MessageAvatarWithContext, areEqual);
 

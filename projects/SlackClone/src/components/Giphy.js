@@ -33,7 +33,9 @@ const styles = StyleSheet.create({
 export const Giphy = ({ attachment }) => {
   const { image_url, thumb_url, title } = attachment;
 
-  if (!image_url && !thumb_url) return null;
+  if (!image_url && !thumb_url) {
+    return null;
+  }
 
   return (
     <TouchableOpacity style={styles.container}>

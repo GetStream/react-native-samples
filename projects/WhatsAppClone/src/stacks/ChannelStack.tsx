@@ -1,13 +1,7 @@
-import React, {useContext, useEffect} from 'react'
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack'
-import {AppContext, noHeaderOptions} from '../App'
-import {chatClient} from '../client'
-import {RouteProp} from '@react-navigation/native'
-import {StackNavigatorParamList} from '../types'
-import Channel from '../screens/Channel'
+import React from 'react'
+import {createStackNavigator} from '@react-navigation/stack'
+import {noHeaderOptions, useAppContext} from '../App'
+import {ChannelScreen} from '../screens/Channel'
 import CustomWallpaper from '../screens/CustomWallpaper'
 import WallpaperTypesOverview from '../screens/WallpaperTypesOverview'
 import WhatsAppChannelWrapper from '../utils/WhatsAppChannelWrapper'
@@ -15,75 +9,51 @@ import ImagePreview from '../screens/ImagePreview'
 import WallpaperTypeDetails from '../screens/WallpaperTypeDetails'
 import ChannelHeader from '../components/channel/ChannelHeader'
 
-export type ChannelScreenNavigationProp = StackNavigationProp<
-  StackNavigatorParamList,
-  'ChannelScreen'
->
-export type ChannelScreenRouteProp = RouteProp<
-  StackNavigatorParamList,
-  'ChannelScreen'
->
-export type ChannelScreenProps = {
-  navigation: ChannelScreenNavigationProp
-  route: ChannelScreenRouteProp
-}
-
 const Stack = createStackNavigator()
 
-export default ({
-  route: {
-    params: {channelId},
-  },
-}: ChannelScreenProps) => {
-  const {channel, setChannel} = useContext(AppContext)
+export enum CHANNEL_STACK {
+  CHANNEL_SCREEN = 'ChannelStackChannelScreen',
+  IMAGE_PREVIEW = 'ChannelStackImagePreview',
+  CUSTOM_WALLPAPER = 'ChannelStackCustomWallpaper',
+  WALLPAPER_TYPES_OVERVIEW = 'ChannelStackWallpaperTypesOverview',
+  WALLPAPER_TYPE_DETAILS = 'ChannelStackWallpaperTypeDetails',
+}
 
-  useEffect(() => {
-    const initChannel = async () => {
-      if (!chatClient || !channelId) return
-
-      const newChannel = chatClient?.channel('messaging', channelId)
-
-      if (!newChannel?.initialized) {
-        await newChannel?.watch()
-      }
-      setChannel(newChannel)
-    }
-
-    initChannel()
-  }, [channelId, setChannel])
+export default () => {
+  const {channel} = useAppContext()
 
   return (
     <WhatsAppChannelWrapper channel={channel}>
       <Stack.Navigator
-        initialRouteName="Channel"
+        initialRouteName={CHANNEL_STACK.CHANNEL_SCREEN}
         screenOptions={{
           headerTitleStyle: {alignSelf: 'center', fontWeight: 'bold'},
         }}>
         <Stack.Screen
-          component={Channel}
-          name="Channel"
+          component={ChannelScreen}
+          name={CHANNEL_STACK.CHANNEL_SCREEN}
           options={{
             header: ChannelHeader,
           }}
         />
         <Stack.Screen
           component={ImagePreview}
-          name="ImagePreview"
+          name={CHANNEL_STACK.IMAGE_PREVIEW}
           options={noHeaderOptions}
         />
         <Stack.Screen
           component={CustomWallpaper}
-          name="CustomWallpaper"
+          name={CHANNEL_STACK.CUSTOM_WALLPAPER}
           options={noHeaderOptions}
         />
         <Stack.Screen
           component={WallpaperTypesOverview}
-          name="WallpaperTypesOverview"
+          name={CHANNEL_STACK.WALLPAPER_TYPES_OVERVIEW}
           options={noHeaderOptions}
         />
         <Stack.Screen
           component={WallpaperTypeDetails}
-          name="WallpaperTypeDetails"
+          name={CHANNEL_STACK.WALLPAPER_TYPE_DETAILS}
           options={noHeaderOptions}
         />
       </Stack.Navigator>

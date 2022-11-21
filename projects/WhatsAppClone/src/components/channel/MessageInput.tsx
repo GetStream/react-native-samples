@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import {
   AutoCompleteInput,
   LocalMessageInputContext,
@@ -17,7 +11,7 @@ import {flex, sizes} from '../../global'
 import {colors} from '../../theme'
 import IconButton from '../IconButton'
 import Reply from './Reply'
-import {AppContext} from '../../App'
+import {useAppContext} from '../../App'
 import moment from 'moment'
 import RecordingBlinking from '../../icons/RecordingBlinking'
 import PeekabooView from '../PeekabooView'
@@ -25,7 +19,9 @@ import MessageInputCTA from './MessageInputCTA'
 import {useNavigation} from '@react-navigation/native'
 import {get, isEmpty, size, values} from 'lodash'
 import {ChannelState} from 'stream-chat'
-import {StreamChatGenerics} from '../../types'
+import {StackNavigatorParamList, StreamChatGenerics} from '../../types'
+import {CHANNEL_STACK} from '../../stacks/ChannelStack'
+import {StackNavigationProp} from '@react-navigation/stack'
 
 export default () => {
   const {
@@ -43,8 +39,10 @@ export default () => {
   const [recordingDurationInMS, setRecordingDurationInMS] = useState(0)
   const {closePicker, setSelectedImages, setSelectedPicker} =
     useAttachmentPickerContext()
-  const {messageInputRef, channel} = useContext(AppContext)
-  const {navigate} = useNavigation()
+  const {messageInputRef, channel} = useAppContext()
+  const {navigate} =
+    useNavigation<StackNavigationProp<StackNavigatorParamList>>()
+
   const numberOfFiles = fileUploads.length
   const channelMembers = get(channel, [
     'state',
@@ -68,7 +66,7 @@ export default () => {
     const photo = await takePhoto({compressImageQuality})
     if (!photo.cancelled) {
       await uploadNewImage(photo)
-      navigate('ImagePreview')
+      navigate(CHANNEL_STACK.IMAGE_PREVIEW)
     }
   }, [closePicker, compressImageQuality, setSelectedImages, setSelectedPicker])
 

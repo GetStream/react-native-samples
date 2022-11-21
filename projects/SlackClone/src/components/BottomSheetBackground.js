@@ -9,6 +9,7 @@ export const BottomSheetBackground = () => {
       style={[
         StyleSheet.absoluteFillObject,
         { backgroundColor: colors.background },
-      ]}></View>
+      ]}
+    />
   );
 };

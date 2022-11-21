@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, useContext, useEffect} from 'react'
+import React, {PropsWithChildren, useEffect} from 'react'
 import type {ChannelProps} from 'stream-chat-react-native'
 import {
   Channel,
@@ -13,13 +13,13 @@ import MessageContent from '../components/channel/MessageContent'
 import MessageText from '../components/channel/MessageText'
 import VoiceMessageAttachment from '../components/channel/VoiceMessageAttachment'
 import {StreamChatGenerics} from '../types'
-import {AppContext} from '../App'
+import {useAppContext} from '../App'
 
 export default ({
   channel,
   ...props
 }: PropsWithChildren<ChannelProps<StreamChatGenerics>>) => {
-  const {setSelectedMessageIdsEditing} = useContext(AppContext)
+  const {setSelectedMessageIdsEditing} = useAppContext()
 
   const handleToggleMessageSelection = ({
     message,

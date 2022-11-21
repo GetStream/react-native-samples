@@ -1,5 +1,5 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native'
-import React, {useContext, useMemo} from 'react'
+import React, {useMemo} from 'react'
 import {
   ChannelPreviewMessage,
   ChannelPreviewMessengerProps,
@@ -10,7 +10,7 @@ import {
   useChannelPreviewDisplayName,
   useTheme,
 } from 'stream-chat-react-native'
-import {AppContext, StreamChannel} from '../../App'
+import {StreamChannel, useAppContext} from '../../App'
 import {useNavigation} from '@react-navigation/native'
 import {colors} from '../../theme'
 import {flex, sizes} from '../../global'
@@ -22,15 +22,21 @@ import Mic from '../../icons/Mic'
 import {get} from 'lodash'
 import moment from 'moment'
 import {parseDurationTextToMs} from '../../utils/conversion'
+import {ROOT_STACK} from '../../stacks/RootStack'
+import {StackNavigationProp} from '@react-navigation/stack'
+import {StackNavigatorParamList} from '../../types'
 
 export default ({
   channel,
   latestMessagePreview,
   formatLatestMessageDate,
 }: ChannelPreviewMessengerProps) => {
-  const {navigate} = useNavigation()
+  const {navigate} =
+    useNavigation<StackNavigationProp<StackNavigatorParamList>>()
+
+  const {setChannel} = useAppContext()
   const {selectedChannelsForEditing, setSelectedChannelsForEditing} =
-    useContext(AppContext)
+    useAppContext()
   const displayName = useChannelPreviewDisplayName(channel)
   const {
     theme: {
@@ -61,9 +67,8 @@ export default ({
     'voice-message'
 
   const handleOnPress = () => {
-    navigate('Channel', {
-      channelId: channel.id,
-    })
+    setChannel(channel)
+    navigate(ROOT_STACK.CHANNEL_SCREEN)
   }
 
   const handleOnLongPress = () => toggleChannelSelectionForEditing(channel)

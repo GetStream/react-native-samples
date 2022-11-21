@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
 
 const isDMChannel = (channel) => channel.id.indexOf('!members-') === 0;
 
-const Spacer = () => <View style={{ width: 50 }}></View>;
+const Spacer = () => <View style={{ width: 50 }} />;
 
 export const ChannelHeader = ({ channel }) => {
   const { colors } = useTheme();

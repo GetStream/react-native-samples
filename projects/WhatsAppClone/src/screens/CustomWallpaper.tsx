@@ -1,14 +1,13 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import React from 'react'
+import {Pressable, StyleSheet, Text, View} from 'react-native'
 import {StackNavigationProp} from '@react-navigation/stack'
-import PressMe from '../components/PressMe'
 import {colors} from '../theme'
 import {flex, sizes} from '../global'
 import Slider from '@react-native-community/slider'
 import {StackNavigatorParamList} from '../types'
 import {RouteProp} from '@react-navigation/native'
 import useChannelPreferences from '../hooks/useChannelPreferences'
-import {AppContext} from '../App'
+import {useAppContext} from '../App'
 import {useChannelPreviewDisplayName} from 'stream-chat-react-native-core/src/components/ChannelPreview/hooks/useChannelPreviewDisplayName'
 import SuperAvatar from '../components/SuperAvatar'
 import Header from '../components/Header'
@@ -18,6 +17,7 @@ import Smiley from '../icons/Smiley'
 import Mic from '../icons/Mic'
 import ChannelBackgroundWrapper from '../utils/ChannelBackgroundWrapper'
 import {vh} from 'stream-chat-react-native'
+import {CHANNEL_STACK} from '../stacks/ChannelStack'
 
 export type CustomWallPaperScreenNavigationProp = StackNavigationProp<
   StackNavigatorParamList,
@@ -40,14 +40,14 @@ export default ({
   },
 }: Props) => {
   const {setProperty, channelPreferences} = useChannelPreferences(channelId)
-  const {channel} = useContext(AppContext)
+  const {channel} = useAppContext()
   const displayName = useChannelPreviewDisplayName(channel, 30)
   const {dimValue} = channelPreferences
 
   const handleOnValueChange = (value: number) => setProperty('dimValue', value)
 
   const handleChangeOnPress = () =>
-    navigate('WallpaperTypesOverview', {channelId})
+    navigate(CHANNEL_STACK.WALLPAPER_TYPES_OVERVIEW, {channelId})
 
   return (
     <>
@@ -96,16 +96,17 @@ export default ({
               </View>
             </ChannelBackgroundWrapper>
           </View>
-          <PressMe
+          <Pressable
             style={{padding: sizes.s, marginBottom: sizes.l}}
             onPress={handleChangeOnPress}>
             <Text style={{color: colors.dark.primaryLight}}>CHANGE</Text>
-          </PressMe>
+          </Pressable>
         </View>
 
         <View style={styles.footerContainer}>
           <Text style={styles.dimmingText}>Wallpaper Dimming</Text>
           <Slider
+            minimumValue={0}
             thumbTintColor={colors.dark.primaryLight}
             minimumTrackTintColor={colors.dark.primaryLight}
             maximumTrackTintColor={colors.dark.text}

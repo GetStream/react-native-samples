@@ -68,7 +68,9 @@ export const HeaderReactionList = ({ openReactionPicker, toggleReaction }) => {
   return (
     <View style={styles.reactionListContainer}>
       {reactions.map((r, index) => {
-        if (!r?.icon) return null;
+        if (!r?.icon) {
+          return null;
+        }
         return (
           <ReactionItem
             handleReaction={toggleReaction}
