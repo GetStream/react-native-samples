@@ -2,7 +2,7 @@
 
 export const DarkTheme = {
   colors: {
-    background: '#19181c',
+    background: 'black',
     backgroundSecondary: '#212527',
     backgroundTertiary: '#222222',
     boldText: '#D0D0D0',
@@ -25,8 +25,8 @@ export const DarkTheme = {
 export const LightTheme = {
   colors: {
     background: 'white',
-    backgroundSecondary: '#E9E9E9',
-    backgroundTertiary: 'white',
+    backgroundSecondary: '#32CBFF',
+    backgroundTertiary: '#EF8354',
     boldText: 'black',
     border: '#D3D3D3',
     borderThick: '#d7d7d7',
