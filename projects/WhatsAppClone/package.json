@@ -39,7 +39,7 @@
     "react-native-share": "^7.9.1",
     "react-native-svg": "^13.4.0",
     "react-native-tab-view": "^3.3.0",
-    "stream-chat-react-native": "5.5.1"
+    "stream-chat-react-native": "5.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",
