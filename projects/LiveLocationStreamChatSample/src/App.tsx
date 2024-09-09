@@ -49,6 +49,10 @@ const Navigator = () => {
       const {token, ...user} = userWithToken;
       client.connectUser(user, token).catch(console.error);
       setChatClient(client);
+
+      return () => {
+        client.disconnectUser();
+      };
     }
   }, [userWithToken]);
 
