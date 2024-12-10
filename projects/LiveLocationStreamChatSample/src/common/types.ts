@@ -2,8 +2,6 @@ import {User} from 'stream-chat';
 import {DefaultStreamChatGenerics} from 'stream-chat-react-native';
 
 type LocalAttachmentType = DefaultStreamChatGenerics['attachmentType'] & {
-  latitude?: number;
-  longitude?: number;
   ended_at?: string;
 };
 
