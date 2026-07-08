@@ -12,6 +12,10 @@ concurrency:
     group: release
     cancel-in-progress: true
 
+permissions:
+  actions: write
+  contents: read
+
 jobs:
     deploy_imessageclone_ios:
         name: Deploy iMessage clone iOS to Testflight

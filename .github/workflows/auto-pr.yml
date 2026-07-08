@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - develop
+
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   syncMainWithDevelop:
     runs-on: ubuntu-latest
