@@ -1,3 +1,5 @@
+> **This sample is out of date and no longer maintained.** It targets Stream Chat React Native v5. For a current app, see [SampleApp in stream-chat-react-native](https://github.com/GetStream/stream-chat-react-native/tree/develop/examples/SampleApp).
+
 # iMessage Clone
 
 ![](https://user-images.githubusercontent.com/18744505/116126112-a21f4780-a69c-11eb-8d03-dbfc174d04aa.jpg)

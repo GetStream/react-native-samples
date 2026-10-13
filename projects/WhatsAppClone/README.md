@@ -1,3 +1,5 @@
+> **This sample is out of date and no longer maintained.** It targets Stream Chat React Native v5. For a current app, see [SampleApp in stream-chat-react-native](https://github.com/GetStream/stream-chat-react-native/tree/develop/examples/SampleApp).
+
 # WhatsApp Clone Using React Native And Stream Chat
 
 ![1280x640px-2](https://user-images.githubusercontent.com/25864161/166482441-e92ad7cf-8705-42b5-ae83-878cc60b4ebd.jpg)
