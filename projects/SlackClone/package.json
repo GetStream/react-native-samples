@@ -41,7 +41,7 @@
     "react-native-share": "^6.2.1",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
-    "stream-chat-react-native": "5.5.1"
+    "stream-chat-react-native": "5.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
