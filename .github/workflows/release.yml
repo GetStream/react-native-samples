@@ -19,7 +19,7 @@ permissions:
 jobs:
     deploy_imessageclone_ios:
         name: Deploy iMessage clone iOS to Testflight
-        runs-on: macos-latest
+        runs-on: { group: scaleway-macos }
         steps:
             - uses: actions/checkout@master
               with:
@@ -74,7 +74,7 @@ jobs:
 
     deploy_slackclone_ios:
         name: Deploy Slack clone iOS to Testflight
-        runs-on: macos-latest
+        runs-on: { group: scaleway-macos }
         steps:
             - uses: actions/checkout@master
               with:
@@ -129,7 +129,7 @@ jobs:
 
     deploy_whatsappclone_ios:
         name: Deploy Whatsapp clone iOS to Testflight
-        runs-on: macos-latest
+        runs-on: { group: scaleway-macos }
         steps:
             - uses: actions/checkout@master
               with:
